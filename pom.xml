@@ -16,6 +16,13 @@
 	
 	<name>Parallel Symmetry Weather Reader</name>
 
+	<repositories>
+		<repository>
+			<id>psm</id>
+			<url>http://code.parallelsymmetry.com/repo/psm</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 
 		<dependency>
