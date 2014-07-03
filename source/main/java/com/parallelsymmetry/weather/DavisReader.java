@@ -7,7 +7,13 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Collection;
+import java.util.concurrent.CopyOnWriteArraySet;
 
+import javax.measure.DecimalMeasure;
+import javax.measure.unit.NonSI;
+
+import com.parallelsymmetry.utility.Controllable;
 import com.parallelsymmetry.utility.EnumerationIterator;
 import com.parallelsymmetry.utility.IoPump;
 import com.parallelsymmetry.utility.TextUtil;
@@ -16,31 +22,36 @@ import com.parallelsymmetry.utility.comm.SerialAgent;
 import com.parallelsymmetry.utility.log.Log;
 
 /**
- * In order to use RXTX there are three things that need to be configured:
+ * Davis weather station reader. This reader is derived from the <a href=
+ * "http://www.davisnet.com/support/weather/download/VantageSerialProtocolDocs_v261.pdf"
+ * >Davis weather station serial protocol</a>.
+ * <p>
+ * This reader uses RXTX as the serial library.In order to use RXTX there are
+ * three things that need to be configured:
  * <ol>
  * <li>The RXTX shared library must be found on the java.library.path</li>
  * <li>The RXTX java library must be found on the java class path</li>
  * <li>The user running the program must have read access to the ports</li>
- * <ol>
- * On Linux Mint the user must be assigned to the dialout group.
+ * </ol>
+ * On Debian and its derivatives the user should be assigned to the dialout
+ * group to have read access to the ports.
  * 
  * @author mvsoder
  */
-public class DavisReader {
+public class DavisReader implements Controllable {
 
 	private boolean console = false;
 
-	public static final void main( String[] commands ) {
-		Log.setLevel( Log.DEBUG );
-		new DavisReader().start();
+	private Collection<WeatherDataListener> listeners;
+
+	public DavisReader() {
+		listeners = new CopyOnWriteArraySet<>();
 	}
 
-	private void start() {
+	public void start() {
 		Log.write( "Starting reader..." );
 
-		for( CommPortIdentifier identifier : new EnumerationIterator<CommPortIdentifier>( CommPortIdentifier.getPortIdentifiers() ) ) {
-			Log.write( "Port: ", identifier.getName() );
-		}
+		listPortIdentifiers();
 
 		String port = "/dev/ttyUSB0";
 
@@ -76,6 +87,30 @@ public class DavisReader {
 		//		}
 
 		Log.write( "Reader stopped!" );
+	}
+
+	@Override
+	public boolean isRunning() {
+		return false;
+	}
+
+	public void stop() {
+
+	}
+
+	public void addWeatherDataListener( WeatherDataListener listener ) {
+		listeners.add( listener );
+	}
+
+	public void removeWeatherDataListener( WeatherDataListener listener ) {
+		listeners.remove( listener );
+	}
+
+	@SuppressWarnings( "unchecked" )
+	private void listPortIdentifiers() {
+		for( CommPortIdentifier identifier : new EnumerationIterator<CommPortIdentifier>( CommPortIdentifier.getPortIdentifiers() ) ) {
+			Log.write( "Port: ", identifier.getName() );
+		}
 	}
 
 	// Does not work to detect if receiver is disconnected.
@@ -137,11 +172,11 @@ public class DavisReader {
 		System.arraycopy( buffer, 1, buffer, 0, 99 );
 
 		// Barometer trend
-		BarometerTrend barTrend = parseBarometerTrend( buffer[3] );
+		BarometerTrend pressureTrend = parseBarometerTrend( buffer[3] );
 
 		// Barometer
 		int barRaw = getUnsignedByte( buffer[7] ) + ( getUnsignedByte( buffer[8] ) << 8 );
-		float bar = barRaw == 0x7fff ? Float.NaN : barRaw / 1000.0f;
+		float pressure = barRaw == 0x7fff ? Float.NaN : barRaw / 1000.0f;
 
 		// Inside temperature
 		int tempInsideRaw = getUnsignedByte( buffer[9] ) + ( getUnsignedByte( buffer[10] ) << 8 );
@@ -175,19 +210,44 @@ public class DavisReader {
 		int rainRateRaw = getUnsignedByte( buffer[41] ) + ( getUnsignedByte( buffer[42] ) << 8 );
 		float rainRate = rainRateRaw == 0xffff ? Float.NaN : rainRateRaw / 100.0f;
 
-		Log.write();
-		Log.write( "Read: ", TextUtil.toPrintableString( buffer, 0, 99 ) );
-		Log.write( "Bar: ", TextUtil.toPrintableString( buffer, 7, 2 ), " ", bar );
-		Log.write( "Bar trend: ", TextUtil.toPrintableString( buffer, 3, 1 ), " ", barTrend.name() );
-		Log.write( "Temp in: ", TextUtil.toPrintableString( buffer, 9, 2 ), " ", tempInside );
-		Log.write( "Humid in: ", TextUtil.toPrintableString( buffer, 1, 1 ), " ", humidInside + "%" );
-		Log.write( "Temp out: ", TextUtil.toPrintableString( buffer, 12, 2 ), " ", tempOutside );
-		Log.write( "Wind speed: ", TextUtil.toPrintableString( buffer, 14, 1 ), " ", windSpeed );
-		Log.write( "Wind speed 10 min. avg.: ", TextUtil.toPrintableString( buffer, 15, 1 ), " ", windSpeedTenMinAvg );
-		Log.write( "Wind direction: ", TextUtil.toPrintableString( buffer, 16, 2 ), " ", windDirection );
+		// Daily rain total
+		int rainTotalDailyRaw = getUnsignedByte( buffer[50] ) + ( getUnsignedByte( buffer[51] ) << 8 );
+		float rainTotalDaily = rainTotalDailyRaw == 0x7fff ? Float.NaN : rainTotalDailyRaw;
 
-		Log.write( "Humid out: ", TextUtil.toPrintableString( buffer, 33, 1 ), " ", humidOutside );
-		Log.write( "Rain rate: ", TextUtil.toPrintableString( buffer, 41, 2 ), " ", rainRate );
+		//		Log.write();
+		//		Log.write( "Read: ", TextUtil.toPrintableString( buffer, 0, 99 ) );
+		//		Log.write( "Pressure: ", TextUtil.toPrintableString( buffer, 7, 2 ), " ", pressure );
+		//		Log.write( "Pressure trend: ", TextUtil.toPrintableString( buffer, 3, 1 ), " ", pressureTrend.name() );
+		//		Log.write( "Temp in: ", TextUtil.toPrintableString( buffer, 9, 2 ), " ", tempInside );
+		//		Log.write( "Humid in: ", TextUtil.toPrintableString( buffer, 1, 1 ), " ", humidInside + "%" );
+		//		Log.write( "Temp out: ", TextUtil.toPrintableString( buffer, 12, 2 ), " ", tempOutside );
+		//		Log.write( "Wind speed: ", TextUtil.toPrintableString( buffer, 14, 1 ), " ", windSpeed );
+		//		Log.write( "Wind speed 10 min. avg.: ", TextUtil.toPrintableString( buffer, 15, 1 ), " ", windSpeedTenMinAvg );
+		//		Log.write( "Wind direction: ", TextUtil.toPrintableString( buffer, 16, 2 ), " ", windDirection );
+		//
+		//		Log.write( "Humid out: ", TextUtil.toPrintableString( buffer, 33, 1 ), " ", humidOutside );
+		//		Log.write( "Rain rate: ", TextUtil.toPrintableString( buffer, 41, 2 ), " ", rainRate );
+		//		Log.write( "Rain total daily: ", TextUtil.toPrintableString( buffer, 50, 2 ), " ", rainTotalDaily );
+
+		WeatherDatum temperatureDatum = new WeatherDatum( WeatherDatumIdentifier.TEMPERATURE, DecimalMeasure.valueOf( tempOutside, NonSI.FAHRENHEIT ) );
+		WeatherDatum pressureDatum = new WeatherDatum( WeatherDatumIdentifier.PRESSURE, DecimalMeasure.valueOf( pressure, NonSI.INCH_OF_MERCURY ) );
+		WeatherDatum humidityDatum = new WeatherDatum( WeatherDatumIdentifier.HUMIDITY, DecimalMeasure.valueOf( humidOutside, NonSI.PERCENT ) );
+		WeatherDatum windSpeedDatum = new WeatherDatum( WeatherDatumIdentifier.WIND_SPEED, DecimalMeasure.valueOf( windSpeed, NonSI.MILES_PER_HOUR ) );
+		WeatherDatum windSpeedTenMinAvgDatum = new WeatherDatum( WeatherDatumIdentifier.WIND_SPEED_10_MINUTE_AVERAGE, DecimalMeasure.valueOf( windSpeedTenMinAvg, NonSI.MILES_PER_HOUR ) );
+		WeatherDatum windDirectionDatum = new WeatherDatum( WeatherDatumIdentifier.WIND_DIRECTION, DecimalMeasure.valueOf( windDirection, NonSI.DEGREE_ANGLE ) );
+		WeatherDatum rainRateDatum = new WeatherDatum( WeatherDatumIdentifier.RAIN_RATE, DecimalMeasure.valueOf( rainRate, NonSI.INCH.divide( NonSI.HOUR ) ) );
+		WeatherDatum rainTotalDailyDatum = new WeatherDatum( WeatherDatumIdentifier.RAIN_TOTAL_DAILY, DecimalMeasure.valueOf( rainTotalDaily, NonSI.INCH ) );
+
+		WeatherDatum temperatureInsideDatum = new WeatherDatum( WeatherDatumIdentifier.TEMPERATURE_INSIDE, DecimalMeasure.valueOf( tempInside, NonSI.FAHRENHEIT ) );
+		WeatherDatum humidityInsideDatum = new WeatherDatum( WeatherDatumIdentifier.HUMIDITY_INSIDE, DecimalMeasure.valueOf( humidInside, NonSI.PERCENT ) );
+
+		fireWeatherEvent( new WeatherDataEvent( temperatureDatum, pressureDatum, humidityDatum, windSpeedDatum, windDirectionDatum, rainRateDatum, rainTotalDailyDatum, temperatureInsideDatum, humidityInsideDatum, windSpeedTenMinAvgDatum ) );
+	}
+
+	private void fireWeatherEvent( WeatherDataEvent event ) {
+		for( WeatherDataListener listener : listeners ) {
+			listener.weatherDataEvent( event );
+		}
 	}
 
 	private int getUnsignedByte( byte value ) {
@@ -226,8 +286,8 @@ public class DavisReader {
 		}
 
 		@Override
-		public void write( int b ) throws IOException {
-			output.print( TextUtil.toPrintableString( (byte)b ) );
+		public void write( int data ) throws IOException {
+			output.print( TextUtil.toPrintableString( (byte)data ) );
 		}
 
 	}

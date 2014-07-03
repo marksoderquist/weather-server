@@ -1,0 +1,16 @@
+package com.parallelsymmetry.weather;
+
+public enum WeatherDatumIdentifier {
+
+	TEMPERATURE,
+	HUMIDITY,
+	PRESSURE,
+	WIND_SPEED,
+	WIND_DIRECTION,
+	RAIN_RATE,
+	TEMPERATURE_INSIDE,
+	HUMIDITY_INSIDE,
+	WIND_SPEED_10_MINUTE_AVERAGE,
+	RAIN_TOTAL_DAILY
+
+}
