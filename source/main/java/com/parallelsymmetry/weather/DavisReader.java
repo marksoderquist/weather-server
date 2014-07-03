@@ -78,6 +78,7 @@ public class DavisReader {
 		Log.write( "Reader stopped!" );
 	}
 
+	// Does not work to detect if receiver is disconnected.
 	private boolean isReceiverConnected( SerialAgent agent ) throws IOException {
 		PrintStream output = new PrintStream( agent.getOutputStream() );
 		output.println( "RECEIVERS" );
@@ -93,7 +94,7 @@ public class DavisReader {
 		}
 
 		boolean connected = ( buffer[6] & 1 ) != 0;
-		
+
 		Log.write();
 		Log.write( "Read: ", TextUtil.toPrintableString( buffer, 0, 7 ) );
 		Log.write( "Connected: ", connected );
@@ -101,9 +102,25 @@ public class DavisReader {
 		return connected;
 	}
 
+	private void clearData( SerialAgent agent ) throws IOException {
+		PrintStream output = new PrintStream( agent.getOutputStream() );
+		output.println( "CLRDATA" );
+
+		byte[] buffer = new byte[8];
+		BufferedInputStream input = new BufferedInputStream( agent.getInputStream() );
+
+		int read = input.read( buffer );
+		int count = read;
+		while( count < 1 ) {
+			read = input.read( buffer );
+			count += read;
+		}
+	}
+
 	private void getData( SerialAgent agent ) throws IOException {
-		boolean connected = isReceiverConnected( agent );
-		
+		//boolean connected = isReceiverConnected( agent );
+		//clearData( agent );
+
 		PrintStream output = new PrintStream( agent.getOutputStream() );
 		output.println( "LOOP 1" );
 
@@ -159,7 +176,7 @@ public class DavisReader {
 		float rainRate = rainRateRaw == 0xffff ? Float.NaN : rainRateRaw / 100.0f;
 
 		Log.write();
-		//Log.write( "Read: ", TextUtil.toPrintableString( buffer, 33, 1 ) );
+		Log.write( "Read: ", TextUtil.toPrintableString( buffer, 0, 99 ) );
 		Log.write( "Bar: ", TextUtil.toPrintableString( buffer, 7, 2 ), " ", bar );
 		Log.write( "Bar trend: ", TextUtil.toPrintableString( buffer, 3, 1 ), " ", barTrend.name() );
 		Log.write( "Temp in: ", TextUtil.toPrintableString( buffer, 9, 2 ), " ", tempInside );
@@ -210,7 +227,7 @@ public class DavisReader {
 
 		@Override
 		public void write( int b ) throws IOException {
-			output.print( TextUtil.toPrintableString( b ) );
+			output.print( TextUtil.toPrintableString( (byte)b ) );
 		}
 
 	}
