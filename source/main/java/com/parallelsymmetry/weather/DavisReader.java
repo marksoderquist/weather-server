@@ -53,6 +53,7 @@ public class DavisReader implements Controllable {
 
 		listPortIdentifiers();
 
+		// TODO Store this in a config file.
 		String port = "/dev/ttyUSB0";
 
 		try {
