@@ -23,6 +23,7 @@ public class WeatherServlet extends HttpServlet {
 		
 		// TODO Fix this problem somehow:
 		// Native library already loaded in another class loader
+		// -Djava.library.path=/usr/lib/jni
 	}
 
 	/**
