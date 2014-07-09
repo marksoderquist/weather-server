@@ -5,16 +5,21 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.parallelsymmetry.pom</groupId>
-		<artifactId>jar</artifactId>
-		<version>2.0.0-SNAPSHOT</version>
+		<groupId>net.soderquist.pom</groupId>
+		<artifactId>top</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 		<relativePath></relativePath>
 	</parent>
 
-	<groupId>com.parallelsymmetry</groupId>
+	<groupId>net.soderquist.mark</groupId>
+	<artifactId>weather</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
+	<packaging>war</packaging>
 
-	<name>Parallel Symmetry Weather Reader</name>
+	<name>Mark Soderquist Weather Reader</name>
+	<description>A personal weather site.</description>
+	<url>http://mark.soderquist.net/weather/</url>
+	<inceptionYear>2014</inceptionYear>
 
 	<repositories>
 		<repository>
@@ -23,12 +28,17 @@
 		</repository>
 	</repositories>
 
-	<dependencies>
+	<build>
+		<finalName>weather##${project.version}</finalName>
+	</build>
 
+	<dependencies>
+	
 		<dependency>
-			<groupId>com.parallelsymmetry</groupId>
-			<artifactId>service</artifactId>
-			<version>2.0.0-SNAPSHOT</version>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -43,42 +53,62 @@
 			<version>4.3.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.parallelsymmetry</groupId>
+			<artifactId>terrace</artifactId>
+			<version>2.0.0-SNAPSHOT</version>
+		</dependency>
+		
 	</dependencies>
 
-	<build>
+	<profiles>
 
-		<resources>
-			<resource>
-				<directory>source/main/resources</directory>
-				<filtering>false</filtering>
-				<excludes>
-					<exclude>**/product.xml</exclude>
-				</excludes>
-			</resource>
-			<resource>
-				<directory>source/main/resources</directory>
-				<filtering>true</filtering>
-				<includes>
-					<include>**/product.xml</include>
-				</includes>
-			</resource>
-		</resources>
+		<profile>
+			<id>local</id>
 
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.5.1</version>
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 
-	</build>
+			<build>
+				<plugins>
 
-	<artifactId>weather</artifactId>
+					<plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat7-maven-plugin</artifactId>
+						<configuration>
+							<url>http://localhost:8080/manager/text</url>
+							<server>local-tomcat</server>
+							<path>/weather</path>
+							<warFile>target/${project.build.finalName}.war</warFile>
+						</configuration>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>production</id>
+
+			<build>
+				<plugins>
+
+					<plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat7-maven-plugin</artifactId>
+						<configuration>
+							<url>http://emerald/manager/text</url>
+							<server>local-tomcat</server>
+							<path>/weather</path>
+							<warFile>target/${project.build.finalName}.war</warFile>
+						</configuration>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+
 </project>

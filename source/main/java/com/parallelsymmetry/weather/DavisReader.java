@@ -45,7 +45,7 @@ public class DavisReader implements Controllable {
 	private Collection<WeatherDataListener> listeners;
 
 	public DavisReader() {
-		listeners = new CopyOnWriteArraySet<>();
+		listeners = new CopyOnWriteArraySet<WeatherDataListener>();
 	}
 
 	public void start() {

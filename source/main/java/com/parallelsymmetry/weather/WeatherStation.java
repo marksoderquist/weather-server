@@ -24,7 +24,7 @@ public class WeatherStation implements WeatherDataListener {
 	private Map<WeatherDatumIdentifier, Quantity> data;
 
 	public WeatherStation() {
-		data = new ConcurrentHashMap<>();
+		data = new ConcurrentHashMap<WeatherDatumIdentifier, Quantity>();
 	}
 
 	public Quantity getQuantity( WeatherDatumIdentifier datum ) {

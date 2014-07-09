@@ -1,16 +1,15 @@
 package com.parallelsymmetry.weather;
 
-import com.parallelsymmetry.service.Service;
-import com.parallelsymmetry.utility.Parameters;
+import com.parallelsymmetry.utility.agent.Agent;
 
-public class WeatherReader extends Service {
+public class WeatherReader extends Agent {
 
 	private WeatherStation station;
 
 	private DavisReader reader;
 	
 	public static final void main( String[] commands ) {
-		new WeatherReader().process( commands );
+		new WeatherReader().start();
 	}
 
 	public WeatherReader() {
@@ -20,17 +19,12 @@ public class WeatherReader extends Service {
 	}
 
 	@Override
-	protected void process( Parameters parameters, boolean peer ) throws Exception {
-
-	}
-
-	@Override
-	protected void startService( Parameters parameters ) throws Exception {
+	protected void startAgent() throws Exception {
 		reader.start();
 	}
 
 	@Override
-	protected void stopService( Parameters parameters ) throws Exception {
+	protected void stopAgent() throws Exception {
 		reader.stop();
 	}
 
