@@ -19,6 +19,9 @@ WeatherStation wxstation = (WeatherStation)application.getAttribute( "wxstation"
 <h1>Bluewing Weather</h1>
 
 <div id="wx-current">
+	<div id="wx-timestamp">
+		<span id="timestamp-label">Timestamp:&nbsp;<span><span id="timestamp-value"><%=wxstation.getTimestamp()%></span>
+	</div>
 	<div id="wx-temperature">
 		<span id="temperature-label">Temperature:&nbsp;<span><span id="temperature-value"><%=wxstation.getTemperature()%></span>&nbsp;<span id="temperature-unit"><%=wxstation.getTemperatureUnit()%></span>
 	</div>

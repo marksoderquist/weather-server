@@ -2,6 +2,10 @@ body {
 	font: 12px/1.5 arial, helvetica, clean, sans-serif;
 }
 
+#wx-timestamp {
+	font-size: 42px;
+}
+
 #wx-temperature {
 	font-size: 42px;
 }

@@ -18,7 +18,7 @@
 
 	<servlet-mapping>
 		<servlet-name>weather</servlet-name>
-		<url-pattern>/station/*</url-pattern>
+		<url-pattern>/wxstation/*</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>

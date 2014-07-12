@@ -34,6 +34,7 @@ public class WeatherServlet extends HttpServlet {
 		// http://<host>[:<port>]/<context>/station/put?id=21&t=42.1&h=57&p=29.92
 
 		Log.write( "Station ID: ", request.getParameter( "id" ) );
+		Log.write( "Timestamp: ", request.getParameter( "ts" ) );
 		Log.write( "Temperature: ", request.getParameter( "t" ) );
 		Log.write( "Humidity: ", request.getParameter( "h" ) );
 		Log.write( "Pressure: ", request.getParameter( "p" ) );
@@ -42,6 +43,8 @@ public class WeatherServlet extends HttpServlet {
 		Log.write( "Wind sustain: ", request.getParameter( "ws" ) );
 		Log.write( "Rain rate: ", request.getParameter( "rr" ) );
 		Log.write( "Rain total daily: ", request.getParameter( "rd" ) );
+
+		station.setTimestamp( request.getParameter( "ts" ) );
 
 		station.setTemperature( request.getParameter( "t" ) );
 		station.setTemperatureUnit( WeatherStation.DEGREE + "F" );

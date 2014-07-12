@@ -3,6 +3,8 @@ package net.soderquist.mark.weather;
 public class WeatherStation {
 
 	public static final String DEGREE = "\u00B0";
+	
+	private String timestamp;
 
 	private String temperature;
 
@@ -37,6 +39,14 @@ public class WeatherStation {
 	private String rainTotalDaily;
 	
 	private String rainTotalDailyUnit;
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp( String timestamp ) {
+		this.timestamp = timestamp;
+	}
 
 	public String getTemperature() {
 		return temperature;
