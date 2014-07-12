@@ -16,15 +16,15 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>Mark Soderquist Weather Reader</name>
-	<description>A personal weather site.</description>
+	<name>Mark Soderquist Weather Site</name>
+	<description>Mark Soderquist personal weather site.</description>
 	<url>http://mark.soderquist.net/weather/</url>
 	<inceptionYear>2014</inceptionYear>
 
 	<repositories>
 		<repository>
 			<id>psm</id>
-			<url>http://code.parallelsymmetry.com/repo/psm</url>
+			<url>http://code.parallelsymmetry.com/repo/sod/website/mark/weather</url>
 		</repository>
 	</repositories>
 
