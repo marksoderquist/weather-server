@@ -1,5 +1,6 @@
 <%@ page language="java"%>
 
+<jsp:useBean id="wxstation" scope="application" class="com.parallelsymmetry.weather.WeatherStation"/>
 <html>
 
 <head>
@@ -15,7 +16,7 @@
 
 <div id="wx-current">
 	<div id="wx-temperature">
-		<span id="temperature-label">Temperature:<span><span id="temperature-fahrenheit">00</span><span id="temperature-unit">&deg;F</span>
+		<span id="temperature-label">Temperature:<span><span id="temperature-fahrenheit"><%=wxstation.getTemperature()%></span><span id="temperature-unit">&deg;F</span>
 	</div>
 </div>
 

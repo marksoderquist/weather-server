@@ -7,7 +7,7 @@ public class WeatherReader extends Agent {
 	private WeatherStation station;
 
 	private DavisReader reader;
-	
+
 	public static final void main( String[] commands ) {
 		new WeatherReader().start();
 	}
@@ -16,6 +16,10 @@ public class WeatherReader extends Agent {
 		station = new WeatherStation();
 		reader = new DavisReader();
 		reader.addWeatherDataListener( station );
+	}
+	
+	public WeatherStation getWeatherStation() {
+		return station;
 	}
 
 	@Override

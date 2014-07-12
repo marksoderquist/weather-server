@@ -19,11 +19,9 @@ public class WeatherServlet extends HttpServlet {
 		Log.write( Log.TRACE, "Starting Weather Reader..." );
 		reader = new WeatherReader();
 		reader.start();
-		Log.write( Log.INFO, "Weather Reader started." );
 		
-		// TODO Fix this problem somehow:
-		// Native library already loaded in another class loader
-		// -Djava.library.path=/usr/lib/jni
+		getServletContext().setAttribute( "wx-station", reader.getWeatherStation() );
+		Log.write( Log.INFO, "Weather Reader started." );
 	}
 
 	/**
