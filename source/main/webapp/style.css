@@ -6,3 +6,31 @@ body {
 	font-size: 42px;
 }
 
+#wx-humidity {
+	font-size: 42px;
+}
+
+#wx-pressure {
+	font-size: 42px;
+}
+
+#wx-wind-direction {
+	font-size: 42px;
+}
+
+#wx-wind-instant {
+	font-size: 42px;
+}
+
+#wx-wind-sustain {
+	font-size: 42px;
+}
+
+#wx-rain-rate {
+	font-size: 42px;
+}
+
+#wx-rain-total-daily {
+	font-size: 42px;
+}
+
