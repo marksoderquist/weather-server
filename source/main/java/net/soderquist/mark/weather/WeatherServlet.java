@@ -1,6 +1,8 @@
 package net.soderquist.mark.weather;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +14,8 @@ import com.parallelsymmetry.utility.log.Log;
 public class WeatherServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -2358024754122910316L;
+
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat( "yyyy-MM-dd hh:mm:ss a" );
 
 	private WeatherStation station;
 
@@ -44,7 +48,10 @@ public class WeatherServlet extends HttpServlet {
 		Log.write( "Rain rate: ", request.getParameter( "rr" ) );
 		Log.write( "Rain total daily: ", request.getParameter( "rd" ) );
 
-		station.setTimestamp( request.getParameter( "ts" ) );
+		Date timestamp = null;
+		String timestampValue = request.getParameter( "ts" );
+		if( timestampValue != null ) timestamp = new Date( Long.parseLong( timestampValue ) );
+		station.setTimestamp( timestamp == null ? null : DATE_FORMAT.format( timestamp ) );
 
 		station.setTemperature( request.getParameter( "t" ) );
 		station.setTemperatureUnit( WeatherStation.DEGREE + "F" );
