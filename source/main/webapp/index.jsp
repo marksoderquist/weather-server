@@ -10,6 +10,7 @@ WeatherStation wxstation = (WeatherStation)application.getAttribute( "wxstation"
 <head>
   <title>Bluewing Weather</title>
   <meta http-equiv="expires" content="0">
+  <meta http-equiv="refresh" content="5">
   <link rel="icon" type="image/png" href="images/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
