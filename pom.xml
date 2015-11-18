@@ -90,7 +90,7 @@
 						<groupId>org.apache.tomcat.maven</groupId>
 						<artifactId>tomcat7-maven-plugin</artifactId>
 						<configuration>
-							<url>http://emerald/manager/text</url>
+							<url>http://ruby:8080/manager/text</url>
 							<server>local-tomcat</server>
 							<path>/weather</path>
 							<warFile>target/${project.build.finalName}.war</warFile>

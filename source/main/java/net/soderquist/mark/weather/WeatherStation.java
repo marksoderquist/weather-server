@@ -28,7 +28,17 @@ public class WeatherStation {
 	
 	private String windInstant;
 	
-	private String windSustain;
+	private String wind2MinMin;
+	
+	private String wind2MinAverage;
+	
+	private String wind2MinMax;
+	
+	private String wind10MinMin;
+	
+	private String wind10MinAverage;
+	
+	private String wind10MinMax;
 	
 	private String windUnit;
 	
@@ -136,12 +146,52 @@ public class WeatherStation {
 		this.windInstant = windInstant;
 	}
 
-	public String getWindSustain() {
-		return windSustain;
+	public String getWind2MinMin() {
+		return wind2MinMin;
 	}
 
-	public void setWindSustain( String windSustain ) {
-		this.windSustain = windSustain;
+	public void setWind2MinMin(String wind2MinMin) {
+		this.wind2MinMin = wind2MinMin;
+	}
+
+	public String getWind2MinAverage() {
+		return wind2MinAverage;
+	}
+
+	public void setWind2MinAverage(String wind2MinAverage) {
+		this.wind2MinAverage = wind2MinAverage;
+	}
+
+	public String getWind2MinMax() {
+		return wind2MinMax;
+	}
+
+	public void setWind2MinMax(String wind2MinMax) {
+		this.wind2MinMax = wind2MinMax;
+	}
+
+	public String getWind10MinMin() {
+		return wind10MinMin;
+	}
+
+	public void setWind10MinMin(String wind10MinMin) {
+		this.wind10MinMin = wind10MinMin;
+	}
+
+	public String getWind10MinAverage() {
+		return wind10MinAverage;
+	}
+
+	public void setWind10MinAverage( String wind10MinAverage ) {
+		this.wind10MinAverage = wind10MinAverage;
+	}
+
+	public String getWind10MinMax() {
+		return wind10MinMax;
+	}
+
+	public void setWind10MinMax(String wind10MinMax) {
+		this.wind10MinMax = wind10MinMax;
 	}
 
 	public String getWindUnit() {

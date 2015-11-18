@@ -66,7 +66,12 @@ public class WeatherServlet extends HttpServlet {
 		station.setWindDirectionUnit( WeatherStation.DEGREE );
 
 		station.setWindInstant( request.getParameter( "wi" ) );
-		station.setWindSustain( request.getParameter( "ws" ) );
+		station.setWind2MinMin( request.getParameter( "wmin2" ) );
+		station.setWind2MinAverage( request.getParameter( "wavg2" ) );
+		station.setWind2MinMax( request.getParameter( "wmax2" ) );
+		station.setWind10MinMin( request.getParameter( "wmin10" ) );
+		station.setWind10MinAverage( request.getParameter( "wavg10" ) );
+		station.setWind10MinMax( request.getParameter( "wmax10" ) );
 		station.setWindUnit( "mph" );
 
 		station.setRainRate( request.getParameter( "rr" ) );

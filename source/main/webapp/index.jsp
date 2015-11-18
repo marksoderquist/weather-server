@@ -38,8 +38,23 @@ WeatherStation wxstation = (WeatherStation)application.getAttribute( "wxstation"
 	<div id="wx-wind-instant">
 		<span id="wind-instant-label">Wind Instant Speed:&nbsp;<span><span id="wind-instant-value"><%=wxstation.getWindInstant()%></span>&nbsp;<span id="wind-instant-unit"><%=wxstation.getWindUnit()%></span>
 	</div>
-	<div id="wx-wind-sustain">
-		<span id="wind-sustain-label">Wind Sustain Speed:&nbsp;<span><span id="wind-sustain-value"><%=wxstation.getWindSustain()%></span>&nbsp;<span id="wind-sustain-unit"><%=wxstation.getWindUnit()%></span>
+	<div id="wx-wind-2min-minimum">
+		<span id="wind-2min-minimum-label">Wind 2 min. Minimum:&nbsp;<span><span id="wind-2min-minimum-value"><%=wxstation.getWind2MinMin()%></span>&nbsp;<span id="wind-2min-minimum-unit"><%=wxstation.getWindUnit()%></span>
+	</div>
+	<div id="wx-wind-2min-average">
+		<span id="wind-2min-average-label">Wind 2 min. Average:&nbsp;<span><span id="wind-2min-average-value"><%=wxstation.getWind2MinAverage()%></span>&nbsp;<span id="wind-2min-average-unit"><%=wxstation.getWindUnit()%></span>
+	</div>
+	<div id="wx-wind-2min-maximum">
+		<span id="wind-2min-maximum-label">Wind 2 min. Maximum:&nbsp;<span><span id="wind-2min-maximum-value"><%=wxstation.getWind2MinMax()%></span>&nbsp;<span id="wind-2min-maximum-unit"><%=wxstation.getWindUnit()%></span>
+	</div>
+	<div id="wx-wind-10min-minimum">
+		<span id="wind-10min-minimum-label">Wind 10 min. Minimum:&nbsp;<span><span id="wind-10min-minimum-value"><%=wxstation.getWind10MinMin()%></span>&nbsp;<span id="wind-10min-minimum-unit"><%=wxstation.getWindUnit()%></span>
+	</div>
+	<div id="wx-wind-10min-average">
+		<span id="wind-10min-average-label">Wind 10 min. Average:&nbsp;<span><span id="wind-10min-average-value"><%=wxstation.getWind10MinAverage()%></span>&nbsp;<span id="wind-10min-average-unit"><%=wxstation.getWindUnit()%></span>
+	</div>
+	<div id="wx-wind-10min-maximum">
+		<span id="wind-10min-maximum-label">Wind 10 min. Maximum:&nbsp;<span><span id="wind-10min-maximum-value"><%=wxstation.getWind10MinMax()%></span>&nbsp;<span id="wind-10min-maximum-unit"><%=wxstation.getWindUnit()%></span>
 	</div>
 	<div id="wx-rain-rate">
 		<span id="rain-rate-label">Rain Rate:&nbsp;<span><span id="rain-rate-value"><%=wxstation.getRainRate()%></span>&nbsp;<span id="rain-rate-unit"><%=wxstation.getRainRateUnit()%></span>
