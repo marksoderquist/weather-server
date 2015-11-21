@@ -31,6 +31,7 @@ public class WeatherServlet extends HttpServlet {
 		station.put( "temperature-unit", WeatherStation.DEGREE + "F" );
 		station.put( "humidity-unit", "%" );
 		station.put( "pressure-unit", "inHg" );
+		station.put( "pressure-trend-unit", "inHg/hr" );
 		station.put( "wind-direction-unit", WeatherStation.DEGREE );
 		station.put( "wind-unit", "mph" );
 		station.put( "rain-total-daily-unit", "in" );

@@ -39,71 +39,85 @@
 				<td><%=wxstation.get("wind-current")%> <%=wxstation.get("wind-unit")%></td>
 			</tr>
 			<tr>
-				<td>Relative Humidity:</td>
+				<td>Humidity:</td>
 				<td><%=wxstation.get("humidity")%> <%=wxstation.get("humidity-unit")%></td>
 				<td></td>
 				<td>Wind Direction:</td>
 				<td><%=wxstation.get("wind-direction")%> <%=wxstation.get("wind-direction-unit")%></td>
 			</tr>
 			<tr>
-				<td>Air Pressure:</td>
-				<td><%=wxstation.get("pressure")%> <%=wxstation.get("pressure-unit")%></td>
+				<td>&nbsp;</td>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
+				<td>Dew Point:</td>
+				<td><%=wxstation.get("dew-point")%> <%=wxstation.get("temperature-unit")%></td>
 				<td></td>
 				<td>Wind 10 min. Maximum:</td>
 				<td><%=wxstation.get("wind-10-min-max")%> <%=wxstation.get("wind-unit")%></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
+				<td>Wind Chill:</td>
+				<td><%=wxstation.get("wind-chill")%> <%=wxstation.get("temperature-unit")%></td>
 				<td></td>
 				<td>Wind 10 min. Average:</td>
 				<td><%=wxstation.get("wind-10-min-avg")%> <%=wxstation.get("wind-unit")%></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
+				<td>Heat Index:</td>
+				<td><%=wxstation.get("heat-index")%> <%=wxstation.get("temperature-unit")%></td>
 				<td></td>
 				<td>Wind 10 min. Minimum:</td>
 				<td><%=wxstation.get("wind-10-min-min")%> <%=wxstation.get("wind-unit")%></td>
 			</tr>
 			<tr>
-				<td></td>
+				<td>&nbsp;</td>
 				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
+				<td>Pressure:</td>
+				<td><%=wxstation.get("pressure")%> <%=wxstation.get("pressure-unit")%></td>
 				<td></td>
 				<td>Wind 2 min. Maximum:</td>
 				<td><%=wxstation.get("wind-2-min-max")%> <%=wxstation.get("wind-unit")%></td>
 			</tr>
 			<tr>
-				<td>Rain Total Daily:</td>
-				<td><%=wxstation.get("rain-total-daily")%> <%=wxstation.get("rain-total-daily-unit")%></td>
+				<td>Pressure Trend:</td>
+				<td><%=wxstation.get("pressure-trend")%> <%=wxstation.get("pressure-trend-unit")%></td>
 				<td></td>
 				<td>Wind 2 min. Average:</td>
 				<td><%=wxstation.get("wind-2-min-avg")%> <%=wxstation.get("wind-unit")%></td>
 			</tr>
 			<tr>
-				<td>Rain Rate:</td>
-				<td><%=wxstation.get("rain-rate")%> <%=wxstation.get("rain-rate-unit")%></td>
+				<td></td>
+				<td></td>
 				<td></td>
 				<td>Wind 2 min. Minimum:</td>
 				<td><%=wxstation.get("wind-2-min-min")%> <%=wxstation.get("wind-unit")%></td>
 			</tr>
 			<tr>
+				<td>&nbsp;</td>
 				<td></td>
 				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Rain Total Daily:</td>
+				<td><%=wxstation.get("rain-total-daily")%> <%=wxstation.get("rain-total-daily-unit")%></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Rain Rate:</td>
+				<td><%=wxstation.get("rain-rate")%> <%=wxstation.get("rain-rate-unit")%></td>
 				<td></td>
 				<td></td>
 				<td></td>
