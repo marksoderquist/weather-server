@@ -15,7 +15,7 @@ public class WeatherServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -2358024754122910316L;
 
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat( "yyyy-MM-dd hh:mm:ss a" );
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
 
 	private WeatherStation station;
 
@@ -24,61 +24,62 @@ public class WeatherServlet extends HttpServlet {
 	 */
 	@Override
 	public void init() throws ServletException {
-		Log.write( Log.TRACE, "Starting Weather Reader..." );
+		Log.write(Log.TRACE, "Starting Weather Reader...");
 
 		station = new WeatherStation();
-		getServletContext().setAttribute( "wxstation", station );
+		getServletContext().setAttribute("wxstation", station);
 
-		Log.write( Log.INFO, "Weather Reader started." );
+		Log.write(Log.INFO, "Weather Reader started.");
 	}
 
 	@Override
-	protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// Call this method with:
 		// http://<host>[:<port>]/<context>/station/put?id=21&t=42.1&h=57&p=29.92
 
-		//		Log.write( "Station ID: ", request.getParameter( "id" ) );
-		//		Log.write( "Timestamp: ", request.getParameter( "ts" ) );
-		//		Log.write( "Temperature: ", request.getParameter( "t" ) );
-		//		Log.write( "Humidity: ", request.getParameter( "h" ) );
-		//		Log.write( "Pressure: ", request.getParameter( "p" ) );
-		//		Log.write( "Wind direction: ", request.getParameter( "wd" ) );
-		//		Log.write( "Wind instant: ", request.getParameter( "wi" ) );
-		//		Log.write( "Wind sustain: ", request.getParameter( "ws" ) );
-		//		Log.write( "Rain rate: ", request.getParameter( "rr" ) );
-		//		Log.write( "Rain total daily: ", request.getParameter( "rd" ) );
+		// Log.write( "Station ID: ", request.getParameter( "id" ) );
+		// Log.write( "Timestamp: ", request.getParameter( "ts" ) );
+		// Log.write( "Temperature: ", request.getParameter( "t" ) );
+		// Log.write( "Humidity: ", request.getParameter( "h" ) );
+		// Log.write( "Pressure: ", request.getParameter( "p" ) );
+		// Log.write( "Wind direction: ", request.getParameter( "wd" ) );
+		// Log.write( "Wind instant: ", request.getParameter( "wi" ) );
+		// Log.write( "Wind sustain: ", request.getParameter( "ws" ) );
+		// Log.write( "Rain rate: ", request.getParameter( "rr" ) );
+		// Log.write( "Rain total daily: ", request.getParameter( "rd" ) );
 
 		Date timestamp = null;
-		String timestampValue = request.getParameter( "ts" );
-		if( timestampValue != null ) timestamp = new Date( Long.parseLong( timestampValue ) );
-		station.setTimestamp( timestamp == null ? null : DATE_FORMAT.format( timestamp ) );
+		String timestampValue = request.getParameter("ts");
+		if (timestampValue != null) timestamp = new Date(Long.parseLong(timestampValue));
+		station.put("timestamp", timestamp == null ? null : DATE_FORMAT.format(timestamp));
 
-		station.setTemperature( request.getParameter( "t" ) );
-		station.setTemperatureUnit( WeatherStation.DEGREE + "F" );
+		station.put("temperature", request.getParameter("t"));
+		station.put("temperature-unit", WeatherStation.DEGREE + "F");
 
-		station.setHumidity( request.getParameter( "h" ) );
-		station.setHumidityUnit( "%" );
+		station.put("humidity", request.getParameter("h"));
+		station.put("humidity-unit", "%");
 
-		station.setPressure( request.getParameter( "p" ) );
-		station.setPressureUnit( "inHg" );
+		station.put("pressure", request.getParameter("p"));
+		station.put("pressure-unit", "inHg");
 
-		station.setWindDirection( request.getParameter( "wd" ) );
-		station.setWindDirectionUnit( WeatherStation.DEGREE );
+		station.put("wind-direction", request.getParameter("wd"));
+		station.put("wind-direction-unit", WeatherStation.DEGREE);
 
-		station.setWindInstant( request.getParameter( "wi" ) );
-		station.setWind2MinMin( request.getParameter( "wmin2" ) );
-		station.setWind2MinAverage( request.getParameter( "wavg2" ) );
-		station.setWind2MinMax( request.getParameter( "wmax2" ) );
-		station.setWind10MinMin( request.getParameter( "wmin10" ) );
-		station.setWind10MinAverage( request.getParameter( "wavg10" ) );
-		station.setWind10MinMax( request.getParameter( "wmax10" ) );
-		station.setWindUnit( "mph" );
+		station.put("wind-current", request.getParameter("wi"));
+		station.put("wind-10-min-max", request.getParameter("wmax10"));
+		station.put("wind-10-min-avg", request.getParameter("wavg10"));
+		station.put("wind-10-min-min", request.getParameter("wmin10"));
+		station.put("wind-2-min-max", request.getParameter("wmax2"));
+		station.put("wind-2-min-avg", request.getParameter("wavg2"));
+		station.put("wind-2-min-min", request.getParameter("wmin2"));
+		station.put("wind-unit", "mph");
 
-		station.setRainRate( request.getParameter( "rr" ) );
-		station.setRainRateUnit( "in/hr" );
+		station.put("rain-total-daily", request.getParameter("rd"));
+		station.put("rain-total-daily-unit", "in");
 
-		station.setRainTotalDaily( request.getParameter( "rd" ) );
-		station.setRainTotalDailyUnit( "in" );
+		station.put("rain-rate", request.getParameter("rr"));
+		station.put("rain-rate-unit", "in/hr");
 	}
 
 	/**
@@ -86,8 +87,8 @@ public class WeatherServlet extends HttpServlet {
 	 */
 	@Override
 	public void destroy() {
-		Log.write( Log.TRACE, "Stopping Weather Reader..." );
-		Log.write( Log.INFO, "Weather Reader stopped." );
+		Log.write(Log.TRACE, "Stopping Weather Reader...");
+		Log.write(Log.INFO, "Weather Reader stopped.");
 	}
 
 }

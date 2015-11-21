@@ -3,9 +3,6 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/source/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/source/main/java"/>
-        <dependent-module archiveName="utility-2.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/utility/utility">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="weather##1.0.0-SNAPSHOT"/>
         <property name="java-output-path" value="/mark.soderquist.net-weather/target/main/java"/>
     </wb-module>

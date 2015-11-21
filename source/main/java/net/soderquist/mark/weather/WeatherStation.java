@@ -1,14 +1,13 @@
 package net.soderquist.mark.weather;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class WeatherStation {
 
 	public static final String DEGREE = "\u00B0";
-	
-	private String timestamp;
 
-	private String temperature;
-
-	private String temperatureUnit;
+	private Map<String, String> fields;
 
 	private String humidity;
 
@@ -17,68 +16,60 @@ public class WeatherStation {
 	private String pressure;
 
 	private String pressureUnit;
-	
+
 	private String pressureTrend;
-	
+
 	private String pressureTrendUnit;
-	
+
 	private String windDirection;
-	
+
 	private String windDirectionUnit;
-	
+
 	private String windInstant;
-	
+
 	private String wind2MinMin;
-	
+
 	private String wind2MinAverage;
-	
+
 	private String wind2MinMax;
-	
+
 	private String wind10MinMin;
-	
+
 	private String wind10MinAverage;
-	
+
 	private String wind10MinMax;
-	
+
 	private String windUnit;
-	
+
 	private String rainRate;
-	
+
 	private String rainRateUnit;
-	
+
 	private String rainTotalDaily;
-	
+
 	private String rainTotalDailyUnit;
 
-	public String getTimestamp() {
-		return timestamp;
+	public WeatherStation() {
+		fields = new HashMap<String, String>();
 	}
 
-	public void setTimestamp( String timestamp ) {
-		this.timestamp = timestamp;
+	public String get(String key) {
+		return fields.get(key);
 	}
 
-	public String getTemperature() {
-		return temperature;
-	}
-
-	public void setTemperature( String temperature ) {
-		this.temperature = temperature;
-	}
-
-	public String getTemperatureUnit() {
-		return temperatureUnit;
-	}
-
-	public void setTemperatureUnit( String temperatureUnit ) {
-		this.temperatureUnit = temperatureUnit;
+	public void put(String key, String value) {
+		if (value == null) {
+			fields.remove(key);
+		} else {
+			fields.put(key, value);
+		}
 	}
 
 	public String getHumidity() {
 		return humidity;
 	}
 
-	public void setHumidity( String humidity ) {
+	public void setHumidity(String humidity) {
 		this.humidity = humidity;
 	}
 
@@ -86,7 +77,7 @@ public class WeatherStation {
 		return humidityUnit;
 	}
 
-	public void setHumidityUnit( String humidityUnit ) {
+	public void setHumidityUnit(String humidityUnit) {
 		this.humidityUnit = humidityUnit;
 	}
 
@@ -94,7 +85,7 @@ public class WeatherStation {
 		return pressure;
 	}
 
-	public void setPressure( String pressure ) {
+	public void setPressure(String pressure) {
 		this.pressure = pressure;
 	}
 
@@ -102,7 +93,7 @@ public class WeatherStation {
 		return pressureUnit;
 	}
 
-	public void setPressureUnit( String pressureUnit ) {
+	public void setPressureUnit(String pressureUnit) {
 		this.pressureUnit = pressureUnit;
 	}
 
@@ -110,7 +101,7 @@ public class WeatherStation {
 		return pressureTrend;
 	}
 
-	public void setPressureTrend( String pressureTrend ) {
+	public void setPressureTrend(String pressureTrend) {
 		this.pressureTrend = pressureTrend;
 	}
 
@@ -118,7 +109,7 @@ public class WeatherStation {
 		return pressureTrendUnit;
 	}
 
-	public void setPressureTrendUnit( String pressureTrendUnit ) {
+	public void setPressureTrendUnit(String pressureTrendUnit) {
 		this.pressureTrendUnit = pressureTrendUnit;
 	}
 
@@ -126,7 +117,7 @@ public class WeatherStation {
 		return windDirection;
 	}
 
-	public void setWindDirection( String windDirection ) {
+	public void setWindDirection(String windDirection) {
 		this.windDirection = windDirection;
 	}
 
@@ -134,7 +125,7 @@ public class WeatherStation {
 		return windDirectionUnit;
 	}
 
-	public void setWindDirectionUnit( String windDirectionUnit ) {
+	public void setWindDirectionUnit(String windDirectionUnit) {
 		this.windDirectionUnit = windDirectionUnit;
 	}
 
@@ -142,7 +133,7 @@ public class WeatherStation {
 		return windInstant;
 	}
 
-	public void setWindInstant( String windInstant ) {
+	public void setWindInstant(String windInstant) {
 		this.windInstant = windInstant;
 	}
 
@@ -182,7 +173,7 @@ public class WeatherStation {
 		return wind10MinAverage;
 	}
 
-	public void setWind10MinAverage( String wind10MinAverage ) {
+	public void setWind10MinAverage(String wind10MinAverage) {
 		this.wind10MinAverage = wind10MinAverage;
 	}
 
@@ -198,7 +189,7 @@ public class WeatherStation {
 		return windUnit;
 	}
 
-	public void setWindUnit( String windUnit ) {
+	public void setWindUnit(String windUnit) {
 		this.windUnit = windUnit;
 	}
 
@@ -206,7 +197,7 @@ public class WeatherStation {
 		return rainRate;
 	}
 
-	public void setRainRate( String rainRate ) {
+	public void setRainRate(String rainRate) {
 		this.rainRate = rainRate;
 	}
 
@@ -214,7 +205,7 @@ public class WeatherStation {
 		return rainRateUnit;
 	}
 
-	public void setRainRateUnit( String rainRateUnit ) {
+	public void setRainRateUnit(String rainRateUnit) {
 		this.rainRateUnit = rainRateUnit;
 	}
 
@@ -222,7 +213,7 @@ public class WeatherStation {
 		return rainTotalDaily;
 	}
 
-	public void setRainTotalDaily( String rainTotalDaily ) {
+	public void setRainTotalDaily(String rainTotalDaily) {
 		this.rainTotalDaily = rainTotalDaily;
 	}
 
@@ -230,7 +221,7 @@ public class WeatherStation {
 		return rainTotalDailyUnit;
 	}
 
-	public void setRainTotalDailyUnit( String rainTotalDailyUnit ) {
+	public void setRainTotalDailyUnit(String rainTotalDailyUnit) {
 		this.rainTotalDailyUnit = rainTotalDailyUnit;
 	}
 
