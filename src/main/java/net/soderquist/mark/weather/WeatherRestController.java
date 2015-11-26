@@ -27,8 +27,30 @@ public class WeatherRestController {
 	}
 
 	@RequestMapping( method = RequestMethod.PUT, path = "/station" )
-	public void putStation( @RequestBody WeatherStation station ) {
-		//return stations.get( id );
+	public void putStation( @RequestParam( value = "id", required = true ) String id, @RequestBody WeatherStation station) {
+		WeatherStation target = stations.get( id );
+		if( target == null ) return;
+
+		target.setTemperature( station.getTemperature() );
+		target.setPressure( station.getPressure() );
+		target.setHumidity( station.getHumidity() );
+		
+		target.setDewPoint( station.getDewPoint() );
+		target.setWindChill( station.getWindChill() );
+		target.setHeatIndex( station.getHeatIndex() );
+		target.setPressureTrend( station.getPressureTrend() );
+		
+		target.setWindDirection( station.getWindDirection() );
+		target.setWind( station.getWind() );
+		target.setWindTenMinMax( station.getWindTenMinMax() );
+		target.setWindTenMinAvg( station.getWindTenMinAvg() );
+		target.setWindTenMinMin( station.getWindTenMinMin() );
+		target.setWindTwoMinMax( station.getWindTwoMinMax() );
+		target.setWindTwoMinAvg( station.getWindTwoMinAvg() );
+		target.setWindTwoMinMin( station.getWindTwoMinMin() );
+		
+		target.setRainTotalDaily( station.getRainTotalDaily() );
+		target.setRainRate( station.getRainRate() );
 	}
 
 }

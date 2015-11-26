@@ -141,6 +141,27 @@
 		</profile>
 
 		<profile>
+			<id>stage</id>
+
+			<build>
+				<plugins>
+
+					<plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat7-maven-plugin</artifactId>
+						<configuration>
+							<url>http://ruby:8080/manager/text</url>
+							<server>sod-tomcat</server>
+							<path>/weatherx</path>
+							<warFile>target/${project.build.finalName}.war</warFile>
+						</configuration>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
 			<id>production</id>
 
 			<build>
