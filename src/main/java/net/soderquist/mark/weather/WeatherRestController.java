@@ -31,15 +31,17 @@ public class WeatherRestController {
 		WeatherStation target = stations.get( id );
 		if( target == null ) return;
 
+		target.setTimestamp( station.getTimestamp() );
+
 		target.setTemperature( station.getTemperature() );
 		target.setPressure( station.getPressure() );
 		target.setHumidity( station.getHumidity() );
-		
+
 		target.setDewPoint( station.getDewPoint() );
 		target.setWindChill( station.getWindChill() );
 		target.setHeatIndex( station.getHeatIndex() );
 		target.setPressureTrend( station.getPressureTrend() );
-		
+
 		target.setWindDirection( station.getWindDirection() );
 		target.setWind( station.getWind() );
 		target.setWindTenMinMax( station.getWindTenMinMax() );
@@ -48,7 +50,7 @@ public class WeatherRestController {
 		target.setWindTwoMinMax( station.getWindTwoMinMax() );
 		target.setWindTwoMinAvg( station.getWindTwoMinAvg() );
 		target.setWindTwoMinMin( station.getWindTwoMinMin() );
-		
+
 		target.setRainTotalDaily( station.getRainTotalDaily() );
 		target.setRainRate( station.getRainRate() );
 	}
