@@ -3,6 +3,7 @@ package net.soderquist.mark.weather;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,8 +22,13 @@ public class WeatherRestController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, path = "/station" )
-	public WeatherStation station( @RequestParam( value = "id" ) String id) {
+	public WeatherStation getStation( @RequestParam( value = "id", required = true ) String id) {
 		return stations.get( id );
+	}
+
+	@RequestMapping( method = RequestMethod.PUT, path = "/station" )
+	public void putStation( @RequestBody WeatherStation station ) {
+		//return stations.get( id );
 	}
 
 }

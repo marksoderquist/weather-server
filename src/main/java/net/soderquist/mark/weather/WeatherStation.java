@@ -5,6 +5,8 @@ import lombok.NonNull;
 
 public @Data class WeatherStation {
 
+	public static final String DEGREE = "\u00B0";
+
 	@NonNull
 	private String id;
 
@@ -13,14 +15,20 @@ public @Data class WeatherStation {
 
 	private float temperature;
 	
+	private float pressure;
+
 	private float humidity;
 
-	private String temperatureUnit;
+	private final String temperatureUnit = DEGREE + "F";
 
-	private String humidityUnit;
+	private final String humidityUnit = "%";
 
-	private String pressureUnit;
+	private final String pressureUnit = "inHg";
 
-	private String windUnit;
-	
+	private final String pressureTrendUnit = "inHg/hr";
+
+	private final String windUnit = "MPH";
+
+	private final String windDirectionUnit = DEGREE;
+
 }
