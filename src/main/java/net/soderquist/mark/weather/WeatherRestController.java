@@ -3,10 +3,12 @@ package net.soderquist.mark.weather;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,8 +23,9 @@ public class WeatherRestController {
 		stations.put( "bluewing", new WeatherStation( "bluewing", "Bluewing Way" ) );
 	}
 
+	@CrossOrigin
 	@RequestMapping( method = RequestMethod.GET, path = "/station" )
-	public WeatherStation getStation( @RequestParam( value = "id", required = true ) String id) {
+	public @ResponseBody WeatherStation getStation( @RequestParam( value = "id", required = true ) String id) {
 		return stations.get( id );
 	}
 
