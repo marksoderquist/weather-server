@@ -40,8 +40,8 @@
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -81,7 +81,7 @@
 		</profile>
 
 		<profile>
-			<id>production</id>
+			<id>stage</id>
 
 			<build>
 				<plugins>
@@ -91,7 +91,28 @@
 						<artifactId>tomcat7-maven-plugin</artifactId>
 						<configuration>
 							<url>http://ruby:8080/manager/text</url>
-							<server>local-tomcat</server>
+							<server>sod-tomcat</server>
+							<path>/weather</path>
+							<warFile>target/${project.build.finalName}.war</warFile>
+						</configuration>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>production</id>
+
+			<build>
+				<plugins>
+
+					<plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat7-maven-plugin</artifactId>
+						<configuration>
+							<url>http://mark.soderquist.net:8080/manager/text</url>
+							<server>sod-tomcat</server>
 							<path>/weather</path>
 							<warFile>target/${project.build.finalName}.war</warFile>
 						</configuration>
