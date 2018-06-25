@@ -1,18 +1,18 @@
 package net.soderquist.mark.weather;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.autoconfigure.AutoConfigurations;
+import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = WeatherApplication.class)
-@WebAppConfiguration
+import static org.junit.Assert.assertNotNull;
+
 public class WeatherApplicationTests {
+
+	private final ApplicationContextRunner contextRunner = new ApplicationContextRunner().withConfiguration( AutoConfigurations.of( WeatherApplication.class ) );
 
 	@Test
 	public void contextLoads() {
+		assertNotNull( contextRunner );
 	}
 
 }
