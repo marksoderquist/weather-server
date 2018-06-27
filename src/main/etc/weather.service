@@ -1,0 +1,11 @@
+[Unit]
+Description=weather
+After=syslog.target
+
+[Service]
+User=sod
+ExecStart=/opt/sod/weather/weather.jar --server.servlet.context-path=/weather/api
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
