@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Override
 	protected void configure( HttpSecurity http ) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers( HttpMethod.GET, "/station" ).permitAll().antMatchers( HttpMethod.PUT, "/station" ).authenticated().and().httpBasic();
@@ -18,6 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
-		auth.inMemoryAuthentication().withUser( "dalton" ).password( "Do5JpMo8z5hSxUi4" ).roles( "USER" );
+		auth.inMemoryAuthentication().withUser( "dalton" ).password( "{noop}Do5JpMo8z5hSxUi4" ).roles( "USER" );
 	}
+
 }

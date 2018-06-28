@@ -4,7 +4,7 @@ After=syslog.target
 
 [Service]
 User=sod
-ExecStart=/opt/sod/weather/weather.jar --server.servlet.context-path=/weather/api
+ExecStart=/opt/sod/weather/weather.jar --server.servlet.context-path=/weather/api --server.port=6095
 SuccessExitStatus=143
 
 [Install]
