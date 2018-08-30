@@ -17,13 +17,13 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 2.5em;
   vertical-align: center;
 }
 
 .App-intro {
   padding: 20px;
-  font-size: large;
+  font-size: xx-large;
 }
 
 @keyframes App-logo-spin {
@@ -39,4 +39,9 @@
 
 .column {
   display: table-cell;
+}
+
+.weather-field {
+  display: table-row;
+  font-size: x-large;
 }
