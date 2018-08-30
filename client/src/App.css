@@ -1,51 +1,63 @@
 .App {
-  text-align: left;
+    text-align: left;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  width: 80px;
-  height: 80px;
-  float: left;
-}
-
-.App-header {
-  background-color: #333;
-  height: 80px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 2.5em;
-  vertical-align: center;
-}
-
-.App-intro {
-  padding: 20px;
-  font-size: xx-large;
+    animation: App-logo-spin infinite 30s linear;
+    width: 80px;
+    height: 80px;
+    float: left;
+    border-radius: 50%;
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(360deg); }
-  to { transform: rotate(0deg); }
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.App-header {
+    display: flex;
+    align-items:center;
+    background-color: #333;
+    height: 80px;
+    padding: 20px;
+    color: white;
+}
+
+.App-title {
+    font-size: 2em;
+}
+
+.content {
+    padding: 1em;
 }
 
 .two-column-layout {
-  width: 100%;
-  display: table;
-  table-layout: fixed;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
 }
 
 .column {
-  display: table-cell;
+    display: table-cell;
 }
 
 .weather-field {
-  display: table-row;
-  font-size: x-large;
+    display: table-row;
+    font-size: 1em;
+    --weather-field-pad: 0.25em;
 }
 
-.weather-cell {
-  display: table-cell;
+.weather-field-prompt {
+    display: table-cell;
+    padding: var(--weather-field-pad) 2.0em var(--weather-field-pad) var(--weather-field-pad);
+}
+
+.weather-field-value {
+    display: table-cell;
+    padding: var(--weather-field-pad) var(--weather-field-pad) var(--weather-field-pad) 0.0em;
 }

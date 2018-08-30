@@ -8,8 +8,8 @@
       "type": "image/x-icon"
     }
   ],
+  "start_url": "http://mark.soderquist.net/weather/index.html",
   "scope": "/weather/",
-  "start_url": "./weather/index.html",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

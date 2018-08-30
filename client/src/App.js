@@ -32,7 +32,7 @@ function parseJSON(response) {
 class App extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             weather: {}
         }
@@ -68,7 +68,7 @@ class Header extends Component {
         return (
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
-                <h1 className="App-title">{this.props.title}</h1>
+                <div className="App-title">{this.props.title}</div>
             </header>
         );
     }
@@ -77,52 +77,72 @@ class Header extends Component {
 class Body extends Component {
     render() {
         return (
-            <div className="two-column-layout">
-                <div className="column">
-                    <Field name='Temperature' value={this.props.weather.temperature} unit='&deg;'/>
-                    <Field name='Wind Chill' value={this.props.weather.windChill} unit='&deg;'/>
-                    <Field name='Head Index' value={this.props.weather.heatIndex} unit='&deg;'/>
-                    <Field name='Dew Point' value={this.props.weather.dewPoint} unit='&deg;'/>
-                    <Separator/>
-                    <Field name='Humidity' value={this.props.weather.humidity} unit='%'/>
-                    <Separator/>
-                    <Field name='Pressure' value={this.props.weather.pressure} unit=' in'/>
-                    <Field name='Pressure Trend' value={this.props.weather.pressureTrend} unit=' in/h'/>
-                    <Separator/>
-                    <Field name='Daily Rain' value={this.props.weather.rainTotalDaily} unit=' in'/>
-                    <Field name='Rain Rate' value={this.props.weather.rainRate} unit=' in/h'/>
-                </div>
-                <div className="column">
-                    <Field name='Wind Speed' value={this.props.weather.windTenMinAvg} unit=' mph'/>
-                    <Field name='Wind Direction' value={this.props.weather.windDirection} unit='&deg;'/>
-                    <Separator/>
-                    <Field name='Maximum Wind Speed (10 min)' value={this.props.weather.windTenMinMax} unit=' mph'/>
-                    <Field name='Average Wind Speed (10 min)' value={this.props.weather.windTenMinAvg} unit=' mph'/>
-                    <Field name='Minimum Wind Speed (10 min)' value={this.props.weather.windTenMinMin} unit=' mph'/>
-                    <Separator/>
-                    <Field name='Maximum Wind Speed (2 min)' value={this.props.weather.windTwoMinMax} unit=' mph'/>
-                    <Field name='Average Wind Speed (2 min)' value={this.props.weather.windTwoMinAvg} unit=' mph'/>
-                    <Field name='Minimum Wind Speed (2 min)' value={this.props.weather.windTwoMinMin} unit=' mph'/>
-                    <Separator/>
-                    <Field name='Instant Wind Speed' value={this.props.weather.wind} unit=' mph'/>
-                </div>
+            <div className="content">
+                    <div className="column">
+                        <Field name='Temperature' value={this.props.weather.temperature} unit='&deg;' precision='1'/>
+                        <Field name='Dew Point' value={this.props.weather.dewPoint} unit='&deg;' precision='1'/>
+                        <Field name='Humidity' value={this.props.weather.humidity} unit='%'/>
+                        {/*<WindField name='Wind Speed' wind={this.props.weather.windTenMinAvg} gust={this.props.weather.windTenMinMax} unit=' mph'/>*/}
+                        <Separator/>
+                        <Field name='Wind' value={this.props.weather.windTenMinAvg} unit=' mph'/>
+                        <Field name='Wind Gusts' value={this.props.weather.windTenMinMax} unit=' mph'/>
+                        <Field name='Wind Sustained' value={this.props.weather.windTenMinMin} unit=' mph'/>
+                        <Field name='Wind Direction' value={this.props.weather.windDirection} unit='&deg;'/>
+                        <Separator/>
+                        <Field name='Daily Rain' value={this.props.weather.rainTotalDaily} unit=' in' precision='2'/>
+                        <Field name='Rain Rate' value={this.props.weather.rainRate} unit=' in/h' precision='2'/>
+                        <Separator/>
+                        <Field name='Pressure' value={this.props.weather.pressure} unit=' in' precision='2'/>
+                        <Field name='Pressure Trend' value={this.props.weather.pressureTrend} unit=' in/h' precision='2'/>
+                        <Separator/>
+                        <Separator/>
+                        <Field name='Wind Chill' value={this.props.weather.windChill} unit='&deg;' precision='1'/>
+                        <Field name='Head Index' value={this.props.weather.heatIndex} unit='&deg;' precision='1'/>
+                        <Separator/>
+                        <Field name='Maximum Wind Speed (10 min)' value={this.props.weather.windTenMinMax} unit=' mph'/>
+                        <Field name='Average Wind Speed (10 min)' value={this.props.weather.windTenMinAvg} unit=' mph'/>
+                        <Field name='Minimum Wind Speed (10 min)' value={this.props.weather.windTenMinMin} unit=' mph'/>
+                        <Separator/>
+                        <Field name='Maximum Wind Speed (2 min)' value={this.props.weather.windTwoMinMax} unit=' mph'/>
+                        <Field name='Average Wind Speed (2 min)' value={this.props.weather.windTwoMinAvg} unit=' mph'/>
+                        <Field name='Minimum Wind Speed (2 min)' value={this.props.weather.windTwoMinMin} unit=' mph'/>
+                        <Separator/>
+                        <Field name='Instant Wind Speed' value={this.props.weather.wind} unit=' mph'/>
+                    </div>
             </div>
         )
     }
 }
 
 class Field extends Component {
+
     render() {
         return (
-            <div className="weather-field"><div className="weather-cell">{this.props.name}:</div><div className="weather-cell">{this.props.value}{this.props.unit}</div></div>
+            <div className="weather-field">
+                <div className="weather-field-prompt">{this.props.name}:</div>
+                <div className="weather-field-value">{parseFloat(this.props.value).toFixed(this.props.precision)}{this.props.unit}</div>
+            </div>
         );
     }
 }
 
+// class WindField extends Component {
+//     render() {
+//         return (
+//             <div className="weather-field">
+//                 <div className="weather-field-prompt">{this.props.name}:</div>
+//                 <div className="weather-field-value">{this.props.wind}{this.props.unit} gusting to {this.props.gust}{this.props.unit}</div>
+//             </div>
+//         );
+//     }
+// }
+
 class Separator extends Component {
     render() {
         return (
-            <div className="weather-field"><div className="weather-cell"/>&nbsp;</div>
+            <div className="weather-field">
+                <div className="weather-field-prompt"/>
+                &nbsp;</div>
         );
     }
 }
