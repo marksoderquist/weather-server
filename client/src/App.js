@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function getWeather(success) {
+function fetchWeather(success) {
     return fetch('http://mark.soderquist.net/weather/api/station?id=bluewing', {
         headers: {
             Accept: 'application/json',
@@ -30,40 +30,26 @@ function parseJSON(response) {
 }
 
 class App extends Component {
-    state = {
-        weather : {
-            "id": "bluewing",
-            "name": "Bluewing Way",
-            "timestamp": 0,
-            "temperature": 0,
-            "pressure": 0,
-            "humidity": 0,
-            "dewPoint": 0,
-            "windChill": 0,
-            "heatIndex": 0,
-            "pressureTrend": 0,
-            "windDirection": 0,
-            "wind": 0,
-            "windTenMinMax": 0,
-            "windTenMinAvg": 0,
-            "windTenMinMin": 0,
-            "windTwoMinMax": 0,
-            "windTwoMinAvg": 0,
-            "windTwoMinMin": 0,
-            "rainTotalDaily": 0,
-            "rainRate": 0
-        }
-    };
 
-    componentDidMount() {
-        this.loadWeatherFromServer();
-        setInterval(this.loadWeatherFromServer, 5000);
+    constructor(props) {
+        super(props)
+        this.state = {
+            weather: {}
+        }
     }
 
+    componentDidMount() {
+        setTimeout(this.loadWeatherFromServer, 0);
+        this.refreshTimer = setInterval(this.loadWeatherFromServer, 5000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.refreshTimer);
+    }
 
     loadWeatherFromServer = () => {
-        getWeather((weatherFromServer) => (
-                this.setState({ weather: weatherFromServer })
+        fetchWeather((weatherFromServer) => (
+                this.setState({weather: weatherFromServer})
             )
         );
     };
