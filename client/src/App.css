@@ -45,3 +45,7 @@
   display: table-row;
   font-size: x-large;
 }
+
+.weather-cell {
+  display: table-cell;
+}

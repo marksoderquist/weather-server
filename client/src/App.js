@@ -39,7 +39,9 @@ class App extends Component {
     }
 
     componentDidMount() {
+        // The initial load
         setTimeout(this.loadWeatherFromServer, 0);
+        // The remaining loads
         this.refreshTimer = setInterval(this.loadWeatherFromServer, 5000);
     }
 
@@ -112,7 +114,7 @@ class Body extends Component {
 class Field extends Component {
     render() {
         return (
-            <div className="weather-field"><td>{this.props.name}:</td><td>{this.props.value}{this.props.unit}</td></div>
+            <div className="weather-field"><div className="weather-cell">{this.props.name}:</div><div className="weather-cell">{this.props.value}{this.props.unit}</div></div>
         );
     }
 }
@@ -120,7 +122,7 @@ class Field extends Component {
 class Separator extends Component {
     render() {
         return (
-            <div className="weather-field"><td/>&nbsp;</div>
+            <div className="weather-field"><div className="weather-cell"/>&nbsp;</div>
         );
     }
 }

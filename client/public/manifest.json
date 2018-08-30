@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Bluewing Weather",
+  "name": "Bluewing Weather",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,7 +8,8 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": "./index.html",
+  "scope": "/weather/",
+  "start_url": "./weather/index.html",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
