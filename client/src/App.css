@@ -35,8 +35,23 @@
     table-layout: fixed;
 }
 
+.temperature {
+    display: table-cell;
+    font-size: 5em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.wind {
+    display: table-cell;
+    font-size: 2em;
+    text-align: center;
+    vertical-align: middle;
+}
+
 .column {
     display: table-cell;
+    background: lightgray;
 }
 
 .weather-field {

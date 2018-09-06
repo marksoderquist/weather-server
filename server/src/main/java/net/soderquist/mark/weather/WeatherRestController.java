@@ -1,17 +1,12 @@
 package net.soderquist.mark.weather;
 
+import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 @RestController
+@SuppressWarnings( "unused" )
 public class WeatherRestController {
 
 	private Map<String, WeatherStation> stations;
@@ -25,12 +20,12 @@ public class WeatherRestController {
 
 	@CrossOrigin
 	@RequestMapping( method = RequestMethod.GET, path = "/station" )
-	public @ResponseBody WeatherStation getStation( @RequestParam( value = "id", required = true ) String id) {
+	public @ResponseBody WeatherStation getStation( @RequestParam( value = "id" ) String id) {
 		return stations.get( id );
 	}
 
 	@RequestMapping( method = RequestMethod.PUT, path = "/station" )
-	public void putStation( @RequestParam( value = "id", required = true ) String id, @RequestBody WeatherStation station) {
+	public void putStation( @RequestParam( value = "id" ) String id, @RequestBody WeatherStation station) {
 		WeatherStation target = stations.get( id );
 		if( target == null ) return;
 
@@ -39,23 +34,27 @@ public class WeatherRestController {
 		target.setTemperature( station.getTemperature() );
 		target.setPressure( station.getPressure() );
 		target.setHumidity( station.getHumidity() );
-
 		target.setDewPoint( station.getDewPoint() );
 		target.setWindChill( station.getWindChill() );
 		target.setHeatIndex( station.getHeatIndex() );
-		target.setPressureTrend( station.getPressureTrend() );
-
-		target.setWindDirection( station.getWindDirection() );
 		target.setWind( station.getWind() );
+		target.setWindDirection( station.getWindDirection() );
+		target.setRainTotalDaily( station.getRainTotalDaily() );
+		target.setRainRate( station.getRainRate() );
+
+		target.setTemperatureOneMinTrend( station.getTemperatureOneMinTrend() );
+		target.setHumidityOneHourTrend( station.getHumidityOneHourTrend() );
+		target.setPressureOneHourTrend( station.getPressureOneHourTrend() );
+		target.setWindOneMinTrend( station.getWindOneMinTrend() );
+
 		target.setWindTenMinMax( station.getWindTenMinMax() );
 		target.setWindTenMinAvg( station.getWindTenMinAvg() );
 		target.setWindTenMinMin( station.getWindTenMinMin() );
 		target.setWindTwoMinMax( station.getWindTwoMinMax() );
 		target.setWindTwoMinAvg( station.getWindTwoMinAvg() );
 		target.setWindTwoMinMin( station.getWindTwoMinMin() );
-
-		target.setRainTotalDaily( station.getRainTotalDaily() );
-		target.setRainRate( station.getRainRate() );
+		target.setWindDirectionTenMinAvg( station.getWindDirectionTenMinAvg() );
+		target.setWindDirectionTwoMinAvg( station.getWindDirectionTwoMinAvg() );
 	}
 
 }
