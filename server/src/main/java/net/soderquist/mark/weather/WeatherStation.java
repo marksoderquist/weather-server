@@ -1,5 +1,6 @@
 package net.soderquist.mark.weather;
 
+@SuppressWarnings( "WeakerAccess" )
 public class WeatherStation {
 
 	private static final String DEGREE = "\u00B0";
@@ -10,39 +11,51 @@ public class WeatherStation {
 
 	private long timestamp;
 
-	private float temperature;
+	// Basic weather measures
+	private double temperature;
 
-	private float pressure;
+	private double pressure;
 
-	private float humidity;
+	private double humidity;
 
-	private float dewPoint;
+	private double dewPoint;
 
-	private float windChill;
+	private double windChill;
 
-	private float heatIndex;
+	private double heatIndex;
 
-	private float pressureTrend;
+	private double wind;
 
-	private float windDirection;
+	private double windDirection;
 
-	private float wind;
+	private double rainTotalDaily;
 
-	private float windTenMinMax;
+	private double rainRate;
 
-	private float windTenMinAvg;
+	// Avg, min, max and trends
+	private double temperatureOneMinTrend;
 
-	private float windTenMinMin;
+	private double humidityOneHourTrend;
 
-	private float windTwoMinMax;
+	private double pressureOneHourTrend;
 
-	private float windTwoMinAvg;
+	private double windOneMinTrend;
 
-	private float windTwoMinMin;
+	private double windTenMinMax;
 
-	private float rainTotalDaily;
+	private double windTenMinAvg;
 
-	private float rainRate;
+	private double windTenMinMin;
+
+	private double windTwoMinMax;
+
+	private double windTwoMinAvg;
+
+	private double windTwoMinMin;
+
+	private double windDirectionTenMinAvg;
+
+	private double windDirectionTwoMinAvg;
 
 	// Unit values.
 	private static final String temperatureUnit = DEGREE + "F";
@@ -51,8 +64,6 @@ public class WeatherStation {
 
 	private static final String pressureUnit = "inHg";
 
-	private static final String pressureRateUnit = "inHg/hr";
-
 	private static final String windUnit = "MPH";
 
 	private static final String windDirectionUnit = DEGREE;
@@ -60,6 +71,12 @@ public class WeatherStation {
 	private static final String rainUnit = "in";
 
 	private static final String rainRateUnit = "in/hr";
+
+	private static final String temperatureTrendUnit = temperatureUnit + "/min";
+
+	private static final String pressureTrendUnit = pressureUnit + "inHg/";
+
+	private static final String windTrendUnit = windUnit + "/min";
 
 	public WeatherStation() {}
 
@@ -74,39 +91,73 @@ public class WeatherStation {
 
 	public long getTimestamp() {return this.timestamp;}
 
-	public float getTemperature() {return this.temperature;}
+	// Weather basics
+	public double getTemperature() {return this.temperature;}
 
-	public float getPressure() {return this.pressure;}
+	public double getPressure() {return this.pressure;}
 
-	public float getHumidity() {return this.humidity;}
+	public double getHumidity() {return this.humidity;}
 
-	public float getDewPoint() {return this.dewPoint;}
+	public double getDewPoint() {return this.dewPoint;}
 
-	public float getWindChill() {return this.windChill;}
+	public double getWindChill() {return this.windChill;}
 
-	public float getHeatIndex() {return this.heatIndex;}
+	public double getHeatIndex() {return this.heatIndex;}
 
-	public float getPressureTrend() {return this.pressureTrend;}
+	public double getWindDirection() {return this.windDirection;}
 
-	public float getWindDirection() {return this.windDirection;}
+	public double getWind() {return this.wind;}
 
-	public float getWind() {return this.wind;}
+	public double getRainTotalDaily() {return this.rainTotalDaily;}
 
-	public float getWindTenMinMax() {return this.windTenMinMax;}
+	public double getRainRate() {return this.rainRate;}
 
-	public float getWindTenMinAvg() {return this.windTenMinAvg;}
+	public double getTemperatureOneMinTrend() { return temperatureOneMinTrend; }
 
-	public float getWindTenMinMin() {return this.windTenMinMin;}
+	public double getHumidityOneHourTrend() { return humidityOneHourTrend; }
 
-	public float getWindTwoMinMax() {return this.windTwoMinMax;}
+	// Avg, min, max and trends
+	public double getPressureTrend() {return getPressureOneHourTrend();}
 
-	public float getWindTwoMinAvg() {return this.windTwoMinAvg;}
+	public double getPressureOneHourTrend() { return pressureOneHourTrend; }
 
-	public float getWindTwoMinMin() {return this.windTwoMinMin;}
+	public double getWindOneMinTrend() { return windOneMinTrend; }
 
-	public float getRainTotalDaily() {return this.rainTotalDaily;}
+	public double getWindTenMinMax() {return this.windTenMinMax;}
 
-	public float getRainRate() {return this.rainRate;}
+	public double getWindTenMinAvg() {return this.windTenMinAvg;}
+
+	public double getWindTenMinMin() {return this.windTenMinMin;}
+
+	public double getWindTwoMinMax() {return this.windTwoMinMax;}
+
+	public double getWindTwoMinAvg() {return this.windTwoMinAvg;}
+
+	public double getWindTwoMinMin() {return this.windTwoMinMin;}
+
+	public double getWindDirectionTenMinAvg() { return windDirectionTenMinAvg; }
+
+	public double getWindDirectionTwoMinAvg() { return windDirectionTwoMinAvg; }
+
+	public static String getTemperatureUnit() { return temperatureUnit; }
+
+	public static String getHumidityUnit() { return humidityUnit; }
+
+	public static String getPressureUnit() { return pressureUnit; }
+
+	public static String getWindUnit() { return windUnit; }
+
+	public static String getWindDirectionUnit() { return windDirectionUnit; }
+
+	public static String getRainUnit() { return rainUnit; }
+
+	public static String getRainRateUnit() { return rainRateUnit; }
+
+	public static String getTemperatureTrendUnit() { return temperatureTrendUnit; }
+
+	public static String getPressureTrendUnit() { return pressureTrendUnit; }
+
+	public static String getWindTrendUnit() { return windTrendUnit; }
 
 	public void setId( String id ) {this.id = id; }
 
@@ -114,70 +165,60 @@ public class WeatherStation {
 
 	public void setTimestamp( long timestamp ) {this.timestamp = timestamp; }
 
-	public void setTemperature( float temperature ) {this.temperature = temperature; }
+	// Weather basics
+	public void setTemperature( double temperature ) {this.temperature = temperature; }
 
-	public void setPressure( float pressure ) {this.pressure = pressure; }
+	public void setPressure( double pressure ) {this.pressure = pressure; }
 
-	public void setHumidity( float humidity ) {this.humidity = humidity; }
+	public void setHumidity( double humidity ) {this.humidity = humidity; }
 
-	public void setDewPoint( float dewPoint ) {this.dewPoint = dewPoint; }
+	public void setDewPoint( double dewPoint ) {this.dewPoint = dewPoint; }
 
-	public void setWindChill( float windChill ) {this.windChill = windChill; }
+	public void setWindChill( double windChill ) {this.windChill = windChill; }
 
-	public void setHeatIndex( float heatIndex ) {this.heatIndex = heatIndex; }
+	public void setHeatIndex( double heatIndex ) {this.heatIndex = heatIndex; }
 
-	public void setPressureTrend( float pressureTrend ) {this.pressureTrend = pressureTrend; }
+	public void setWind( double wind ) {this.wind = wind; }
 
-	public void setWindDirection( float windDirection ) {this.windDirection = windDirection; }
+	public void setWindDirection( double windDirection ) {this.windDirection = windDirection; }
 
-	public void setWind( float wind ) {this.wind = wind; }
+	public void setRainTotalDaily( double rainTotalDaily ) {this.rainTotalDaily = rainTotalDaily; }
 
-	public void setWindTenMinMax( float windTenMinMax ) {this.windTenMinMax = windTenMinMax; }
+	public void setRainRate( double rainRate ) {this.rainRate = rainRate; }
 
-	public void setWindTenMinAvg( float windTenMinAvg ) {this.windTenMinAvg = windTenMinAvg; }
+	public void setTemperatureOneMinTrend( double temperatureOneMinTrend ) { this.temperatureOneMinTrend = temperatureOneMinTrend; }
 
-	public void setWindTenMinMin( float windTenMinMin ) {this.windTenMinMin = windTenMinMin; }
+	public void setHumidityOneHourTrend( double humidityOneHourTrend ) { this.humidityOneHourTrend = humidityOneHourTrend; }
 
-	public void setWindTwoMinMax( float windTwoMinMax ) {this.windTwoMinMax = windTwoMinMax; }
+	// Avg, min, max and trend
+	public void setPressureOneHourTrend( double pressureOneHourTrend ) { this.pressureOneHourTrend = pressureOneHourTrend; }
 
-	public void setWindTwoMinAvg( float windTwoMinAvg ) {this.windTwoMinAvg = windTwoMinAvg; }
+	public void setWindOneMinTrend( double windOneMinTrend ) { this.windOneMinTrend = windOneMinTrend; }
 
-	public void setWindTwoMinMin( float windTwoMinMin ) {this.windTwoMinMin = windTwoMinMin; }
+	public void setWindTenMinMax( double windTenMinMax ) {this.windTenMinMax = windTenMinMax; }
 
-	public void setRainTotalDaily( float rainTotalDaily ) {this.rainTotalDaily = rainTotalDaily; }
+	public void setWindTenMinAvg( double windTenMinAvg ) {this.windTenMinAvg = windTenMinAvg; }
 
-	public void setRainRate( float rainRate ) {this.rainRate = rainRate; }
+	public void setWindTenMinMin( double windTenMinMin ) {this.windTenMinMin = windTenMinMin; }
+
+	public void setWindTwoMinMax( double windTwoMinMax ) {this.windTwoMinMax = windTwoMinMax; }
+
+	public void setWindTwoMinAvg( double windTwoMinAvg ) {this.windTwoMinAvg = windTwoMinAvg; }
+
+	public void setWindTwoMinMin( double windTwoMinMin ) {this.windTwoMinMin = windTwoMinMin; }
+
+	public void setWindDirectionTenMinAvg( double windDirectionTenMinAvg ) { this.windDirectionTenMinAvg = windDirectionTenMinAvg; }
+
+	public void setWindDirectionTwoMinAvg( double windDirectionTwoMinAvg ) { this.windDirectionTwoMinAvg = windDirectionTwoMinAvg; }
 
 	public boolean equals( Object o ) {
 		if( o == this ) return true;
 		if( !(o instanceof WeatherStation) ) return false;
 		final WeatherStation other = (WeatherStation)o;
-		if( !other.canEqual( (Object)this ) ) return false;
+		if( !other.canEqual( this ) ) return false;
 		final Object this$id = this.getId();
 		final Object other$id = other.getId();
-		if( this$id == null ? other$id != null : !this$id.equals( other$id ) ) return false;
-		final Object this$name = this.getName();
-		final Object other$name = other.getName();
-		if( this$name == null ? other$name != null : !this$name.equals( other$name ) ) return false;
-		if( this.getTimestamp() != other.getTimestamp() ) return false;
-		if( Float.compare( this.getTemperature(), other.getTemperature() ) != 0 ) return false;
-		if( Float.compare( this.getPressure(), other.getPressure() ) != 0 ) return false;
-		if( Float.compare( this.getHumidity(), other.getHumidity() ) != 0 ) return false;
-		if( Float.compare( this.getDewPoint(), other.getDewPoint() ) != 0 ) return false;
-		if( Float.compare( this.getWindChill(), other.getWindChill() ) != 0 ) return false;
-		if( Float.compare( this.getHeatIndex(), other.getHeatIndex() ) != 0 ) return false;
-		if( Float.compare( this.getPressureTrend(), other.getPressureTrend() ) != 0 ) return false;
-		if( Float.compare( this.getWindDirection(), other.getWindDirection() ) != 0 ) return false;
-		if( Float.compare( this.getWind(), other.getWind() ) != 0 ) return false;
-		if( Float.compare( this.getWindTenMinMax(), other.getWindTenMinMax() ) != 0 ) return false;
-		if( Float.compare( this.getWindTenMinAvg(), other.getWindTenMinAvg() ) != 0 ) return false;
-		if( Float.compare( this.getWindTenMinMin(), other.getWindTenMinMin() ) != 0 ) return false;
-		if( Float.compare( this.getWindTwoMinMax(), other.getWindTwoMinMax() ) != 0 ) return false;
-		if( Float.compare( this.getWindTwoMinAvg(), other.getWindTwoMinAvg() ) != 0 ) return false;
-		if( Float.compare( this.getWindTwoMinMin(), other.getWindTwoMinMin() ) != 0 ) return false;
-		if( Float.compare( this.getRainTotalDaily(), other.getRainTotalDaily() ) != 0 ) return false;
-		if( Float.compare( this.getRainRate(), other.getRainRate() ) != 0 ) return false;
-		return true;
+		return this$id == null ? other$id == null : this$id.equals( other$id );
 	}
 
 	public int hashCode() {
@@ -185,31 +226,10 @@ public class WeatherStation {
 		int result = 1;
 		final Object $id = this.getId();
 		result = result * PRIME + ($id == null ? 43 : $id.hashCode());
-		final Object $name = this.getName();
-		result = result * PRIME + ($name == null ? 43 : $name.hashCode());
-		final long $timestamp = this.getTimestamp();
-		result = result * PRIME + (int)($timestamp >>> 32 ^ $timestamp);
-		result = result * PRIME + Float.floatToIntBits( this.getTemperature() );
-		result = result * PRIME + Float.floatToIntBits( this.getPressure() );
-		result = result * PRIME + Float.floatToIntBits( this.getHumidity() );
-		result = result * PRIME + Float.floatToIntBits( this.getDewPoint() );
-		result = result * PRIME + Float.floatToIntBits( this.getWindChill() );
-		result = result * PRIME + Float.floatToIntBits( this.getHeatIndex() );
-		result = result * PRIME + Float.floatToIntBits( this.getPressureTrend() );
-		result = result * PRIME + Float.floatToIntBits( this.getWindDirection() );
-		result = result * PRIME + Float.floatToIntBits( this.getWind() );
-		result = result * PRIME + Float.floatToIntBits( this.getWindTenMinMax() );
-		result = result * PRIME + Float.floatToIntBits( this.getWindTenMinAvg() );
-		result = result * PRIME + Float.floatToIntBits( this.getWindTenMinMin() );
-		result = result * PRIME + Float.floatToIntBits( this.getWindTwoMinMax() );
-		result = result * PRIME + Float.floatToIntBits( this.getWindTwoMinAvg() );
-		result = result * PRIME + Float.floatToIntBits( this.getWindTwoMinMin() );
-		result = result * PRIME + Float.floatToIntBits( this.getRainTotalDaily() );
-		result = result * PRIME + Float.floatToIntBits( this.getRainRate() );
 		return result;
 	}
 
 	protected boolean canEqual( Object other ) {return other instanceof WeatherStation;}
 
-	public String toString() {return "WeatherStation(id=" + this.getId() + ", name=" + this.getName() + ", timestamp=" + this.getTimestamp() + ", temperature=" + this.getTemperature() + ", pressure=" + this.getPressure() + ", humidity=" + this.getHumidity() + ", dewPoint=" + this.getDewPoint() + ", windChill=" + this.getWindChill() + ", heatIndex=" + this.getHeatIndex() + ", pressureTrend=" + this.getPressureTrend() + ", windDirection=" + this.getWindDirection() + ", wind=" + this.getWind() + ", windTenMinMax=" + this.getWindTenMinMax() + ", windTenMinAvg=" + this.getWindTenMinAvg() + ", windTenMinMin=" + this.getWindTenMinMin() + ", windTwoMinMax=" + this.getWindTwoMinMax() + ", windTwoMinAvg=" + this.getWindTwoMinAvg() + ", windTwoMinMin=" + this.getWindTwoMinMin() + ", rainTotalDaily=" + this.getRainTotalDaily() + ", rainRate=" + this.getRainRate() + ")";}
+	public String toString() {return "WeatherStation(id=" + this.getId() + ", name=" + this.getName() + ", timestamp=" + this.getTimestamp() + ", temperature=" + this.getTemperature() + ", pressure=" + this.getPressure() + ", humidity=" + this.getHumidity() + ", dewPoint=" + this.getDewPoint() + ", windChill=" + this.getWindChill() + ", heatIndex=" + this.getHeatIndex() + ", wind=" + this.getWind() + ", windDirection=" + this.getWindDirection() + ", rainTotalDaily=" + this.getRainTotalDaily() + ", rainRate=" + this.getRainRate() + ")";}
 }
