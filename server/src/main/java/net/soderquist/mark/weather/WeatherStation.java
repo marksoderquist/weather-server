@@ -70,7 +70,7 @@ public class WeatherStation {
 
 	private static final String rainUnit = "in";
 
-	private static final String rainRateUnit = "in/hr";
+	private static final String rainRateUnit = rainUnit + "/hr";
 
 	private static final String temperatureTrendUnit = temperatureUnit + "/min";
 
