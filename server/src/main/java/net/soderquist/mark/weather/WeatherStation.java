@@ -24,7 +24,7 @@ public class WeatherStation {
 
 	private double heatIndex;
 
-	private double wind;
+	private double windSpeed;
 
 	private double windDirection;
 
@@ -33,13 +33,13 @@ public class WeatherStation {
 	private double rainRate;
 
 	// Avg, min, max and trends
-	private double temperatureOneMinTrend;
+	private double temperatureTrend;
 
-	private double humidityOneHourTrend;
+	private double humidityTrend;
 
-	private double pressureOneHourTrend;
+	private double pressureTrend;
 
-	private double windOneMinTrend;
+	private double windSpeedTrend;
 
 	private double windTenMinMax;
 
@@ -72,7 +72,7 @@ public class WeatherStation {
 
 	private static final String rainRateUnit = rainUnit + "/hr";
 
-	private static final String temperatureTrendUnit = temperatureUnit + "/min";
+	private static final String temperatureTrendUnit = temperatureUnit + "/hr";
 
 	private static final String pressureTrendUnit = pressureUnit + "inHg/";
 
@@ -106,22 +106,20 @@ public class WeatherStation {
 
 	public double getWindDirection() {return this.windDirection;}
 
-	public double getWind() {return this.wind;}
+	public double getWindSpeed() {return this.windSpeed;}
 
 	public double getRainTotalDaily() {return this.rainTotalDaily;}
 
 	public double getRainRate() {return this.rainRate;}
 
-	public double getTemperatureOneMinTrend() { return temperatureOneMinTrend; }
-
-	public double getHumidityOneHourTrend() { return humidityOneHourTrend; }
-
 	// Avg, min, max and trends
-	public double getPressureTrend() {return getPressureOneHourTrend();}
+	public double getTemperatureTrend() { return temperatureTrend; }
 
-	public double getPressureOneHourTrend() { return pressureOneHourTrend; }
+	public double getHumidityTrend() { return humidityTrend; }
 
-	public double getWindOneMinTrend() { return windOneMinTrend; }
+	public double getPressureTrend() { return pressureTrend; }
+
+	public double getWindSpeedTrend() { return windSpeedTrend; }
 
 	public double getWindTenMinMax() {return this.windTenMinMax;}
 
@@ -178,7 +176,7 @@ public class WeatherStation {
 
 	public void setHeatIndex( double heatIndex ) {this.heatIndex = heatIndex; }
 
-	public void setWind( double wind ) {this.wind = wind; }
+	public void setWindSpeed( double windSpeed ) {this.windSpeed = windSpeed; }
 
 	public void setWindDirection( double windDirection ) {this.windDirection = windDirection; }
 
@@ -186,14 +184,14 @@ public class WeatherStation {
 
 	public void setRainRate( double rainRate ) {this.rainRate = rainRate; }
 
-	public void setTemperatureOneMinTrend( double temperatureOneMinTrend ) { this.temperatureOneMinTrend = temperatureOneMinTrend; }
-
-	public void setHumidityOneHourTrend( double humidityOneHourTrend ) { this.humidityOneHourTrend = humidityOneHourTrend; }
-
 	// Avg, min, max and trend
-	public void setPressureOneHourTrend( double pressureOneHourTrend ) { this.pressureOneHourTrend = pressureOneHourTrend; }
+	public void setTemperatureTrend( double temperatureTrend ) { this.temperatureTrend = temperatureTrend; }
 
-	public void setWindOneMinTrend( double windOneMinTrend ) { this.windOneMinTrend = windOneMinTrend; }
+	public void setHumidityTrend( double humidityTrend ) { this.humidityTrend = humidityTrend; }
+
+	public void setPressureTrend( double pressureTrend ) { this.pressureTrend = pressureTrend; }
+
+	public void setWindSpeedTrend( double windSpeedTrend ) { this.windSpeedTrend = windSpeedTrend; }
 
 	public void setWindTenMinMax( double windTenMinMax ) {this.windTenMinMax = windTenMinMax; }
 
@@ -231,5 +229,5 @@ public class WeatherStation {
 
 	protected boolean canEqual( Object other ) {return other instanceof WeatherStation;}
 
-	public String toString() {return "WeatherStation(id=" + this.getId() + ", name=" + this.getName() + ", timestamp=" + this.getTimestamp() + ", temperature=" + this.getTemperature() + ", pressure=" + this.getPressure() + ", humidity=" + this.getHumidity() + ", dewPoint=" + this.getDewPoint() + ", windChill=" + this.getWindChill() + ", heatIndex=" + this.getHeatIndex() + ", wind=" + this.getWind() + ", windDirection=" + this.getWindDirection() + ", rainTotalDaily=" + this.getRainTotalDaily() + ", rainRate=" + this.getRainRate() + ")";}
+	public String toString() {return "WeatherStation(id=" + this.getId() + ", name=" + this.getName() + ", timestamp=" + this.getTimestamp() + ", temperature=" + this.getTemperature() + ", pressure=" + this.getPressure() + ", humidity=" + this.getHumidity() + ", dewPoint=" + this.getDewPoint() + ", windChill=" + this.getWindChill() + ", heatIndex=" + this.getHeatIndex() + ", wind=" + this.getWindSpeed() + ", windDirection=" + this.getWindDirection() + ", rainTotalDaily=" + this.getRainTotalDaily() + ", rainRate=" + this.getRainRate() + ")";}
 }

@@ -37,15 +37,15 @@ public class WeatherRestController {
 		target.setDewPoint( station.getDewPoint() );
 		target.setWindChill( station.getWindChill() );
 		target.setHeatIndex( station.getHeatIndex() );
-		target.setWind( station.getWind() );
+		target.setWindSpeed( station.getWindSpeed() );
 		target.setWindDirection( station.getWindDirection() );
 		target.setRainTotalDaily( station.getRainTotalDaily() );
 		target.setRainRate( station.getRainRate() );
 
-		target.setTemperatureOneMinTrend( station.getTemperatureOneMinTrend() );
-		target.setHumidityOneHourTrend( station.getHumidityOneHourTrend() );
-		target.setPressureOneHourTrend( station.getPressureOneHourTrend() );
-		target.setWindOneMinTrend( station.getWindOneMinTrend() );
+		target.setTemperatureTrend( station.getTemperatureTrend() );
+		target.setHumidityTrend( station.getHumidityTrend() );
+		target.setPressureTrend( station.getPressureTrend() );
+		target.setWindSpeedTrend( station.getWindSpeedTrend() );
 
 		target.setWindTenMinMax( station.getWindTenMinMax() );
 		target.setWindTenMinAvg( station.getWindTenMinAvg() );
