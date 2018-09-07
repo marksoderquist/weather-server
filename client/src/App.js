@@ -82,7 +82,7 @@ class Body extends Component {
         return (
             <div className="content">
                 <div className="column">
-                    <div className="temperature">{this.props.weather.temperature}&deg;</div>
+                    <div className="temperature">{parseFloat(this.props.weather.temperature).toFixed(1)}&deg;</div>
                     <div className="wind">
                         <div>wind {parseFloat(this.props.weather.windTenMinAvg).toFixed(1)} mph</div>
                         <div>gust {parseFloat(this.props.weather.windTenMinMax).toFixed(1)} mph</div>
