@@ -42,7 +42,7 @@ class App extends Component {
         // The initial load
         setTimeout(this.loadWeatherFromServer, 0);
         // The remaining loads
-        this.refreshTimer = setInterval(this.loadWeatherFromServer, 5000);
+        this.refreshTimer = setInterval(this.loadWeatherFromServer, 2500);
     }
 
     componentWillUnmount() {
@@ -91,31 +91,34 @@ class Body extends Component {
                     <NumberField name='Temperature' value={this.props.weather.temperature} unit='&deg;' fixed='1'/>
                     <NumberField name='Dew Point' value={this.props.weather.dewPoint} unit='&deg;' fixed='1'/>
                     <NumberField name='Humidity' value={this.props.weather.humidity} unit='%'/>
+                    <NumberField name='Pressure' value={this.props.weather.pressure} unit=' inHg' fixed='2'/>
                     <Separator/>
-                    <NumberField name='Wind' value={this.props.weather.windTenMinAvg} unit=' mph'/>
+                    <NumberField name='Wind Speed' value={this.props.weather.windTenMinAvg} unit=' mph'/>
                     <NumberField name='Wind Gusts' value={this.props.weather.windTenMinMax} unit=' mph'/>
                     <NumberField name='Wind Sustained' value={this.props.weather.windTenMinMin} unit=' mph'/>
-                    <NumberField name='Wind Direction' value={this.props.weather.windDirection} unit='&deg;'/>
+                    <NumberField name='Wind Direction' value={this.props.weather.windDirection} unit='&deg;F'/>
                     <Separator/>
                     <NumberField name='Daily Rain' value={this.props.weather.rainTotalDaily} unit=' in' fixed='2'/>
                     <NumberField name='Rain Rate' value={this.props.weather.rainRate} unit=' in/h' fixed='2'/>
-                    <Separator/>
-                    <NumberField name='Pressure' value={this.props.weather.pressure} unit=' in' fixed='2'/>
-                    <NumberField name='Pressure Trend' value={this.props.weather.pressureTrend} unit=' in/h' fixed='2'/>
                     <Separator/>
                     <Separator/>
                     <NumberField name='Wind Chill' value={this.props.weather.windChill} unit='&deg;' fixed='1'/>
                     <NumberField name='Head Index' value={this.props.weather.heatIndex} unit='&deg;' fixed='1'/>
                     <Separator/>
-                    <NumberField name='Maximum Wind Speed (10 min)' value={this.props.weather.windTenMinMax} unit=' mph'/>
-                    <NumberField name='Average Wind Speed (10 min)' value={this.props.weather.windTenMinAvg} unit=' mph'/>
-                    <NumberField name='Minimum Wind Speed (10 min)' value={this.props.weather.windTenMinMin} unit=' mph'/>
+                    <NumberField name='Temperature Trend' value={this.props.weather.temperatureTrend} unit='&deg;F/h' fixed='1'/>
+                    <NumberField name='Humidity Trend' value={this.props.weather.humidityTrend} unit='%/h' fixed='1'/>
+                    <NumberField name='Pressure Trend' value={this.props.weather.pressureTrend} unit=' inHg/h' fixed='3'/>
+                    <NumberField name='Wind Speed Trend' value={this.props.weather.windSpeedTrend} unit=' mph/h' fixed='1'/>
                     <Separator/>
-                    <NumberField name='Maximum Wind Speed (2 min)' value={this.props.weather.windTwoMinMax} unit=' mph'/>
-                    <NumberField name='Average Wind Speed (2 min)' value={this.props.weather.windTwoMinAvg} unit=' mph'/>
-                    <NumberField name='Minimum Wind Speed (2 min)' value={this.props.weather.windTwoMinMin} unit=' mph'/>
+                    <NumberField name='Maximum Wind Speed (10 min)' value={this.props.weather.windTenMinMax} unit=' mph' fixed='1'/>
+                    <NumberField name='Average Wind Speed (10 min)' value={this.props.weather.windTenMinAvg} unit=' mph' fixed='1'/>
+                    <NumberField name='Minimum Wind Speed (10 min)' value={this.props.weather.windTenMinMin} unit=' mph' fixed='1'/>
                     <Separator/>
-                    <NumberField name='Instant Wind Speed' value={this.props.weather.wind} unit=' mph'/>
+                    <NumberField name='Maximum Wind Speed (2 min)' value={this.props.weather.windTwoMinMax} unit=' mph' fixed='1'/>
+                    <NumberField name='Average Wind Speed (2 min)' value={this.props.weather.windTwoMinAvg} unit=' mph' fixed='1'/>
+                    <NumberField name='Minimum Wind Speed (2 min)' value={this.props.weather.windTwoMinMin} unit=' mph' fixed='1'/>
+                    <Separator/>
+                    <NumberField name='Instant Wind Speed' value={this.props.weather.windSpeed} unit=' mph'/>
                     <Separator/>
                     <NumberField name='Timestamp' value={this.props.weather.timestamp} unit=' ms'/>
                 </div>
