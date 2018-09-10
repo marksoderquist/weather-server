@@ -151,8 +151,8 @@ class Separator extends Component {
 function toDatestamp(time) {
     const date = new Date(time);
     const year = pad(date.getFullYear(), 4);
-    const month = pad(date.getMonth(), 2);
-    const day = pad(date.getDay(), 2);
+    const month = pad(date.getMonth() + 1, 2);
+    const day = pad(date.getDate(), 2);
     const hour = pad(date.getHours() % 12, 2);
     const minute = pad(date.getMinutes(), 2);
     const second = pad(date.getSeconds(), 2);
