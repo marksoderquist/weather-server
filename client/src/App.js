@@ -86,6 +86,7 @@ class Body extends Component {
                     <div className="wind">
                         <div>wind {parseFloat(this.props.weather.windTenMinAvg).toFixed(1)} mph</div>
                         <div>gust {parseFloat(this.props.weather.windTenMinMax).toFixed(1)} mph</div>
+                        <div>from {parseFloat(this.props.weather.windDirectionTenMinAvg).toFixed(1)} &deg;</div>
                     </div>
                     <Separator/>
                     <NumberField name='Temperature' value={this.props.weather.temperature} unit='&deg;' fixed='1'/>
@@ -95,8 +96,8 @@ class Body extends Component {
                     <Separator/>
                     <NumberField name='Wind Speed' value={this.props.weather.windTenMinAvg} unit=' mph'/>
                     <NumberField name='Wind Gusts' value={this.props.weather.windTenMinMax} unit=' mph'/>
-                    <NumberField name='Wind Sustained' value={this.props.weather.windTenMinMin} unit=' mph'/>
-                    <NumberField name='Wind Direction' value={this.props.weather.windDirection} unit='&deg;F'/>
+                    <NumberField name='Wind Minimum' value={this.props.weather.windTenMinMin} unit=' mph'/>
+                    <NumberField name='Wind Direction' value={this.props.weather.windDirectionTenMinAvg} unit='&deg;F'/>
                     <Separator/>
                     <NumberField name='Daily Rain' value={this.props.weather.rainTotalDaily} unit=' in' fixed='2'/>
                     <NumberField name='Rain Rate' value={this.props.weather.rainRate} unit=' in/h' fixed='2'/>
