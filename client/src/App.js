@@ -120,6 +120,7 @@ class Body extends Component {
                     <NumberField name='Minimum Wind Speed (2 min)' value={this.props.weather.windTwoMinMin} unit=' mph' fixed='1'/>
                     <Separator/>
                     <NumberField name='Instant Wind Speed' value={this.props.weather.windSpeed} unit=' mph'/>
+                    <NumberField name='Instant Wind Direction' value={this.props.weather.windDirection} unit='&deg;'/>
                     <Separator/>
                     <NumberField name='Timestamp' value={this.props.weather.timestamp} unit=' ms'/>
                 </div>
