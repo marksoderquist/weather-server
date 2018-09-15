@@ -28,6 +28,8 @@ public class WeatherStation {
 
 	private double windDirection;
 
+	private Cardinal windCardinal;
+
 	private double rainTotalDaily;
 
 	private double rainRate;
@@ -55,7 +57,11 @@ public class WeatherStation {
 
 	private double windDirectionTenMinAvg;
 
+	private Cardinal windCardinalTenMinAvg;
+
 	private double windDirectionTwoMinAvg;
+
+	private Cardinal windCardinalTwoMinAvg;
 
 	// Unit values.
 	private static final String temperatureUnit = DEGREE + "F";
@@ -106,6 +112,8 @@ public class WeatherStation {
 
 	public double getWindDirection() {return this.windDirection;}
 
+	public Cardinal getWindCardinal() { return this.windCardinal;}
+
 	public double getWindSpeed() {return this.windSpeed;}
 
 	public double getRainTotalDaily() {return this.rainTotalDaily;}
@@ -135,7 +143,11 @@ public class WeatherStation {
 
 	public double getWindDirectionTenMinAvg() { return windDirectionTenMinAvg; }
 
+	public Cardinal getWindCardinalTenMinAvg() { return windCardinalTenMinAvg; }
+
 	public double getWindDirectionTwoMinAvg() { return windDirectionTwoMinAvg; }
+
+	public Cardinal getWindCardinalTwoMinAvg() { return windCardinalTwoMinAvg; }
 
 	public static String getTemperatureUnit() { return temperatureUnit; }
 
@@ -178,7 +190,10 @@ public class WeatherStation {
 
 	public void setWindSpeed( double windSpeed ) {this.windSpeed = windSpeed; }
 
-	public void setWindDirection( double windDirection ) {this.windDirection = windDirection; }
+	public void setWindDirection( double windDirection ) {
+		this.windDirection = windDirection;
+		this.windCardinal = Cardinal.toCardinal( windDirection );
+	}
 
 	public void setRainTotalDaily( double rainTotalDaily ) {this.rainTotalDaily = rainTotalDaily; }
 
@@ -205,9 +220,15 @@ public class WeatherStation {
 
 	public void setWindTwoMinMin( double windTwoMinMin ) {this.windTwoMinMin = windTwoMinMin; }
 
-	public void setWindDirectionTenMinAvg( double windDirectionTenMinAvg ) { this.windDirectionTenMinAvg = windDirectionTenMinAvg; }
+	public void setWindDirectionTenMinAvg( double windDirectionTenMinAvg ) {
+		this.windDirectionTenMinAvg = windDirectionTenMinAvg;
+		this.windCardinalTenMinAvg = Cardinal.toCardinal( windDirectionTenMinAvg );
+	}
 
-	public void setWindDirectionTwoMinAvg( double windDirectionTwoMinAvg ) { this.windDirectionTwoMinAvg = windDirectionTwoMinAvg; }
+	public void setWindDirectionTwoMinAvg( double windDirectionTwoMinAvg ) {
+		this.windDirectionTwoMinAvg = windDirectionTwoMinAvg;
+		this.windCardinalTwoMinAvg = Cardinal.toCardinal( windDirectionTwoMinAvg );
+	}
 
 	public boolean equals( Object o ) {
 		if( o == this ) return true;
