@@ -84,10 +84,19 @@ class Body extends Component {
                 <div className="column">
                     <div className="temperature">{parseFloat(this.props.weather.temperature).toFixed(1)}&deg;</div>
                     <div className="wind">
-                        <div>wind {parseFloat(this.props.weather.windTenMinAvg).toFixed(1)} mph</div>
-                        <div>gust {parseFloat(this.props.weather.windTenMinMax).toFixed(1)} mph</div>
-                        <div>from {parseFloat(this.props.weather.windDirectionTenMinAvg).toFixed(1)} &deg;</div>
+                        <table>
+                            <tr><td class="label">wind&nbsp;</td><td class="value">&nbsp;{parseFloat(this.props.weather.windTenMinAvg).toFixed(1)}</td><td class="unit">&nbsp;mph</td></tr>
+                            <tr><td class="label">gust&nbsp;</td><td class="value">&nbsp;{parseFloat(this.props.weather.windTenMinMax).toFixed(1)}</td><td class="unit">&nbsp;mph</td></tr>
+                            <tr>
+                                <td className="label">from&nbsp;</td>
+                                <td className="value">&nbsp;{this.props.weather.windCardinalTenMinAvg}</td>
+                                <td className="unit">&nbsp;{parseFloat(this.props.weather.windDirectionTenMinAvg).toFixed(0)}&deg;</td>
+                            </tr>
+                        </table>
                     </div>
+                    <Separator/>
+                    <NumberField name='Temperature Trend' value={this.props.weather.temperatureTrend} unit='&deg;F/h' fixed='1'/>
+                    <NumberField name='Wind Speed Trend' value={this.props.weather.windSpeedTrend} unit=' mph/h' fixed='1'/>
                     <Separator/>
                     <NumberField name='Temperature' value={this.props.weather.temperature} unit='&deg;' fixed='1'/>
                     <NumberField name='Dew Point' value={this.props.weather.dewPoint} unit='&deg;' fixed='1'/>
@@ -106,10 +115,8 @@ class Body extends Component {
                     <NumberField name='Wind Chill' value={this.props.weather.windChill} unit='&deg;' fixed='1'/>
                     <NumberField name='Head Index' value={this.props.weather.heatIndex} unit='&deg;' fixed='1'/>
                     <Separator/>
-                    <NumberField name='Temperature Trend' value={this.props.weather.temperatureTrend} unit='&deg;F/h' fixed='1'/>
                     <NumberField name='Humidity Trend' value={this.props.weather.humidityTrend} unit='%/h' fixed='1'/>
                     <NumberField name='Pressure Trend' value={this.props.weather.pressureTrend} unit=' inHg/h' fixed='3'/>
-                    <NumberField name='Wind Speed Trend' value={this.props.weather.windSpeedTrend} unit=' mph/h' fixed='1'/>
                     <Separator/>
                     <NumberField name='Maximum Wind Speed (10 min)' value={this.props.weather.windTenMinMax} unit=' mph' fixed='1'/>
                     <NumberField name='Average Wind Speed (10 min)' value={this.props.weather.windTenMinAvg} unit=' mph' fixed='1'/>

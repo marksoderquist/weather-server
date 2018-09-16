@@ -36,22 +36,40 @@
 }
 
 .temperature {
-    display: table-cell;
-    font-size: 5em;
+    font-size: 8em;
     text-align: center;
     vertical-align: middle;
 }
 
 .wind {
-    display: table-cell;
-    font-size: 2em;
+    font-size: 3em;
     text-align: center;
     vertical-align: middle;
 }
 
+.wind table {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.label {
+    color: #808080;
+    text-align: left;
+    font-size: 0.75em;
+}
+
+.value {
+    text-align: right;
+}
+
+.unit {
+    color: #808080;
+    text-align: left;
+    font-size: 0.75em;
+}
+
 .column {
     display: table-cell;
-    background: lightgray;
 }
 
 .weather-field {
