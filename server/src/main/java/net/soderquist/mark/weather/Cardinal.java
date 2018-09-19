@@ -1,5 +1,8 @@
 package net.soderquist.mark.weather;
 
+// In meteorology, an azimuth of 000° is used only when no wind is blowing,
+// while 360° means the wind is from the North.
+
 public enum Cardinal {
 
 	N,
@@ -17,7 +20,8 @@ public enum Cardinal {
 	W,
 	WNW,
 	NW,
-	NNW;
+	NNW,
+	NON;
 
 	private static final double SLICE = 360.0 / 16.0;
 
@@ -61,7 +65,7 @@ public enum Cardinal {
 			return NNW;
 		}
 
-		return N;
+		return NON;
 	}
 
 }
