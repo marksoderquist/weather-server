@@ -62,10 +62,18 @@
     text-align: right;
 }
 
+.tempunit {
+    color: #808080;
+    text-align: left;
+    vertical-align: super;
+    font-size: 0.5em;
+}
+
 .unit {
     color: #808080;
     text-align: left;
-    font-size: 0.75em;
+    vertical-align: middle;
+    font-size: 0.5em;
 }
 
 .column {
