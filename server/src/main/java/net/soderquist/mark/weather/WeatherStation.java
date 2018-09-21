@@ -80,6 +80,8 @@ public class WeatherStation {
 
 	private String temperatureTrendUnit = temperatureUnit + "/hr";
 
+	private String humidityTrendUnit = humidityUnit + "/hr";
+
 	private String pressureTrendUnit = pressureUnit + "/hr";
 
 	private String windSpeedTrendUnit = windSpeedUnit + "/hr";
@@ -165,6 +167,8 @@ public class WeatherStation {
 
 	public String getTemperatureTrendUnit() { return temperatureTrendUnit; }
 
+	public String getHumidityTrendUnit() { return humidityTrendUnit; }
+
 	public String getPressureTrendUnit() { return pressureTrendUnit; }
 
 	public String getWindSpeedTrendUnit() { return windSpeedTrendUnit; }
@@ -247,6 +251,8 @@ public class WeatherStation {
 
 	public void setTemperatureTrendUnit( String temperatureTrendUnit ) { this.temperatureTrendUnit = temperatureTrendUnit; }
 
+	public void setHumidityTrendUnit( String humidityTrendUnit ) {this.humidityTrendUnit = humidityTrendUnit; }
+
 	public void setPressureTrendUnit( String pressureTrendUnit ) { this.pressureTrendUnit = pressureTrendUnit; }
 
 	public void setWindSpeedTrendUnit( String windSpeedTrendUnit ) { this.windSpeedTrendUnit = windSpeedTrendUnit; }
@@ -287,6 +293,7 @@ public class WeatherStation {
 		this.setRainUnit( that.getRainUnit() );
 		this.setRainRateUnit( that.getRainRateUnit() );
 		this.setTemperatureTrendUnit( that.getTemperatureTrendUnit() );
+		this.setHumidityTrendUnit( that.getHumidityTrendUnit() );
 		this.setPressureTrendUnit( that.getPressureTrendUnit() );
 		this.setWindSpeedTrendUnit( that.getWindSpeedTrendUnit() );
 	}
