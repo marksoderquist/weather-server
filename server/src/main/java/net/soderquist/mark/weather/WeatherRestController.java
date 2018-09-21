@@ -28,33 +28,7 @@ public class WeatherRestController {
 	public void putStation( @RequestParam( value = "id" ) String id, @RequestBody WeatherStation station) {
 		WeatherStation target = stations.get( id );
 		if( target == null ) return;
-
-		target.setTimestamp( station.getTimestamp() );
-
-		target.setTemperature( station.getTemperature() );
-		target.setPressure( station.getPressure() );
-		target.setHumidity( station.getHumidity() );
-		target.setDewPoint( station.getDewPoint() );
-		target.setWindChill( station.getWindChill() );
-		target.setHeatIndex( station.getHeatIndex() );
-		target.setWindSpeed( station.getWindSpeed() );
-		target.setWindDirection( station.getWindDirection() );
-		target.setRainTotalDaily( station.getRainTotalDaily() );
-		target.setRainRate( station.getRainRate() );
-
-		target.setTemperatureTrend( station.getTemperatureTrend() );
-		target.setHumidityTrend( station.getHumidityTrend() );
-		target.setPressureTrend( station.getPressureTrend() );
-		target.setWindSpeedTrend( station.getWindSpeedTrend() );
-
-		target.setWindTenMinMax( station.getWindTenMinMax() );
-		target.setWindTenMinAvg( station.getWindTenMinAvg() );
-		target.setWindTenMinMin( station.getWindTenMinMin() );
-		target.setWindTwoMinMax( station.getWindTwoMinMax() );
-		target.setWindTwoMinAvg( station.getWindTwoMinAvg() );
-		target.setWindTwoMinMin( station.getWindTwoMinMin() );
-		target.setWindDirectionTenMinAvg( station.getWindDirectionTenMinAvg() );
-		target.setWindDirectionTwoMinAvg( station.getWindDirectionTwoMinAvg() );
+		target.copyFrom( station );
 	}
 
 }

@@ -64,25 +64,25 @@ public class WeatherStation {
 	private Cardinal windCardinalTwoMinAvg;
 
 	// Unit values.
-	private static final String temperatureUnit = DEGREE + "F";
+	private String temperatureUnit = DEGREE + "F";
 
-	private static final String humidityUnit = "%";
+	private String humidityUnit = "%";
 
-	private static final String pressureUnit = "inHg";
+	private String pressureUnit = "inHg";
 
-	private static final String windUnit = "MPH";
+	private String windSpeedUnit = "MPH";
 
-	private static final String windDirectionUnit = DEGREE;
+	private String windDirectionUnit = DEGREE;
 
-	private static final String rainUnit = "in";
+	private String rainUnit = "in";
 
-	private static final String rainRateUnit = rainUnit + "/hr";
+	private String rainRateUnit = rainUnit + "/hr";
 
-	private static final String temperatureTrendUnit = temperatureUnit + "/hr";
+	private String temperatureTrendUnit = temperatureUnit + "/hr";
 
-	private static final String pressureTrendUnit = pressureUnit + "inHg/";
+	private String pressureTrendUnit = pressureUnit + "inHg/";
 
-	private static final String windTrendUnit = windUnit + "/min";
+	private String windSpeedTrendUnit = windSpeedUnit + "/min";
 
 	public WeatherStation() {}
 
@@ -149,26 +149,27 @@ public class WeatherStation {
 
 	public Cardinal getWindCardinalTwoMinAvg() { return windCardinalTwoMinAvg; }
 
-	public static String getTemperatureUnit() { return temperatureUnit; }
+	public String getTemperatureUnit() { return temperatureUnit; }
 
-	public static String getHumidityUnit() { return humidityUnit; }
+	public String getHumidityUnit() { return humidityUnit; }
 
-	public static String getPressureUnit() { return pressureUnit; }
+	public String getPressureUnit() { return pressureUnit; }
 
-	public static String getWindUnit() { return windUnit; }
+	public String getWindSpeedUnit() { return windSpeedUnit; }
 
-	public static String getWindDirectionUnit() { return windDirectionUnit; }
+	public String getWindDirectionUnit() { return windDirectionUnit; }
 
-	public static String getRainUnit() { return rainUnit; }
+	public String getRainUnit() { return rainUnit; }
 
-	public static String getRainRateUnit() { return rainRateUnit; }
+	public String getRainRateUnit() { return rainRateUnit; }
 
-	public static String getTemperatureTrendUnit() { return temperatureTrendUnit; }
+	public String getTemperatureTrendUnit() { return temperatureTrendUnit; }
 
-	public static String getPressureTrendUnit() { return pressureTrendUnit; }
+	public String getPressureTrendUnit() { return pressureTrendUnit; }
 
-	public static String getWindTrendUnit() { return windTrendUnit; }
+	public String getWindSpeedTrendUnit() { return windSpeedTrendUnit; }
 
+	// Weather station
 	public void setId( String id ) {this.id = id; }
 
 	public void setName( String name ) {this.name = name; }
@@ -228,6 +229,66 @@ public class WeatherStation {
 	public void setWindDirectionTwoMinAvg( double windDirectionTwoMinAvg ) {
 		this.windDirectionTwoMinAvg = windDirectionTwoMinAvg;
 		this.windCardinalTwoMinAvg = Cardinal.toCardinal( windDirectionTwoMinAvg );
+	}
+
+	public void setTemperatureUnit( String temperatureUnit ) { this.temperatureUnit = temperatureUnit; }
+
+	public void setHumidityUnit( String humidityUnit ) { this.humidityUnit = humidityUnit; }
+
+	public void setPressureUnit( String pressureUnit ) { this.pressureUnit = pressureUnit; }
+
+	public void setWindSpeedUnit( String windSpeedUnit ) { this.windSpeedUnit = windSpeedUnit; }
+
+	public void setWindDirectionUnit( String windDirectionUnit ) { this.windDirectionUnit = windDirectionUnit; }
+
+	public void setRainUnit( String rainUnit ) { this.rainUnit = rainUnit; }
+
+	public void setRainRateUnit( String rainRateUnit ) { this.rainRateUnit = rainRateUnit; }
+
+	public void setTemperatureTrendUnit( String temperatureTrendUnit ) { this.temperatureTrendUnit = temperatureTrendUnit; }
+
+	public void setPressureTrendUnit( String pressureTrendUnit ) { this.pressureTrendUnit = pressureTrendUnit; }
+
+	public void setWindSpeedTrendUnit( String windSpeedTrendUnit ) { this.windSpeedTrendUnit = windSpeedTrendUnit; }
+
+	public void copyFrom( WeatherStation that ) {
+		this.setTimestamp( that.getTimestamp() );
+
+		this.setTemperature( that.getTemperature() );
+		this.setPressure( that.getPressure() );
+		this.setHumidity( that.getHumidity() );
+		this.setDewPoint( that.getDewPoint() );
+		this.setWindChill( that.getWindChill() );
+		this.setHeatIndex( that.getHeatIndex() );
+		this.setWindSpeed( that.getWindSpeed() );
+		this.setWindDirection( that.getWindDirection() );
+		this.setRainTotalDaily( that.getRainTotalDaily() );
+		this.setRainRate( that.getRainRate() );
+
+		this.setTemperatureTrend( that.getTemperatureTrend() );
+		this.setHumidityTrend( that.getHumidityTrend() );
+		this.setPressureTrend( that.getPressureTrend() );
+		this.setWindSpeedTrend( that.getWindSpeedTrend() );
+
+		this.setWindTenMinMax( that.getWindTenMinMax() );
+		this.setWindTenMinAvg( that.getWindTenMinAvg() );
+		this.setWindTenMinMin( that.getWindTenMinMin() );
+		this.setWindTwoMinMax( that.getWindTwoMinMax() );
+		this.setWindTwoMinAvg( that.getWindTwoMinAvg() );
+		this.setWindTwoMinMin( that.getWindTwoMinMin() );
+		this.setWindDirectionTenMinAvg( that.getWindDirectionTenMinAvg() );
+		this.setWindDirectionTwoMinAvg( that.getWindDirectionTwoMinAvg() );
+
+		this.setTemperatureUnit( that.getTemperatureUnit() );
+		this.setHumidityUnit( that.getHumidityUnit() );
+		this.setPressureUnit( that.getPressureUnit() );
+		this.setWindSpeedUnit( that.getWindSpeedUnit() );
+		this.setWindDirectionUnit( that.getWindDirectionUnit() );
+		this.setRainUnit( that.getRainUnit() );
+		this.setRainRateUnit( that.getRainRateUnit() );
+		this.setTemperatureTrendUnit( that.getTemperatureTrendUnit() );
+		this.setPressureTrendUnit( that.getPressureTrendUnit() );
+		this.setWindSpeedTrendUnit( that.getWindSpeedTrendUnit() );
 	}
 
 	public boolean equals( Object o ) {
