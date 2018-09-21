@@ -1,11 +1,7 @@
 package net.soderquist.mark.weather;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.invoke.MethodHandles;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,20 +9,11 @@ import java.util.Map;
 @SuppressWarnings( "unused" )
 public class WeatherRestController {
 
-	private Logger log = LoggerFactory.getLogger( MethodHandles.lookup().lookupClass() );
-
-	@Value( "${spring.application.name}" )
-	private String name;
-
-	@Value( "${spring.application.version}" )
-	private String version;
-
 	private Map<String, WeatherStation> stations;
 
 	WeatherStation station;
 
 	public WeatherRestController() {
-		log.info( name + " " + version );
 		stations = new HashMap<>();
 		stations.put( "bluewing", new WeatherStation( "bluewing", "Bluewing Way" ) );
 	}
