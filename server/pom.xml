@@ -11,8 +11,8 @@
 	</parent>
 
 	<groupId>net.soderquist.mark</groupId>
-	<artifactId>weather</artifactId>
-	<version>2.0u5</version>
+	<artifactId>weather-server</artifactId>
+	<version>2.1u0</version>
 	<packaging>jar</packaging>
 
 	<description>Mark Soderquist weather data provider</description>
