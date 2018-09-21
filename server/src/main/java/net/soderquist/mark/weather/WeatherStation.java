@@ -68,9 +68,9 @@ public class WeatherStation {
 
 	private String humidityUnit = "%";
 
-	private String pressureUnit = "inHg";
+	private String pressureUnit = "in";
 
-	private String windSpeedUnit = "MPH";
+	private String windSpeedUnit = "mph";
 
 	private String windDirectionUnit = DEGREE;
 
@@ -80,9 +80,9 @@ public class WeatherStation {
 
 	private String temperatureTrendUnit = temperatureUnit + "/hr";
 
-	private String pressureTrendUnit = pressureUnit + "inHg/";
+	private String pressureTrendUnit = pressureUnit + "/hr";
 
-	private String windSpeedTrendUnit = windSpeedUnit + "/min";
+	private String windSpeedTrendUnit = windSpeedUnit + "/hr";
 
 	public WeatherStation() {}
 
