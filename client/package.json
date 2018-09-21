@@ -5,11 +5,11 @@
   "homepage": "/weather",
   "dependencies": {
     "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-scripts": "1.1.5"
+    "react-dom": "^16.4.2"
   },
   "devDependencies": {
-    "fetch-mock": "^6.5.2"
+    "fetch-mock": "^6.5.2",
+    "react-scripts": "1.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
