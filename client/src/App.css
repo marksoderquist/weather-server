@@ -21,6 +21,10 @@
     color: white;
 }
 
+.App-header a {
+    color: #AAA;
+}
+
 .App-title {
     font-size: 2em;
 }

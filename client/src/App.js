@@ -71,6 +71,7 @@ class Header extends Component {
                 <div>
                     <div className="App-title">{this.props.title}</div>
                     <div>{toDatestamp(this.props.timestamp)}</div>
+                    <div><a href="https://www.wunderground.com/weather/us/ut/riverton/KUTRIVER9">Weather Underground</a></div>
                 </div>
             </div>
         );
