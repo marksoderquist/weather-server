@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import logo from './cloud.svg';
 import './App.css';
+import packageJson from '../package.json';
 
 function fetchWeather(success) {
     return fetch('http://mark.soderquist.net/weather/api/station?id=bluewing', {
@@ -121,6 +122,7 @@ class Body extends Component {
                     <NumberField name='Instant Wind Direction' value={this.props.weather.windDirection} unit={this.props.weather.windDirectionUnit}/>
                     <Separator/>
                     <NumberField name='Timestamp' value={this.props.weather.timestamp} unit=' ms'/>
+                    <StringField name='Version' value={packageJson.version}/>
                 </div>
             </div>
         )
@@ -170,6 +172,17 @@ class NumberField extends Component {
             <div className="weather-field">
                 <div className="weather-field-prompt">{this.props.name}</div>
                 <div className="weather-field-value">{parseFloat(this.props.value).toFixed(this.props.fixed)} {this.props.unit}</div>
+            </div>
+        );
+    }
+}
+
+class StringField extends Component {
+    render() {
+        return (
+            <div className="weather-field">
+                <div className="weather-field-prompt">{this.props.name}</div>
+                <div className="weather-field-value">{this.props.value}</div>
             </div>
         );
     }
