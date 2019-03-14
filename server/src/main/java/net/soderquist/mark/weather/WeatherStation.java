@@ -1,5 +1,8 @@
 package net.soderquist.mark.weather;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @SuppressWarnings( "WeakerAccess" )
 public class WeatherStation {
 
@@ -86,11 +89,14 @@ public class WeatherStation {
 
 	private String windSpeedTrendUnit = windSpeedUnit + "/hr";
 
+	private Flying flying;
+
 	public WeatherStation() {}
 
 	public WeatherStation( String id, String name ) {
 		this.id = id;
 		this.name = name;
+		this.flying = new Flying();
 	}
 
 	public String getId() {return this.id;}
@@ -257,6 +263,14 @@ public class WeatherStation {
 
 	public void setWindSpeedTrendUnit( String windSpeedTrendUnit ) { this.windSpeedTrendUnit = windSpeedTrendUnit; }
 
+	public Flying getFlying() {
+		return flying;
+	}
+
+	public void setFlying( Flying flying ) {
+		this.flying = flying;
+	}
+
 	public void copyFrom( WeatherStation that ) {
 		this.setTimestamp( that.getTimestamp() );
 
@@ -296,6 +310,64 @@ public class WeatherStation {
 		this.setHumidityTrendUnit( that.getHumidityTrendUnit() );
 		this.setPressureTrendUnit( that.getPressureTrendUnit() );
 		this.setWindSpeedTrendUnit( that.getWindSpeedTrendUnit() );
+
+		updateFlyingConditions();
+	}
+
+	private void updateFlyingConditions() {
+		// TODO Update the flying conditions
+		Flying.Condition condition = Flying.Condition.GREAT;
+		Set<Flying.Reason> reasons = new HashSet<>();
+
+		double temperature = getTemperature();
+		if( temperature >= 100 ) {
+			updateFlyingCondition( Flying.Condition.POOR );
+			reasons.add( Flying.Reason.HOT );
+		} else if( temperature < 100 && temperature >= 90 ) {
+			updateFlyingCondition( Flying.Condition.FAIR );
+			reasons.add( Flying.Reason.WARM );
+		} else if( temperature < 90 && temperature >= 80 ) {
+			updateFlyingCondition( Flying.Condition.GOOD );
+			//reasons.add( Flying.Reason.WARM );
+		} else if( temperature < 80 && temperature >= 70 ) {
+			updateFlyingCondition( Flying.Condition.GREAT );
+		} else if( temperature < 70 && temperature >= 60 ) {
+			updateFlyingCondition( Flying.Condition.GOOD );
+			//reasons.add( Flying.Reason.COOL );
+		} else if( temperature < 60 && temperature >= 50 ) {
+			updateFlyingCondition( Flying.Condition.FAIR );
+			reasons.add( Flying.Reason.COOL );
+		} else if( temperature < 50 && temperature >= 30 ) {
+			updateFlyingCondition( Flying.Condition.POOR );
+			reasons.add( Flying.Reason.COLD );
+		} else if( temperature < 30 ) {
+			updateFlyingCondition( Flying.Condition.BAD );
+			reasons.add( Flying.Reason.COLD );
+		}
+
+		double wind = getWindSpeed();
+		if( wind >= 25 ) {
+			updateFlyingCondition( Flying.Condition.BAD );
+			reasons.add( Flying.Reason.WINDY );
+		} else if( wind < 25 && wind >= 20 ) {
+			updateFlyingCondition( Flying.Condition.POOR );
+			reasons.add( Flying.Reason.WINDY );
+		} else if( wind < 20 && wind >= 15 ) {
+			updateFlyingCondition( Flying.Condition.FAIR );
+			reasons.add( Flying.Reason.BREEZY );
+		} else if( wind < 15 && wind >= 10 ) {
+			updateFlyingCondition( Flying.Condition.GOOD );
+			reasons.add( Flying.Reason.BREEZY );
+		} else if( wind < 10 ) {
+			updateFlyingCondition( Flying.Condition.GREAT );
+			//reasons.add( Flying.Reason.WINDY );
+		}
+
+		this.getFlying().setReasons( reasons );
+	}
+
+	private void updateFlyingCondition( Flying.Condition condition ) {
+		if( condition.ordinal() > getFlying().getCondition().ordinal() ) getFlying().setCondition( condition );
 	}
 
 	public boolean equals( Object o ) {
