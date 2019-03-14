@@ -1,5 +1,6 @@
 package net.soderquist.mark.weather;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Flying {
@@ -22,9 +23,9 @@ public class Flying {
 		DARK
 	}
 
-	private Condition condition;
+	private Condition condition = Condition.GREAT;
 
-	private Set<Reason> reasons;
+	private Set<Reason> reasons = new HashSet<>();
 
 	public Condition getCondition() {
 		return condition;
