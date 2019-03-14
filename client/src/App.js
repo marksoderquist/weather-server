@@ -121,6 +121,9 @@ class Body extends Component {
                     <NumberField name='Instant Wind Speed' value={this.props.weather.windSpeed} unit={this.props.weather.windSpeedUnit}/>
                     <NumberField name='Instant Wind Direction' value={this.props.weather.windDirection} unit={this.props.weather.windDirectionUnit}/>
                     <Separator/>
+										<StringField name='Flying Condition' value={''}/>
+										<StringField name='Flying Reasons' value={''}/>
+										<Separator/>
                     <NumberField name='Timestamp' value={this.props.weather.timestamp} unit=' ms'/>
                     <StringField name='Version' value={packageJson.version}/>
                 </div>
