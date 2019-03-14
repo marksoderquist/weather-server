@@ -19,7 +19,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>9</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
@@ -34,6 +34,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>5.4.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -54,8 +60,8 @@
 	<repositories>
 		<repository>
 			<id>sod</id>
-			<name>Soderquist Ventures Release Repository</name>
-			<url>https://code.xeomar.com/repo/sod/</url>
+			<name>Soderquist Ventures Repository</name>
+			<url>https://repo.xeomar.com/sod/</url>
 		</repository>
 	</repositories>
 
@@ -63,12 +69,12 @@
 		<repository>
 			<id>sod-release</id>
 			<name>Soderquist Ventures Release Repository</name>
-			<url>https://code.xeomar.com/repo/sod-release/</url>
+			<url>https://repo.xeomar.com/sod-release/</url>
 		</repository>
 		<snapshotRepository>
 			<id>sod-snapshot</id>
 			<name>Soderquist Ventures Snapshot Repository</name>
-			<url>https://code.xeomar.com/repo/sod-snapshot/</url>
+			<url>https://repo.xeomar.com/sod-snapshot/</url>
 		</snapshotRepository>
 	</distributionManagement>
 

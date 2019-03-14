@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import logo from './cloud.svg';
 import './App.css';
+import packageJson from '../package.json';
 
 function fetchWeather(success) {
     return fetch('http://mark.soderquist.net/weather/api/station?id=bluewing', {
@@ -83,26 +84,8 @@ class Body extends Component {
         return (
             <div className="content">
                 <div className="column">
-                    <div className="temperature">{parseFloat(this.props.weather.temperature).toFixed(1)}<span className="tempunit">{this.props.weather.temperatureUnit}</span></div>
-                    <div className="wind">
-                        <table>
-                            <tr>
-                                <td class="label">wind&nbsp;</td>
-                                <td class="value">&nbsp;{parseFloat(this.props.weather.windTenMinAvg).toFixed(1)}</td>
-                                <td class="unit">&nbsp;{this.props.weather.windSpeedUnit}</td>
-                            </tr>
-                            <tr>
-                                <td class="label">gust&nbsp;</td>
-                                <td class="value">&nbsp;{parseFloat(this.props.weather.windTenMinMax).toFixed(1)}</td>
-                                <td class="unit">&nbsp;{this.props.weather.windSpeedUnit}</td>
-                            </tr>
-                            <tr>
-                                <td className="label">from&nbsp;</td>
-                                <td className="value">&nbsp;{this.props.weather.windCardinalTenMinAvg}</td>
-                                <td className="unit">&nbsp;{parseFloat(this.props.weather.windDirectionTenMinAvg).toFixed(0)}{this.props.weather.windDirectionUnit}</td>
-                            </tr>
-                        </table>
-                    </div>
+                    <TemperatureGauge weather={this.props.weather}/>
+                    <WindGauge weather={this.props.weather}/>
                     <Separator/>
                     <NumberField name='Temperature Trend' value={this.props.weather.temperatureTrend} unit={this.props.weather.temperatureTrendUnit} fixed='1'/>
                     <NumberField name='Wind Speed Trend' value={this.props.weather.windSpeedTrend} unit={this.props.weather.windSpeedTrendUnit} fixed='1'/>
@@ -139,9 +122,47 @@ class Body extends Component {
                     <NumberField name='Instant Wind Direction' value={this.props.weather.windDirection} unit={this.props.weather.windDirectionUnit}/>
                     <Separator/>
                     <NumberField name='Timestamp' value={this.props.weather.timestamp} unit=' ms'/>
+                    <StringField name='Version' value={packageJson.version}/>
                 </div>
             </div>
         )
+    }
+}
+
+class TemperatureGauge extends Component {
+    render() {
+        return (
+            <div className="temperature">{parseFloat(this.props.weather.temperature).toFixed(1)}<span className="tempunit">{this.props.weather.temperatureUnit}</span></div>
+        );
+    }
+}
+
+class WindGauge extends Component {
+    render() {
+        const windSpeed = parseFloat(this.props.weather.windTenMinAvg).toFixed(1);
+        const gustSpeed = parseFloat(this.props.weather.windTenMinMax).toFixed(1);
+        const windCardinal = windSpeed < 0.1 ? "---" : this.props.weather.windCardinalTenMinAvg;
+        const windDirection = windSpeed < 0.1 ? "---" : parseFloat(this.props.weather.windDirectionTenMinAvg).toFixed(0);
+        return (
+            <div className="wind">
+                <table>
+                    <tr>
+                        <td className="label">wind&nbsp;</td>
+                        <td className="value">&nbsp;{windSpeed}</td>
+                        <td className="unit">&nbsp;{this.props.weather.windSpeedUnit}</td>
+                    </tr>
+                    <tr>
+                        <td className="label">gust&nbsp;</td>
+                        <td className="value">&nbsp;{gustSpeed}</td>
+                        <td className="unit">&nbsp;{this.props.weather.windSpeedUnit}</td>
+                    </tr>
+                    <tr>
+                        <td className="label">from&nbsp;</td>
+                        <td className="value">&nbsp;{windCardinal}</td>
+                        <td className="unit">&nbsp;{windDirection}{this.props.weather.windDirectionUnit}</td>
+                    </tr>
+                </table>
+            </div>        );
     }
 }
 
@@ -151,6 +172,17 @@ class NumberField extends Component {
             <div className="weather-field">
                 <div className="weather-field-prompt">{this.props.name}</div>
                 <div className="weather-field-value">{parseFloat(this.props.value).toFixed(this.props.fixed)} {this.props.unit}</div>
+            </div>
+        );
+    }
+}
+
+class StringField extends Component {
+    render() {
+        return (
+            <div className="weather-field">
+                <div className="weather-field-prompt">{this.props.name}</div>
+                <div className="weather-field-value">{this.props.value}</div>
             </div>
         );
     }
