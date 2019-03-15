@@ -315,8 +315,7 @@ public class WeatherStation {
 	}
 
 	private void updateFlyingConditions() {
-		// TODO Update the flying conditions
-		Flying.Condition condition = Flying.Condition.GREAT;
+		updateFlyingCondition( Flying.Condition.GREAT );
 		Set<Flying.Reason> reasons = new HashSet<>();
 
 		double temperature = getTemperature();
@@ -345,7 +344,7 @@ public class WeatherStation {
 			reasons.add( Flying.Reason.COLD );
 		}
 
-		double wind = getWindSpeed();
+		double wind = getWindTenMinAvg();
 		if( wind >= 25 ) {
 			updateFlyingCondition( Flying.Condition.BAD );
 			reasons.add( Flying.Reason.WINDY );
@@ -360,7 +359,6 @@ public class WeatherStation {
 			reasons.add( Flying.Reason.BREEZY );
 		} else if( wind < 10 ) {
 			updateFlyingCondition( Flying.Condition.GREAT );
-			//reasons.add( Flying.Reason.WINDY );
 		}
 
 		this.getFlying().setReasons( reasons );
