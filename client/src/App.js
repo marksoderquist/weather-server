@@ -177,8 +177,7 @@ class WindGauge extends Component {
 class FlyingConditions extends Component {
 	render() {
 		let condition = (this.props.weather.flying && this.props.weather.flying.condition) || '';
-		//let reasons = (this.props.weather.flying && this.props.weather.flying.reasons) || [];
-		let reasons = ["COLD", "WINDY"];
+		let reasons = (this.props.weather.flying && this.props.weather.flying.reasons) || [];
 		return (
 			<div className='flying-conditions'>
 				<table>
