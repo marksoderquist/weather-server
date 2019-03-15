@@ -1,101 +1,123 @@
 .App {
-    text-align: left;
-    --header-pad: 20px;
+	text-align: left;
+	--header-pad: 20px;
 }
 
 .App-logo {
-    width: 80px;
-    height: 80px;
-    float: left;
-    background-color: #1080FA;
-    border-radius: 50%;
-    margin: 0 var(--header-pad) 0 0;
+	width: 80px;
+	height: 80px;
+	float: left;
+	background-color: #1080FA;
+	border-radius: 50%;
+	margin: 0 var(--header-pad) 0 0;
 }
 
 .App-header {
-    display: flex;
-    align-items:center;
-    background-color: #333;
-    height: 80px;
-    padding: var(--header-pad);
-    color: white;
+	display: flex;
+	align-items: center;
+	background-color: #333;
+	height: 80px;
+	padding: var(--header-pad);
+	color: white;
 }
 
 .App-header a {
-    color: #AAA;
+	color: #AAA;
 }
 
 .App-title {
-    font-size: 2em;
+	font-size: 2em;
 }
 
 .content {
-    padding: 1em;
+	padding: 1em;
 }
 
 .two-column-layout {
-    width: 100%;
-    display: table;
-    table-layout: fixed;
+	width: 100%;
+	display: table;
+	table-layout: fixed;
 }
 
 .temperature {
-    font-size: 8em;
-    text-align: center;
-    vertical-align: middle;
+	font-size: 8em;
+	text-align: center;
+	vertical-align: middle;
 }
 
 .wind {
-    font-size: 3em;
-    text-align: center;
-    vertical-align: middle;
+	font-size: 3em;
+	text-align: center;
+	vertical-align: middle;
 }
 
 .wind table {
-    margin-left:auto;
-    margin-right:auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.flying-conditions {
+	text-align: center;
+}
+
+.flying-conditions table {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.flying-conditions th {
+	background: #C0C0FF;
+}
+
+.flying-conditions .condition {
+	font-size: 4em;
+}
+
+.flying-conditions .reason {
+	font-size: 2em;
 }
 
 .label {
-    color: #808080;
-    text-align: left;
-    font-size: 0.75em;
+	color: #808080;
+	text-align: left;
+	font-size: 0.75em;
 }
 
 .value {
-    text-align: right;
+	text-align: right;
 }
 
 .tempunit {
-    color: #808080;
-    text-align: left;
-    vertical-align: super;
-    font-size: 0.5em;
+	color: #808080;
+	text-align: left;
+	vertical-align: super;
+	font-size: 0.5em;
 }
 
 .unit {
-    color: #808080;
-    text-align: left;
-    vertical-align: middle;
-    font-size: 0.5em;
+	color: #808080;
+	text-align: left;
+	vertical-align: middle;
+	font-size: 0.5em;
 }
 
 .column {
-    display: table-cell;
+	display: table-cell;
 }
 
 .weather-field {
-    display: table-row;
-    font-size: 1em;
-    --weather-field-pad: 0.25em;
+	display: table-row;
+	font-size: 1em;
+	--weather-field-pad: 0.25em;
 }
 
 .weather-field-prompt {
-    display: table-cell;
-    padding: var(--weather-field-pad) 2.0em var(--weather-field-pad) var(--weather-field-pad);
+	display: table-cell;
+	padding: var(--weather-field-pad) 2.0em var(--weather-field-pad) var(--weather-field-pad);
 }
 
 .weather-field-value {
-    display: table-cell;
-    padding: var(--weather-field-pad) var(--weather-field-pad) var(--weather-field-pad) 0.0em;
+	display: table-cell;
+	padding: var(--weather-field-pad) var(--weather-field-pad) var(--weather-field-pad) 0.0em;
 }

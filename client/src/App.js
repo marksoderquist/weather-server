@@ -81,12 +81,13 @@ class Header extends Component {
 
 class Body extends Component {
 	render() {
-		console.log( JSON.stringify( this.props.weather ) );
+		//console.log(JSON.stringify(this.props.weather));
 		return (
 			<div className="content">
 				<div className="column">
 					<TemperatureGauge weather={this.props.weather}/>
 					<WindGauge weather={this.props.weather}/>
+					<FlyingConditions weather={this.props.weather}/>
 					<Separator/>
 					<NumberField name='Temperature Trend' value={this.props.weather.temperatureTrend} unit={this.props.weather.temperatureTrendUnit} fixed='1'/>
 					<NumberField name='Wind Speed Trend' value={this.props.weather.windSpeedTrend} unit={this.props.weather.windSpeedTrendUnit} fixed='1'/>
@@ -168,7 +169,37 @@ class WindGauge extends Component {
 					</tr>
 					</tbody>
 				</table>
-			</div>);
+			</div>
+		);
+	}
+}
+
+class FlyingConditions extends Component {
+	render() {
+		let condition = (this.props.weather.flying && this.props.weather.flying.condition) || '';
+		//let reasons = (this.props.weather.flying && this.props.weather.flying.reasons) || [];
+		let reasons = ["COLD", "WINDY"];
+		return (
+			<div className='flying-conditions'>
+				<table>
+					<tbody>
+					<tr>
+						<th colSpan='100'>Flying Conditions</th>
+					</tr>
+					<tr>
+						<td className='condition'>{condition}</td>
+					</tr>
+					{reasons.length > 0 &&
+					<tr>
+						<td className='reason'>{reasons.map((reason, index) => (
+							<span key={index}>{index > 0 ? ' & ' : ''}{reason}</span>
+						))}</td>
+					</tr>
+					}
+					</tbody>
+				</table>
+			</div>
+		);
 	}
 }
 
