@@ -315,7 +315,7 @@ public class WeatherStation {
 	}
 
 	private void updateFlyingConditions() {
-		updateFlyingCondition( Flying.Condition.GREAT );
+		getFlying().setCondition( Flying.Condition.GREAT );
 		Set<Flying.Reason> reasons = new HashSet<>();
 
 		double temperature = getTemperature();
