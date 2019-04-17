@@ -20,6 +20,8 @@ public class Flying {
 		COLD,
 		BREEZY,
 		WINDY,
+		GUSTY,
+		RAINY,
 		DARK
 	}
 
@@ -39,8 +41,9 @@ public class Flying {
 		return reasons;
 	}
 
-	public void setReasons( Set<Reason> reasons ) {
-		this.reasons = reasons;
+	public void reset() {
+		condition = Flying.Condition.GREAT;
+		reasons.clear();
 	}
 
 }
