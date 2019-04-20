@@ -336,10 +336,19 @@ public class WeatherStation {
 		double wind = getWindTenMinAvg();
 		if( wind >= 15 ) {
 			updateFlyingCondition( Flying.Condition.BAD, Flying.Reason.WINDY );
+		} else if( wind >= 10 ) {
+			updateFlyingCondition( Flying.Condition.POOR, Flying.Reason.WINDY );
 		} else if( wind >= 5 ) {
 			updateFlyingCondition( Flying.Condition.FAIR, Flying.Reason.BREEZY );
-		} else {
-			updateFlyingCondition( Flying.Condition.GREAT );
+		}
+
+		double gust = getWindTenMinMax();
+		if( gust >= 25 ) {
+			updateFlyingCondition( Flying.Condition.BAD, Flying.Reason.GUSTY );
+		} else if( gust >= 20 ) {
+			updateFlyingCondition( Flying.Condition.POOR, Flying.Reason.GUSTY );
+		} else if( gust >= 15 ) {
+			updateFlyingCondition( Flying.Condition.FAIR, Flying.Reason.GUSTY );
 		}
 
 		if( getRainRate() > 0 ) {
