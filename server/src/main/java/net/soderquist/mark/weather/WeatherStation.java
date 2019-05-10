@@ -1,5 +1,7 @@
 package net.soderquist.mark.weather;
 
+import java.util.Objects;
+
 @SuppressWarnings( "WeakerAccess" )
 public class WeatherStation {
 
@@ -371,9 +373,7 @@ public class WeatherStation {
 		if( !(o instanceof WeatherStation) ) return false;
 		final WeatherStation other = (WeatherStation)o;
 		if( !other.canEqual( this ) ) return false;
-		final Object this$id = this.getId();
-		final Object other$id = other.getId();
-		return this$id == null ? other$id == null : this$id.equals( other$id );
+		return Objects.equals( this.getId(), other.getId() );
 	}
 
 	public int hashCode() {
