@@ -363,6 +363,7 @@ public class WeatherStation {
 	private void updateFlyingCondition( Flying.Condition condition, Flying.Reason reason ) {
 		if( condition.ordinal() > getFlying().getCondition().ordinal() ) getFlying().setCondition( condition );
 		if( reason != null ) getFlying().getReasons().add( reason );
+		getFlying().getReasons().sort( null );
 	}
 
 	public boolean equals( Object o ) {

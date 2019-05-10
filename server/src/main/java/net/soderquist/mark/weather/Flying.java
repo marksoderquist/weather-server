@@ -1,7 +1,7 @@
 package net.soderquist.mark.weather;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Flying {
 
@@ -27,7 +27,7 @@ public class Flying {
 
 	private Condition condition = Condition.GREAT;
 
-	private Set<Reason> reasons = new HashSet<>();
+	private List<Reason> reasons = new ArrayList<>();
 
 	public Condition getCondition() {
 		return condition;
@@ -37,7 +37,7 @@ public class Flying {
 		this.condition = condition;
 	}
 
-	public Set<Reason> getReasons() {
+	public List<Reason> getReasons() {
 		return reasons;
 	}
 
