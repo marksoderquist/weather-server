@@ -3,7 +3,7 @@ package net.soderquist.mark.weather;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Flying {
+public class Flight {
 
 	enum Condition {
 		GREAT,
@@ -42,7 +42,7 @@ public class Flying {
 	}
 
 	public void reset() {
-		condition = Flying.Condition.GREAT;
+		condition = Flight.Condition.GREAT;
 		reasons.clear();
 	}
 

@@ -88,14 +88,17 @@ public class WeatherStation {
 
 	private String windSpeedTrendUnit = windSpeedUnit + "/hr";
 
-	private Flying flying;
+	private Flight flight;
+
+	private String serverVersion;
 
 	public WeatherStation() {}
 
-	public WeatherStation( String id, String name ) {
+	public WeatherStation( String id, String name, String version ) {
 		this.id = id;
 		this.name = name;
-		this.flying = new Flying();
+		this.serverVersion = version;
+		this.flight = new Flight();
 	}
 
 	public String getId() {return this.id;}
@@ -262,12 +265,20 @@ public class WeatherStation {
 
 	public void setWindSpeedTrendUnit( String windSpeedTrendUnit ) { this.windSpeedTrendUnit = windSpeedTrendUnit; }
 
-	public Flying getFlying() {
-		return flying;
+	public Flight getFlight() {
+		return flight;
 	}
 
-	public void setFlying( Flying flying ) {
-		this.flying = flying;
+	public void setFlight( Flight flight ) {
+		this.flight = flight;
+	}
+
+	public String getServerVersion() {
+		return serverVersion;
+	}
+
+	public void setServerVersion( String serverVersion ) {
+		this.serverVersion = serverVersion;
 	}
 
 	public void copyFrom( WeatherStation that ) {
@@ -311,63 +322,65 @@ public class WeatherStation {
 		this.setWindSpeedTrendUnit( that.getWindSpeedTrendUnit() );
 
 		updateFlyingConditions();
+
+		this.setServerVersion( that.getServerVersion() );
 	}
 
 	private void updateFlyingConditions() {
-		getFlying().reset();
+		getFlight().reset();
 
 		double temperature = getTemperature();
 		if( temperature >= 100 ) {
-			updateFlyingCondition( Flying.Condition.POOR, Flying.Reason.HOT );
+			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.HOT );
 		} else if( temperature < 100 && temperature >= 90 ) {
-			updateFlyingCondition( Flying.Condition.FAIR, Flying.Reason.WARM );
+			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.WARM );
 		} else if( temperature < 90 && temperature >= 80 ) {
-			updateFlyingCondition( Flying.Condition.GOOD );
+			updateFlyingCondition( Flight.Condition.GOOD );
 		} else if( temperature < 80 && temperature >= 70 ) {
-			updateFlyingCondition( Flying.Condition.GREAT );
+			updateFlyingCondition( Flight.Condition.GREAT );
 		} else if( temperature < 70 && temperature >= 60 ) {
-			updateFlyingCondition( Flying.Condition.GOOD );
+			updateFlyingCondition( Flight.Condition.GOOD );
 		} else if( temperature < 60 && temperature >= 50 ) {
-			updateFlyingCondition( Flying.Condition.FAIR, Flying.Reason.COOL );
+			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.COOL );
 		} else if( temperature < 50 && temperature >= 30 ) {
-			updateFlyingCondition( Flying.Condition.POOR, Flying.Reason.COLD );
+			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.COLD );
 		} else if( temperature < 30 ) {
-			updateFlyingCondition( Flying.Condition.BAD, Flying.Reason.COLD );
+			updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.COLD );
 		}
 
 		double wind = getWindTenMinAvg();
 		if( wind >= 15 ) {
-			updateFlyingCondition( Flying.Condition.BAD, Flying.Reason.WINDY );
+			updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.WINDY );
 		} else if( wind >= 10 ) {
-			updateFlyingCondition( Flying.Condition.POOR, Flying.Reason.WINDY );
+			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.WINDY );
 		} else if( wind >= 5 ) {
-			updateFlyingCondition( Flying.Condition.FAIR, Flying.Reason.BREEZY );
+			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.BREEZY );
 		}
 
 		double gust = getWindTenMinMax();
-		if( gust >= 2*wind ) updateFlyingCondition( Flying.Condition.POOR, Flying.Reason.GUSTY );
+		if( gust >= 2*wind ) updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.GUSTY );
 
 //		if( gust >= 25 ) {
-//			updateFlyingCondition( Flying.Condition.BAD, Flying.Reason.GUSTY );
+//			updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.GUSTY );
 //		} else if( gust >= 20 ) {
-//			updateFlyingCondition( Flying.Condition.POOR, Flying.Reason.GUSTY );
+//			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.GUSTY );
 //		} else if( gust >= 15 ) {
-//			updateFlyingCondition( Flying.Condition.FAIR, Flying.Reason.GUSTY );
+//			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.GUSTY );
 //		}
 
 		if( getRainRate() > 0 ) {
-			updateFlyingCondition( Flying.Condition.POOR, Flying.Reason.RAINY );
+			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.RAINY );
 		}
 	}
 
-	private void updateFlyingCondition( Flying.Condition condition ) {
+	private void updateFlyingCondition( Flight.Condition condition ) {
 		updateFlyingCondition( condition, null );
 	}
 
-	private void updateFlyingCondition( Flying.Condition condition, Flying.Reason reason ) {
-		if( condition.ordinal() > getFlying().getCondition().ordinal() ) getFlying().setCondition( condition );
-		if( reason != null ) getFlying().getReasons().add( reason );
-		getFlying().getReasons().sort( null );
+	private void updateFlyingCondition( Flight.Condition condition, Flight.Reason reason ) {
+		if( condition.ordinal() > getFlight().getCondition().ordinal() ) getFlight().setCondition( condition );
+		if( reason != null ) getFlight().getReasons().add( reason );
+		getFlight().getReasons().sort( null );
 	}
 
 	public boolean equals( Object o ) {
