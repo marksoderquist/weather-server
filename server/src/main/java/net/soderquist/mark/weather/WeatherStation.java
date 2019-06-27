@@ -322,8 +322,6 @@ public class WeatherStation {
 		this.setWindSpeedTrendUnit( that.getWindSpeedTrendUnit() );
 
 		updateFlyingConditions();
-
-		this.setServerVersion( that.getServerVersion() );
 	}
 
 	private void updateFlyingConditions() {
