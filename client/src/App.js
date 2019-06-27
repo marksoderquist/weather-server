@@ -69,7 +69,7 @@ class Header extends Component {
 		return (
 			<div className="App-header">
 				<img src={logo} className="App-logo" alt="logo"/>
-				<div>
+				<div className="App-title-box">
 					<div className="App-title">{this.props.title}</div>
 					<div>{toDatestamp(this.props.timestamp)}</div>
 					<div><a href="https://www.wunderground.com/weather/us/ut/riverton/KUTRIVER9">Weather Underground</a></div>

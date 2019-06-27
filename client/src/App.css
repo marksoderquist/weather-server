@@ -1,5 +1,4 @@
 .App {
-	text-align: center;
 	--header-pad: 20px;
 }
 
@@ -7,7 +6,7 @@
 	width: 80px;
 	height: 80px;
 	float: left;
-	background-color: #1080FA;
+	background-color: #1080A8;
 	border-radius: 50%;
 	margin: 0 var(--header-pad) 0 0;
 }
@@ -15,6 +14,7 @@
 .App-header {
 	display: flex;
 	align-items: center;
+	text-align: center;
 	background-color: #333;
 	height: 80px;
 	padding: var(--header-pad);
@@ -31,6 +31,7 @@
 
 .content {
 	padding: 1em;
+	text-align: center;
 }
 
 .two-column-layout {
@@ -61,13 +62,11 @@
 }
 
 .flight-conditions table {
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
+	width: 100%;
 }
 
 .flight-conditions th {
-	background: #C0C0FF;
+	background: #C0C0C0;
 }
 
 .flight-conditions .condition {
