@@ -81,13 +81,13 @@ class Header extends Component {
 
 class Body extends Component {
 	render() {
-		//console.log(JSON.stringify(this.props.weather));
+		console.log(JSON.stringify(this.props.weather));
 		return (
 			<div className="content">
 				<div className="column">
 					<TemperatureGauge weather={this.props.weather}/>
 					<WindGauge weather={this.props.weather}/>
-					<FlyingConditions weather={this.props.weather}/>
+					<FlightConditions weather={this.props.weather}/>
 					<Separator/>
 					<NumberField name='Temperature Trend' value={this.props.weather.temperatureTrend} unit={this.props.weather.temperatureTrendUnit} fixed='1'/>
 					<NumberField name='Wind Speed Trend' value={this.props.weather.windSpeedTrend} unit={this.props.weather.windSpeedTrendUnit} fixed='1'/>
@@ -123,11 +123,12 @@ class Body extends Component {
 					<NumberField name='Instant Wind Speed' value={this.props.weather.windSpeed} unit={this.props.weather.windSpeedUnit}/>
 					<NumberField name='Instant Wind Direction' value={this.props.weather.windDirection} unit={this.props.weather.windDirectionUnit}/>
 					<Separator/>
-					<StringField name='Flying Condition' value={this.props.weather.flying && this.props.weather.flying.condition}/>
-					<StringField name='Flying Reasons' value={this.props.weather.flying && this.props.weather.flying.reasons}/>
+					<StringField name='Flight Condition' value={this.props.weather.flight && this.props.weather.flight.condition}/>
+					<StringField name='Flight Reasons' value={this.props.weather.flight && this.props.weather.flight.reasons}/>
 					<Separator/>
 					<NumberField name='Timestamp' value={this.props.weather.timestamp} unit=' ms'/>
-					<StringField name='Version' value={packageJson.version}/>
+					<StringField name='Client Version' value={packageJson.version}/>
+					<StringField name='Server Version' value={this.props.weather.serverVersion}/>
 				</div>
 			</div>
 		)
@@ -174,16 +175,16 @@ class WindGauge extends Component {
 	}
 }
 
-class FlyingConditions extends Component {
+class FlightConditions extends Component {
 	render() {
-		let condition = (this.props.weather.flying && this.props.weather.flying.condition) || '';
-		let reasons = (this.props.weather.flying && this.props.weather.flying.reasons) || [];
+		let condition = (this.props.weather.flight && this.props.weather.flight.condition) || '';
+		let reasons = (this.props.weather.flight && this.props.weather.flight.reasons) || [];
 		return (
-			<div className='flying-conditions'>
+			<div className='flight-conditions'>
 				<table>
 					<tbody>
 					<tr>
-						<th colSpan='100'>Flying Conditions</th>
+						<th colSpan='100'>Flight Conditions</th>
 					</tr>
 					<tr>
 						<td className='condition'>{condition}</td>

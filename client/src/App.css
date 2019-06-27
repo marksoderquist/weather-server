@@ -1,5 +1,5 @@
 .App {
-	text-align: left;
+	text-align: center;
 	--header-pad: 20px;
 }
 
@@ -56,25 +56,25 @@
 	margin-right: auto;
 }
 
-.flying-conditions {
+.flight-conditions {
 	text-align: center;
 }
 
-.flying-conditions table {
+.flight-conditions table {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
 }
 
-.flying-conditions th {
+.flight-conditions th {
 	background: #C0C0FF;
 }
 
-.flying-conditions .condition {
+.flight-conditions .condition {
 	font-size: 4em;
 }
 
-.flying-conditions .reason {
+.flight-conditions .reason {
 	font-size: 2em;
 }
 
