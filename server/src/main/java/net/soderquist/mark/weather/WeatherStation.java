@@ -356,7 +356,7 @@ public class WeatherStation {
 		}
 
 		double gust = getWindTenMinMax() - wind;
-		if( gust > wind ) updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.GUSTY );
+		if( gust >= 5 && ( gust > wind || gust > 20 ) ) updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.GUSTY );
 //		if( gust >= 30 ) {
 //			updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.GUSTY );
 //		} else if( gust >= 20 ) {
