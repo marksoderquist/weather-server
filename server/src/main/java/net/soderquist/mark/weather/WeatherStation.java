@@ -346,8 +346,8 @@ public class WeatherStation {
 			updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.COLD );
 		}
 
-		double wind = getWindTenMinAvg();
-		double gust = getWindTenMinMax() - wind;
+		double wind = getWindTwoMinAvg();
+		double gust = getWindTwoMinMax() - wind;
 
 		if( wind >= 15 ) {
 			updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.WINDY );
@@ -357,14 +357,12 @@ public class WeatherStation {
 			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.BREEZY );
 		}
 
-		if( wind >= 5 ) {
-			if( gust >= 15 ) {
-				updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.GUSTY );
-			} else if( gust >= 10 ) {
-				updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.GUSTY );
-			} else if( gust >= 5 ) {
-				updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.GUSTY );
-			}
+		if( gust >= 15 ) {
+			updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.GUSTY );
+		} else if( gust >= 10 ) {
+			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.GUSTY );
+		} else if( gust >= 5 ) {
+			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.GUSTY );
 		}
 
 		if( getRainRate() > 0 ) {
@@ -376,7 +374,7 @@ public class WeatherStation {
 		updateFlyingCondition( condition, null );
 	}
 
-	private void updateFlyingCondition( Flight.Reason reason  ) {
+	private void updateFlyingCondition( Flight.Reason reason ) {
 		updateFlyingCondition( null, reason );
 	}
 
