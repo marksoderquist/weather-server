@@ -347,6 +347,8 @@ public class WeatherStation {
 		}
 
 		double wind = getWindTenMinAvg();
+		double gust = getWindTenMinMax() - wind;
+
 		if( wind >= 15 ) {
 			updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.WINDY );
 		} else if( wind >= 10 ) {
@@ -355,15 +357,15 @@ public class WeatherStation {
 			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.BREEZY );
 		}
 
-		double gust = getWindTenMinMax() - wind;
-		if( gust >= 5 && ( gust > wind || gust > 20 ) ) updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.GUSTY );
-//		if( gust >= 30 ) {
-//			updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.GUSTY );
-//		} else if( gust >= 20 ) {
-//			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.GUSTY );
-//		} else if( gust >= 10 ) {
-//			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.GUSTY );
-//		}
+		if( wind >= 5 ) {
+			if( gust >= 15 ) {
+				updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.GUSTY );
+			} else if( gust >= 10 ) {
+				updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.GUSTY );
+			} else if( gust >= 5 ) {
+				updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.GUSTY );
+			}
+		}
 
 		if( getRainRate() > 0 ) {
 			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.RAINY );
@@ -374,8 +376,12 @@ public class WeatherStation {
 		updateFlyingCondition( condition, null );
 	}
 
+	private void updateFlyingCondition( Flight.Reason reason  ) {
+		updateFlyingCondition( null, reason );
+	}
+
 	private void updateFlyingCondition( Flight.Condition condition, Flight.Reason reason ) {
-		if( condition.ordinal() > getFlight().getCondition().ordinal() ) getFlight().setCondition( condition );
+		if( condition != null && condition.ordinal() > getFlight().getCondition().ordinal() ) getFlight().setCondition( condition );
 		if( reason != null ) getFlight().getReasons().add( reason );
 		getFlight().getReasons().sort( null );
 	}
@@ -398,5 +404,9 @@ public class WeatherStation {
 
 	protected boolean canEqual( Object other ) {return other instanceof WeatherStation;}
 
-	public String toString() {return "WeatherStation(id=" + this.getId() + ", name=" + this.getName() + ", timestamp=" + this.getTimestamp() + ", temperature=" + this.getTemperature() + ", pressure=" + this.getPressure() + ", humidity=" + this.getHumidity() + ", dewPoint=" + this.getDewPoint() + ", windChill=" + this.getWindChill() + ", heatIndex=" + this.getHeatIndex() + ", wind=" + this.getWindSpeed() + ", windDirection=" + this.getWindDirection() + ", rainTotalDaily=" + this.getRainTotalDaily() + ", rainRate=" + this.getRainRate() + ")";}
+	public String toString() {
+		return "WeatherStation(id=" + this.getId() + ", name=" + this.getName() + ", timestamp=" + this.getTimestamp() + ", temperature=" + this.getTemperature() + ", pressure=" + this
+			.getPressure() + ", humidity=" + this.getHumidity() + ", dewPoint=" + this.getDewPoint() + ", windChill=" + this.getWindChill() + ", heatIndex=" + this.getHeatIndex() + ", wind=" + this
+			.getWindSpeed() + ", windDirection=" + this.getWindDirection() + ", rainTotalDaily=" + this.getRainTotalDaily() + ", rainRate=" + this.getRainRate() + ")";
+	}
 }
