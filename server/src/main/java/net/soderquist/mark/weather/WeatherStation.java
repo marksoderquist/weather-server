@@ -331,15 +331,15 @@ public class WeatherStation {
 		if( temperature >= 100 ) {
 			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.HOT );
 		} else if( temperature < 100 && temperature >= 90 ) {
-			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.WARM );
+			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.HOT );
 		} else if( temperature < 90 && temperature >= 80 ) {
-			updateFlyingCondition( Flight.Condition.GOOD );
+			updateFlyingCondition( Flight.Condition.GOOD, Flight.Reason.WARM );
 		} else if( temperature < 80 && temperature >= 70 ) {
 			updateFlyingCondition( Flight.Condition.GREAT );
 		} else if( temperature < 70 && temperature >= 60 ) {
-			updateFlyingCondition( Flight.Condition.GOOD );
+			updateFlyingCondition( Flight.Condition.GOOD, Flight.Reason.COOL );
 		} else if( temperature < 60 && temperature >= 50 ) {
-			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.COOL );
+			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.COLD );
 		} else if( temperature < 50 && temperature >= 30 ) {
 			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.COLD );
 		} else if( temperature < 30 ) {
