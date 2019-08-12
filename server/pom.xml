@@ -12,7 +12,7 @@
 
 	<groupId>net.soderquist.mark</groupId>
 	<artifactId>weather-server</artifactId>
-	<version>2.2u8</version>
+	<version>2.2u9</version>
 	<packaging>jar</packaging>
 
 	<description>Mark Soderquist weather data provider</description>

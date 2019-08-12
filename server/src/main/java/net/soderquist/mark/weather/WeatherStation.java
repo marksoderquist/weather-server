@@ -339,7 +339,7 @@ public class WeatherStation {
 		} else if( temperature < 70 && temperature >= 60 ) {
 			updateFlyingCondition( Flight.Condition.GOOD, Flight.Reason.COOL );
 		} else if( temperature < 60 && temperature >= 50 ) {
-			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.COLD );
+			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.COOL );
 		} else if( temperature < 50 && temperature >= 30 ) {
 			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.COLD );
 		} else if( temperature < 30 ) {
