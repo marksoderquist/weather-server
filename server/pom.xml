@@ -61,7 +61,7 @@
 		<repository>
 			<id>sod</id>
 			<name>Soderquist Ventures Repository</name>
-			<url>https://repo.xeomar.com/sod/</url>
+			<url>https://repo.avereon.com/sod/</url>
 		</repository>
 	</repositories>
 
@@ -69,12 +69,12 @@
 		<repository>
 			<id>sod-release</id>
 			<name>Soderquist Ventures Release Repository</name>
-			<url>https://repo.xeomar.com/sod-release/</url>
+			<url>https://repo.avereon.com/sod-release/</url>
 		</repository>
 		<snapshotRepository>
 			<id>sod-snapshot</id>
 			<name>Soderquist Ventures Snapshot Repository</name>
-			<url>https://repo.xeomar.com/sod-snapshot/</url>
+			<url>https://repo.avereon.com/sod-snapshot/</url>
 		</snapshotRepository>
 	</distributionManagement>
 
