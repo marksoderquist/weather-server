@@ -1,10 +1,10 @@
 [Unit]
-Description=weather-server
+Description=dalton
 After=syslog.target
 
 [Service]
 User=sod
-ExecStart=/opt/sod/weather-server/weather-server.jar --server.servlet.context-path=/weather/api --server.port=6095
+ExecStart=/opt/sod/dalton/dalton.jar --server.servlet.context-path=/weather/api --server.port=6095
 SuccessExitStatus=143
 
 [Install]

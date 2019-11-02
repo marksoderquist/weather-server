@@ -11,11 +11,11 @@
 	</parent>
 
 	<groupId>net.soderquist.mark</groupId>
-	<artifactId>weather-server</artifactId>
+	<artifactId>dalton-server</artifactId>
 	<version>2.2u9</version>
 	<packaging>jar</packaging>
 
-	<description>Mark Soderquist weather data provider</description>
+	<description>Mark Soderquist weather data server</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
