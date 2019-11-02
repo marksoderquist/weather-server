@@ -12,7 +12,7 @@
 
 	<groupId>net.soderquist.mark</groupId>
 	<artifactId>dalton-server</artifactId>
-	<version>2.2u9</version>
+	<version>3.0.0</version>
 	<packaging>jar</packaging>
 
 	<description>Mark Soderquist weather data server</description>
