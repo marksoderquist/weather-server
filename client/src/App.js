@@ -123,6 +123,8 @@ class Body extends Component {
 					<NumberField name='Instant Wind Speed' value={this.props.weather.windSpeed} unit={this.props.weather.windSpeedUnit}/>
 					<NumberField name='Instant Wind Direction' value={this.props.weather.windDirection} unit={this.props.weather.windDirectionUnit}/>
 					<Separator/>
+					<NumberField name='Sun Altitude' value={this.props.weather.sunAltitude} unit={this.props.weather.sunAltitudeUnit}/>
+					<Separator/>
 					<StringField name='Flight Condition' value={this.props.weather.flight && this.props.weather.flight.condition}/>
 					<StringField name='Flight Reasons' value={this.props.weather.flight && this.props.weather.flight.reasons}/>
 					<Separator/>
