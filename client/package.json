@@ -17,6 +17,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "scp -r build/* soderquist.net:/opt/sod/weather/client",
-		"redeploy": "npm run build && npm run deploy"
+    "redeploy": "npm run build && npm run deploy"
   }
 }

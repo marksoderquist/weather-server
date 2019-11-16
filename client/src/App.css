@@ -1,5 +1,20 @@
 .App {
+	/* This is a CSS variable */
 	--header-pad: 20px;
+}
+
+.App-header {
+	text-align: center;
+	background-color: #333;
+	height: 80px;
+	padding: var(--header-pad);
+	color: white;
+
+	display: flex;
+	/* along the main axis */
+	justify-content: center;
+	/* along the cross axis */
+	align-items: center;
 }
 
 .App-logo {
@@ -11,27 +26,22 @@
 	margin: 0 var(--header-pad) 0 0;
 }
 
-.App-header {
-	display: flex;
-	align-items: center;
-	text-align: center;
-	background-color: #333;
-	height: 80px;
-	padding: var(--header-pad);
-	color: white;
+.App-title {
+	font-size: 2rem;
 }
 
 .App-header a {
 	color: #AAA;
 }
 
-.App-title {
-	font-size: 2em;
-}
-
 .content {
-	padding: 1em;
-	text-align: center;
+	padding: 1rem;
+
+	display: flex;
+	/* along the main axis */
+	justify-content: center;
+	/* along the cross axis */
+	align-items: center;
 }
 
 .two-column-layout {
@@ -41,13 +51,13 @@
 }
 
 .temperature {
-	font-size: 8em;
+	font-size: 8rem;
 	text-align: center;
 	vertical-align: middle;
 }
 
 .wind {
-	font-size: 3em;
+	font-size: 3rem;
 	text-align: center;
 	vertical-align: middle;
 }
