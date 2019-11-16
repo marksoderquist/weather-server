@@ -22,6 +22,7 @@ public class Flight {
 		WINDY,
 		GUSTY,
 		RAINY,
+		TWILIGHT,
 		DARK
 	}
 

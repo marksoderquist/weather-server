@@ -36,12 +36,13 @@ public class WeatherRestController {
 		WeatherStation target = getStations().get( id );
 		if( target == null ) return;
 		target.copyFrom( station );
+		target.setServerVersion( version );
 	}
 
 	private Map<String, WeatherStation> getStations() {
 		if( stations == null ) {
 			stations = new HashMap<>();
-			stations.put( "bluewing", new WeatherStation( "bluewing", "Bluewing Way", version ) );
+			stations.put( "bluewing", new WeatherStation( "bluewing", "Bluewing Way", 40.503923, -112.013373 ) );
 		}
 		return stations;
 	}

@@ -1,5 +1,8 @@
 package net.soderquist.mark.weather;
 
+import org.shredzone.commons.suncalc.SunPosition;
+
+import java.util.Date;
 import java.util.Objects;
 
 @SuppressWarnings( "WeakerAccess" )
@@ -10,6 +13,12 @@ public class WeatherStation {
 	private String id;
 
 	private String name;
+
+	private double latitude;
+
+	private double longitude;
+
+	private String serverVersion;
 
 	private long timestamp;
 
@@ -65,6 +74,8 @@ public class WeatherStation {
 
 	private Cardinal windCardinalTwoMinAvg;
 
+	private double sunAltitude;
+
 	// Unit values.
 	private String temperatureUnit = DEGREE + "F";
 
@@ -88,16 +99,17 @@ public class WeatherStation {
 
 	private String windSpeedTrendUnit = windSpeedUnit + "/hr";
 
-	private Flight flight;
+	private String sunAltitudeUnit = DEGREE;
 
-	private String serverVersion;
+	private Flight flight;
 
 	public WeatherStation() {}
 
-	public WeatherStation( String id, String name, String version ) {
+	public WeatherStation( String id, String name, double latitude, double longitude ) {
 		this.id = id;
 		this.name = name;
-		this.serverVersion = version;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.flight = new Flight();
 	}
 
@@ -159,6 +171,8 @@ public class WeatherStation {
 
 	public Cardinal getWindCardinalTwoMinAvg() { return windCardinalTwoMinAvg; }
 
+	public double getSunAltitude() { return sunAltitude; }
+
 	public String getTemperatureUnit() { return temperatureUnit; }
 
 	public String getHumidityUnit() { return humidityUnit; }
@@ -180,6 +194,8 @@ public class WeatherStation {
 	public String getPressureTrendUnit() { return pressureTrendUnit; }
 
 	public String getWindSpeedTrendUnit() { return windSpeedTrendUnit; }
+
+	public String getSunAltitudeUnit() { return sunAltitudeUnit; }
 
 	// Weather station
 	public void setId( String id ) {this.id = id; }
@@ -243,6 +259,8 @@ public class WeatherStation {
 		this.windCardinalTwoMinAvg = Cardinal.toCardinal( windDirectionTwoMinAvg );
 	}
 
+	public void setSunAltitude( double sunAltitude ) { this.sunAltitude = sunAltitude; }
+
 	public void setTemperatureUnit( String temperatureUnit ) { this.temperatureUnit = temperatureUnit; }
 
 	public void setHumidityUnit( String humidityUnit ) { this.humidityUnit = humidityUnit; }
@@ -264,6 +282,8 @@ public class WeatherStation {
 	public void setPressureTrendUnit( String pressureTrendUnit ) { this.pressureTrendUnit = pressureTrendUnit; }
 
 	public void setWindSpeedTrendUnit( String windSpeedTrendUnit ) { this.windSpeedTrendUnit = windSpeedTrendUnit; }
+
+	public void setSunAltitudeUnit( String sunAltitudeUnit ) { this.sunAltitudeUnit = sunAltitudeUnit; }
 
 	public Flight getFlight() {
 		return flight;
@@ -321,6 +341,11 @@ public class WeatherStation {
 		this.setPressureTrendUnit( that.getPressureTrendUnit() );
 		this.setWindSpeedTrendUnit( that.getWindSpeedTrendUnit() );
 
+		// Using the sun altitude, calculate an illumination value
+		// Civil twilight is -6 degrees (https://en.wikipedia.org/wiki/Twilight)
+		SunPosition position = SunPosition.compute().on( new Date() ).at( latitude, longitude ).execute();
+		this.setSunAltitude( position.getTrueAltitude() );
+
 		updateFlyingConditions();
 	}
 
@@ -352,7 +377,7 @@ public class WeatherStation {
 		if( wind >= 15 ) {
 			updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.WINDY );
 		} else if( wind >= 10 ) {
-			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.WINDY );
+			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.BREEZY );
 		} else if( wind >= 5 ) {
 			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.BREEZY );
 		}
@@ -361,8 +386,13 @@ public class WeatherStation {
 			updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.GUSTY );
 		} else if( gust >= 10 ) {
 			updateFlyingCondition( Flight.Condition.POOR, Flight.Reason.GUSTY );
-		} else if( gust >= 5 ) {
-			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.GUSTY );
+		}
+
+		double sun = getSunAltitude();
+		if( sun <= -6 ) {
+			updateFlyingCondition( Flight.Condition.BAD, Flight.Reason.DARK );
+		} else if( sun <= 0 ) {
+			updateFlyingCondition( Flight.Condition.FAIR, Flight.Reason.TWILIGHT );
 		}
 
 		if( getRainRate() > 0 ) {
