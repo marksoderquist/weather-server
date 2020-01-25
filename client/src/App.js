@@ -125,8 +125,8 @@ class Body extends Component {
 					<Separator/>
 					<NumberField name='Sun Altitude' value={this.props.weather.sunAltitude} unit={this.props.weather.sunAltitudeUnit}/>
 					<Separator/>
-					<StringField name='Flight Condition' value={this.props.weather.flight && this.props.weather.flight.condition}/>
-					<StringField name='Flight Reasons' value={this.props.weather.flight && this.props.weather.flight.reasons}/>
+					<StringField name='Flight Condition' value={this.props.weather.flightCondition && this.props.weather.flightCondition.summary}/>
+					<StringField name='Flight Reasons' value={this.props.weather.flightCondition && this.props.weather.flightCondition.reasons}/>
 					<Separator/>
 					<NumberField name='Timestamp' value={this.props.weather.timestamp} unit=' ms'/>
 					<StringField name='Client Version' value={packageJson.version}/>
@@ -179,8 +179,8 @@ class WindGauge extends Component {
 
 class FlightConditions extends Component {
 	render() {
-		let condition = (this.props.weather.flight && this.props.weather.flight.condition) || '';
-		let reasons = (this.props.weather.flight && this.props.weather.flight.reasons) || [];
+		let summary = (this.props.weather.flightCondition && this.props.weather.flightCondition.summary) || '';
+		let reasons = (this.props.weather.flightCondition && this.props.weather.flightCondition.reasons) || [];
 		return (
 			<div className='flight-conditions'>
 				<table>
@@ -189,7 +189,7 @@ class FlightConditions extends Component {
 						<th colSpan='100'>Flight Conditions</th>
 					</tr>
 					<tr>
-						<td className='condition'>{condition}</td>
+						<td className='summary'>{summary}</td>
 					</tr>
 					{reasons.length > 0 &&
 					<tr>

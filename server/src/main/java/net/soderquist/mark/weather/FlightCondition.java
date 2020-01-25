@@ -3,14 +3,14 @@ package net.soderquist.mark.weather;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Flight {
+public class FlightCondition {
 
-	enum Condition {
-		GREAT,
+	enum Summary {
+		FANTASTIC,
 		GOOD,
 		FAIR,
 		POOR,
-		BAD
+		HORRIBLE
 	}
 
 	enum Reason {
@@ -26,16 +26,16 @@ public class Flight {
 		DARK
 	}
 
-	private Condition condition = Condition.GREAT;
+	private Summary summary = Summary.FANTASTIC;
 
 	private List<Reason> reasons = new ArrayList<>();
 
-	public Condition getCondition() {
-		return condition;
+	public Summary getSummary() {
+		return summary;
 	}
 
-	public void setCondition( Condition condition ) {
-		this.condition = condition;
+	public void setSummary( Summary summary ) {
+		this.summary = summary;
 	}
 
 	public List<Reason> getReasons() {
@@ -43,8 +43,8 @@ public class Flight {
 	}
 
 	public void reset() {
-		condition = Flight.Condition.GREAT;
 		reasons.clear();
+		summary = Summary.FANTASTIC;
 	}
 
 }
