@@ -57,7 +57,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<Header title={this.state.weather.name} timestamp={this.state.weather.timestamp}/>
+				<Header weather={this.state.weather}/>
 				<Body weather={this.state.weather}/>
 			</div>
 		);
@@ -68,11 +68,10 @@ class Header extends Component {
 	render() {
 		return (
 			<div className="App-header">
-				<img src={logo} className="App-logo" alt="logo"/>
+				<a href='https://www.wunderground.com/dashboard/pws/KUTRIVER9?cm_ven=localwx_pwsdash'><img src={logo} className="App-logo" alt="logo"/></a>
 				<div className="App-title-box">
-					<div className="App-title">{this.props.title}</div>
-					<div>{toDatestamp(this.props.timestamp)}</div>
-					<div><a href="https://www.wunderground.com/weather/us/ut/riverton/KUTRIVER9">Weather Underground</a></div>
+					<div className="App-title">Bluewing</div>
+					<div>{toDatestamp(this.props.weather.timestamp)}</div>
 				</div>
 			</div>
 		);
@@ -88,6 +87,8 @@ class Body extends Component {
 					<TemperatureGauge weather={this.props.weather}/>
 					<WindGauge weather={this.props.weather}/>
 					<FlightConditions weather={this.props.weather}/>
+					<Separator/>
+					<Details/>
 					<Separator/>
 					<NumberField name='Temperature Trend' value={this.props.weather.temperatureTrend} unit={this.props.weather.temperatureTrendUnit} fixed='1'/>
 					<NumberField name='Wind Speed Trend' value={this.props.weather.windSpeedTrend} unit={this.props.weather.windSpeedTrendUnit} fixed='1'/>
@@ -202,6 +203,22 @@ class FlightConditions extends Component {
 				</table>
 			</div>
 		);
+	}
+}
+
+class Details extends Component {
+	render() {
+		return (
+			<div className='details'>
+				<table>
+					<tbody>
+					<tr>
+						<th colSpan='100'>Detailed Weather Metrics</th>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		)
 	}
 }
 

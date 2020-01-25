@@ -42,7 +42,7 @@ public class WeatherRestController {
 	private Map<String, WeatherStation> getStations() {
 		if( stations == null ) {
 			stations = new HashMap<>();
-			stations.put( "bluewing", new WeatherStation( "bluewing", "Bluewing Way", 40.503923, -112.013373 ) );
+			stations.put( "bluewing", new WeatherStation( "bluewing", "Bluewing", 40.503923, -112.013373 ) );
 		}
 		return stations;
 	}

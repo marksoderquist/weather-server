@@ -5,10 +5,10 @@
 
 .App-header {
 	text-align: center;
+	color: #eee;
 	background-color: #333;
-	height: 80px;
+	height: 60px;
 	padding: var(--header-pad);
-	color: white;
 
 	display: flex;
 	/* along the main axis */
@@ -27,15 +27,17 @@
 }
 
 .App-title {
-	font-size: 2rem;
+	font-size: 3rem;
 }
 
 .App-header a {
-	color: #AAA;
+	color: #aaa;
 }
 
 .content {
 	padding: 1rem;
+	color: #eee;
+	background-color: #222;
 
 	display: flex;
 	/* along the main axis */
@@ -51,13 +53,13 @@
 }
 
 .temperature {
-	font-size: 8rem;
+	font-size: 6rem;
 	text-align: center;
 	vertical-align: middle;
 }
 
 .wind {
-	font-size: 3rem;
+	font-size: 2.5rem;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -65,6 +67,19 @@
 .wind table {
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.details {
+	text-align: center;
+}
+
+.details table {
+	width: 100%;
+}
+
+.details th {
+	color: #eee;
+	background-color: #333;
 }
 
 .flight-conditions {
@@ -76,7 +91,8 @@
 }
 
 .flight-conditions th {
-	background: #C0C0C0;
+	color: #eee;
+	background-color: #333;
 }
 
 .flight-conditions .summary {
