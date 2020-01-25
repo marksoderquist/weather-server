@@ -70,7 +70,7 @@ class Header extends Component {
 			<div className="App-header">
 				<a href='https://www.wunderground.com/dashboard/pws/KUTRIVER9?cm_ven=localwx_pwsdash'><img src={logo} className="App-logo" alt="logo"/></a>
 				<div className="App-title-box">
-					<div className="App-title">Bluewing</div>
+					<div className="App-title">{this.props.weather.name}</div>
 					<div>{toDatestamp(this.props.weather.timestamp)}</div>
 				</div>
 			</div>
