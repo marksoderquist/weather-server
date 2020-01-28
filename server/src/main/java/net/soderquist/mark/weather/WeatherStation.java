@@ -374,7 +374,7 @@ public class WeatherStation {
 		}
 
 		double wind = getWindTenMinAvg();
-		double gust = getWindTenMinMax() - wind;
+		double gust = getWindTenMinMax();
 
 		if( wind >= 20 ) {
 			updateFlightCondition( FlightCondition.Summary.SEVERE, FlightCondition.Reason.WINDY );
