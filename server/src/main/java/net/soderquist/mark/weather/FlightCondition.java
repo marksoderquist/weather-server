@@ -10,7 +10,7 @@ public class FlightCondition {
 		GOOD,
 		FAIR,
 		POOR,
-		SEVERE
+		GROUNDED
 	}
 
 	enum Reason {

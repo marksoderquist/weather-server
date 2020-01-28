@@ -354,7 +354,7 @@ public class WeatherStation {
 
 		double temperature = getTemperature();
 		if( temperature >= 110 ) {
-			updateFlightCondition( FlightCondition.Summary.SEVERE, FlightCondition.Reason.HOT );
+			updateFlightCondition( FlightCondition.Summary.GROUNDED, FlightCondition.Reason.HOT );
 		} else if( temperature < 110 && temperature >= 100 ) {
 			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.HOT );
 		} else if( temperature < 100 && temperature >= 90 ) {
@@ -370,14 +370,14 @@ public class WeatherStation {
 		} else if( temperature < 50 && temperature >= 30 ) {
 			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.COLD );
 		} else if( temperature < 30 ) {
-			updateFlightCondition( FlightCondition.Summary.SEVERE, FlightCondition.Reason.COLD );
+			updateFlightCondition( FlightCondition.Summary.GROUNDED, FlightCondition.Reason.COLD );
 		}
 
 		double wind = getWindTenMinAvg();
 		double gust = getWindTenMinMax();
 
 		if( wind >= 20 ) {
-			updateFlightCondition( FlightCondition.Summary.SEVERE, FlightCondition.Reason.WINDY );
+			updateFlightCondition( FlightCondition.Summary.GROUNDED, FlightCondition.Reason.WINDY );
 		} else if( wind >= 15 ) {
 			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.WINDY );
 		} else if( wind >= 10 ) {
@@ -387,7 +387,7 @@ public class WeatherStation {
 		} // otherwise GREAT
 
 		if( gust >= 30 ) {
-			updateFlightCondition( FlightCondition.Summary.SEVERE, FlightCondition.Reason.GUSTY );
+			updateFlightCondition( FlightCondition.Summary.GROUNDED, FlightCondition.Reason.GUSTY );
 		} else if( gust >= 20 ) {
 			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.GUSTY );
 		} else if( gust >= 15 ) {
