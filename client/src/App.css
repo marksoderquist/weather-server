@@ -52,10 +52,34 @@
 	table-layout: fixed;
 }
 
+.column {
+	display: table-cell;
+}
+
+.clock {
+	font-size: 6rem;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.clock .unit {
+	color: #808080;
+	text-align: left;
+	vertical-align: baseline;
+	font-size: 0.5em;
+}
+
 .temperature {
 	font-size: 6rem;
 	text-align: center;
 	vertical-align: middle;
+}
+
+.temperature .unit {
+	color: #808080;
+	text-align: left;
+	vertical-align: super;
+	font-size: 0.5em;
 }
 
 .wind {
@@ -113,22 +137,11 @@
 	text-align: right;
 }
 
-.tempunit {
-	color: #808080;
-	text-align: left;
-	vertical-align: super;
-	font-size: 0.5em;
-}
-
 .unit {
 	color: #808080;
 	text-align: left;
 	vertical-align: middle;
 	font-size: 0.5em;
-}
-
-.column {
-	display: table-cell;
 }
 
 .weather-field {

@@ -32,13 +32,6 @@ function parseJSON(response) {
 
 class App extends Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			weather: {}
-		}
-	}
-
 	componentDidMount() {
 		// The initial load
 		setTimeout(this.loadWeatherFromServer, 0);
@@ -57,11 +50,15 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<Header weather={this.state.weather}/>
-				<Body weather={this.state.weather}/>
+				<Header/>
+				<div className="content">
+					<Clock/>
+					<Weather/>
+				</div>
 			</div>
 		);
 	}
+
 }
 
 class Header extends Component {
@@ -70,69 +67,133 @@ class Header extends Component {
 			<div className="App-header">
 				<a href='https://www.wunderground.com/dashboard/pws/KUTRIVER9?cm_ven=localwx_pwsdash'><img src={logo} className="App-logo" alt="logo"/></a>
 				<div className="App-title-box">
-					<div className="App-title">{this.props.weather.name}</div>
-					<div>{toDatestamp(this.props.weather.timestamp)}</div>
+					<div className="App-title">Bluewing</div>
 				</div>
 			</div>
 		);
 	}
 }
 
-class Body extends Component {
+class Clock extends Component {
+
+	state = {
+		hh: '00',
+		mm: '00',
+		ss: '00',
+		ap: '--'
+	};
+
+	componentDidMount() {
+		setTimeout(this.updateTime, 0);
+		this.refreshTimer = setInterval(this.updateTime, 1000);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.refreshTimer);
+	}
+
+	updateTime = () => {
+		var timestamp = new Date();
+		var hh = timestamp.getHours();
+		var mm = timestamp.getMinutes();
+		var ss = timestamp.getSeconds();
+		var ap = hh < 12 ? "am" : "pm";
+
+		hh = hh % 12;
+		hh = hh === 0 ? 12 : hh;
+
+		//hh = pad( hh, 2 );
+		mm = pad(mm, 2);
+		ss = pad(ss, 2);
+
+		this.setState({hh: hh, mm: mm, ss: ss, ap: ap});
+	};
+
 	render() {
-		console.log(JSON.stringify(this.props.weather));
+
 		return (
-			<div className="content">
-				<div className="column">
-					<TemperatureGauge weather={this.props.weather}/>
-					<WindGauge weather={this.props.weather}/>
-					<FlightConditions weather={this.props.weather}/>
-					<Separator/>
-					<Details/>
-					<Separator/>
-					<NumberField name='Temperature Trend' value={this.props.weather.temperatureTrend} unit={this.props.weather.temperatureTrendUnit} fixed='1'/>
-					<NumberField name='Wind Speed Trend' value={this.props.weather.windSpeedTrend} unit={this.props.weather.windSpeedTrendUnit} fixed='1'/>
-					<Separator/>
-					<NumberField name='Temperature' value={this.props.weather.temperature} unit={this.props.weather.temperatureUnit} fixed='1'/>
-					<NumberField name='Dew Point' value={this.props.weather.dewPoint} unit={this.props.weather.temperatureUnit} fixed='1'/>
-					<NumberField name='Humidity' value={this.props.weather.humidity} unit={this.props.weather.humidityUnit}/>
-					<NumberField name='Pressure' value={this.props.weather.pressure} unit={this.props.weather.pressureUnit} fixed='2'/>
-					<Separator/>
-					<NumberField name='Wind Speed' value={this.props.weather.windTenMinAvg} unit={this.props.weather.windSpeedUnit}/>
-					<NumberField name='Wind Gusts' value={this.props.weather.windTenMinMax} unit={this.props.weather.windSpeedUnit}/>
-					<NumberField name='Wind Minimum' value={this.props.weather.windTenMinMin} unit={this.props.weather.windSpeedUnit}/>
-					<NumberField name='Wind Direction' value={this.props.weather.windDirectionTenMinAvg} unit={this.props.weather.windDirectionUnit}/>
-					<Separator/>
-					<NumberField name='Daily Rain' value={this.props.weather.rainTotalDaily} unit={this.props.weather.rainUnit} fixed='2'/>
-					<NumberField name='Rain Rate' value={this.props.weather.rainRate} unit={this.props.weather.rainRateUnit} fixed='2'/>
-					<Separator/>
-					<Separator/>
-					<NumberField name='Wind Chill' value={this.props.weather.windChill} unit={this.props.weather.temperatureUnit} fixed='1'/>
-					<NumberField name='Head Index' value={this.props.weather.heatIndex} unit={this.props.weather.temperatureUnit} fixed='1'/>
-					<Separator/>
-					<NumberField name='Humidity Trend' value={this.props.weather.humidityTrend} unit={this.props.weather.humidityTrendUnit} fixed='1'/>
-					<NumberField name='Pressure Trend' value={this.props.weather.pressureTrend} unit={this.props.weather.pressureTrendUnit} fixed='3'/>
-					<Separator/>
-					<NumberField name='Maximum Wind Speed (10 min)' value={this.props.weather.windTenMinMax} unit={this.props.weather.windSpeedUnit} fixed='1'/>
-					<NumberField name='Average Wind Speed (10 min)' value={this.props.weather.windTenMinAvg} unit={this.props.weather.windSpeedUnit} fixed='1'/>
-					<NumberField name='Minimum Wind Speed (10 min)' value={this.props.weather.windTenMinMin} unit={this.props.weather.windSpeedUnit} fixed='1'/>
-					<Separator/>
-					<NumberField name='Maximum Wind Speed (2 min)' value={this.props.weather.windTwoMinMax} unit={this.props.weather.windSpeedUnit} fixed='1'/>
-					<NumberField name='Average Wind Speed (2 min)' value={this.props.weather.windTwoMinAvg} unit={this.props.weather.windSpeedUnit} fixed='1'/>
-					<NumberField name='Minimum Wind Speed (2 min)' value={this.props.weather.windTwoMinMin} unit={this.props.weather.windSpeedUnit} fixed='1'/>
-					<Separator/>
-					<NumberField name='Instant Wind Speed' value={this.props.weather.windSpeed} unit={this.props.weather.windSpeedUnit}/>
-					<NumberField name='Instant Wind Direction' value={this.props.weather.windDirection} unit={this.props.weather.windDirectionUnit}/>
-					<Separator/>
-					<NumberField name='Sun Altitude' value={this.props.weather.sunAltitude} unit={this.props.weather.sunAltitudeUnit}/>
-					<Separator/>
-					<StringField name='Flight Condition' value={this.props.weather.flightCondition && this.props.weather.flightCondition.summary}/>
-					<StringField name='Flight Reasons' value={this.props.weather.flightCondition && this.props.weather.flightCondition.reasons}/>
-					<Separator/>
-					<NumberField name='Timestamp' value={this.props.weather.timestamp} unit=' ms'/>
-					<StringField name='Client Version' value={packageJson.version}/>
-					<StringField name='Server Version' value={this.props.weather.serverVersion}/>
-				</div>
+			<div className="clock">{this.state.hh}:{this.state.mm}<span className="unit">{this.state.ap}</span></div>
+		);
+	}
+
+}
+
+class Weather extends Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			weather: {}
+		}
+	}
+
+	componentDidMount() {
+		// The initial load
+		setTimeout(this.loadWeatherFromServer, 0);
+		// The remaining loads
+		this.refreshTimer = setInterval(this.loadWeatherFromServer, 5000);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.refreshTimer);
+	}
+
+	loadWeatherFromServer = () => {
+		fetchWeather((weatherFromServer) => this.setState({weather: weatherFromServer}));
+	};
+
+	render() {
+		//console.log(JSON.stringify(this.props.weather));
+		return (
+			<div className="column">
+				<TemperatureGauge weather={this.state.weather}/>
+				<WindGauge weather={this.state.weather}/>
+				<FlightConditions weather={this.state.weather}/>
+				<Separator/>
+				<Details/>
+				<Separator/>
+				<NumberField name='Temperature Trend' value={this.state.weather.temperatureTrend} unit={this.state.weather.temperatureTrendUnit} fixed='1'/>
+				<NumberField name='Wind Speed Trend' value={this.state.weather.windSpeedTrend} unit={this.state.weather.windSpeedTrendUnit} fixed='1'/>
+				<Separator/>
+				<NumberField name='Temperature' value={this.state.weather.temperature} unit={this.state.weather.temperatureUnit} fixed='1'/>
+				<NumberField name='Dew Point' value={this.state.weather.dewPoint} unit={this.state.weather.temperatureUnit} fixed='1'/>
+				<NumberField name='Humidity' value={this.state.weather.humidity} unit={this.state.weather.humidityUnit}/>
+				<NumberField name='Pressure' value={this.state.weather.pressure} unit={this.state.weather.pressureUnit} fixed='2'/>
+				<Separator/>
+				<NumberField name='Wind Speed' value={this.state.weather.windTenMinAvg} unit={this.state.weather.windSpeedUnit}/>
+				<NumberField name='Wind Gusts' value={this.state.weather.windTenMinMax} unit={this.state.weather.windSpeedUnit}/>
+				<NumberField name='Wind Minimum' value={this.state.weather.windTenMinMin} unit={this.state.weather.windSpeedUnit}/>
+				<NumberField name='Wind Direction' value={this.state.weather.windDirectionTenMinAvg} unit={this.state.weather.windDirectionUnit}/>
+				<Separator/>
+				<NumberField name='Daily Rain' value={this.state.weather.rainTotalDaily} unit={this.state.weather.rainUnit} fixed='2'/>
+				<NumberField name='Rain Rate' value={this.state.weather.rainRate} unit={this.state.weather.rainRateUnit} fixed='2'/>
+				<Separator/>
+				<Separator/>
+				<NumberField name='Wind Chill' value={this.state.weather.windChill} unit={this.state.weather.temperatureUnit} fixed='1'/>
+				<NumberField name='Head Index' value={this.state.weather.heatIndex} unit={this.state.weather.temperatureUnit} fixed='1'/>
+				<Separator/>
+				<NumberField name='Humidity Trend' value={this.state.weather.humidityTrend} unit={this.state.weather.humidityTrendUnit} fixed='1'/>
+				<NumberField name='Pressure Trend' value={this.state.weather.pressureTrend} unit={this.state.weather.pressureTrendUnit} fixed='3'/>
+				<Separator/>
+				<NumberField name='Maximum Wind Speed (10 min)' value={this.state.weather.windTenMinMax} unit={this.state.weather.windSpeedUnit} fixed='1'/>
+				<NumberField name='Average Wind Speed (10 min)' value={this.state.weather.windTenMinAvg} unit={this.state.weather.windSpeedUnit} fixed='1'/>
+				<NumberField name='Minimum Wind Speed (10 min)' value={this.state.weather.windTenMinMin} unit={this.state.weather.windSpeedUnit} fixed='1'/>
+				<Separator/>
+				<NumberField name='Maximum Wind Speed (2 min)' value={this.state.weather.windTwoMinMax} unit={this.state.weather.windSpeedUnit} fixed='1'/>
+				<NumberField name='Average Wind Speed (2 min)' value={this.state.weather.windTwoMinAvg} unit={this.state.weather.windSpeedUnit} fixed='1'/>
+				<NumberField name='Minimum Wind Speed (2 min)' value={this.state.weather.windTwoMinMin} unit={this.state.weather.windSpeedUnit} fixed='1'/>
+				<Separator/>
+				<NumberField name='Instant Wind Speed' value={this.state.weather.windSpeed} unit={this.state.weather.windSpeedUnit}/>
+				<NumberField name='Instant Wind Direction' value={this.state.weather.windDirection} unit={this.state.weather.windDirectionUnit}/>
+				<Separator/>
+				<NumberField name='Sun Altitude' value={this.state.weather.sunAltitude} unit={this.state.weather.sunAltitudeUnit}/>
+				<Separator/>
+				<StringField name='Flight Condition' value={this.state.weather.flightCondition && this.state.weather.flightCondition.summary}/>
+				<StringField name='Flight Reasons' value={this.state.weather.flightCondition && this.state.weather.flightCondition.reasons}/>
+				<Separator/>
+				<NumberField name='Timestamp' value={this.state.weather.timestamp} unit=' ms'/>
+				<StringField name='Client Version' value={packageJson.version}/>
+				<StringField name='Server Version' value={this.state.weather.serverVersion}/>
 			</div>
 		)
 	}
@@ -141,7 +202,7 @@ class Body extends Component {
 class TemperatureGauge extends Component {
 	render() {
 		return (
-			<div className="temperature">{parseFloat(this.props.weather.temperature).toFixed(1)}<span className="tempunit">{this.props.weather.temperatureUnit}</span></div>
+			<div className="temperature">{parseFloat(this.props.weather.temperature).toFixed(1)}<span className="unit">{this.props.weather.temperatureUnit}</span></div>
 		);
 	}
 }
@@ -195,7 +256,7 @@ class FlightConditions extends Component {
 					{reasons.length > 0 &&
 					<tr>
 						<td className='reason'>{reasons.map((reason, index) => (
-							<span key={index}>{index > 0 ? ' & ' : ''}{reason}</span>
+							<span key={index}>{index > 0 ? ' ' : ''}{reason}</span>
 						))}</td>
 					</tr>
 					}
