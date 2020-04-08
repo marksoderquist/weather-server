@@ -1,0 +1,96 @@
+.buffer {
+	height: 7rem;
+}
+
+.weather {
+	text-align: center;
+}
+
+.weather .title {
+	background-color: #333;
+	color: #eee;
+	font-weight: bold;
+}
+
+.temperature {
+	font-size: 6rem;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.temperature .unit {
+	color: #808080;
+	text-align: left;
+	vertical-align: super;
+	font-size: 0.5em;
+}
+
+.wind {
+	font-size: 2.5rem;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.wind table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.wind .label {
+	color: #808080;
+	text-align: left;
+	font-size: 0.75em;
+}
+
+.wind .value {
+	text-align: right;
+}
+
+.wind .unit {
+	color: #808080;
+	text-align: left;
+	vertical-align: middle;
+	font-size: 0.5em;
+}
+
+.clock {
+	font-size: 6rem;
+	text-align: center;
+}
+
+.clock .time {
+	vertical-align: middle;
+}
+
+.clock .ampm {
+	color: #808080;
+	font-size: 0.5em;
+}
+
+.clock .date {
+	color: #808080;
+	font-size: 0.4em;
+}
+
+.clock .dow {
+	font-size: 0.5em;
+}
+
+.flight-conditions {
+	text-align: center;
+}
+
+.flight-conditions .title {
+	background-color: #333;
+	color: #eee;
+	font-weight: bold;
+}
+
+.flight-conditions .summary {
+	font-size: 4rem;
+}
+
+.flight-conditions .reason {
+	font-size: 2rem;
+}
+
