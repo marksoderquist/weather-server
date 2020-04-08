@@ -9,11 +9,12 @@
 .weather .title {
 	background-color: #333;
 	color: #eee;
+	font-size: 2rem;
 	font-weight: bold;
 }
 
 .temperature {
-	font-size: 6rem;
+	font-size: 4rem;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -22,11 +23,12 @@
 	color: #808080;
 	text-align: left;
 	vertical-align: super;
+	/* This should stay as 0.5em, and not use the rem unit */
 	font-size: 0.5em;
 }
 
 .wind {
-	font-size: 2.5rem;
+	font-size: 2rem;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -39,7 +41,7 @@
 .wind .label {
 	color: #808080;
 	text-align: left;
-	font-size: 0.75em;
+	font-size: 1.5rem;
 }
 
 .wind .value {
@@ -50,6 +52,7 @@
 	color: #808080;
 	text-align: left;
 	vertical-align: middle;
+	/* This should stay as 0.5em, and not use the rem unit */
 	font-size: 0.5em;
 }
 
@@ -83,6 +86,7 @@
 .flight-conditions .title {
 	background-color: #333;
 	color: #eee;
+	font-size: 2rem;
 	font-weight: bold;
 }
 
