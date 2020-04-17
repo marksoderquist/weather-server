@@ -5,6 +5,7 @@ import java.io.IOException;
 public class PerformPublisher extends HttpPublisher {
 
 	private static final String VBIT = "vbit";
+
 	private static final String MEM = "mem";
 
 	public int publish( WeatherStation station ) throws IOException {
@@ -68,25 +69,5 @@ public class PerformPublisher extends HttpPublisher {
 	private String add( String type, int address, double value ) {
 		return add( type, address, Double.doubleToLongBits( value ) );
 	}
-
-	//	private void addLong( WeatherDataEvent event, StringBuilder builder, WeatherDatumIdentifier identifier, String key ) {
-	//		Long value = event.getValue( identifier );
-	//		if( value == null ) return;
-	//
-	//		builder.append( "&" );
-	//		builder.append( key );
-	//		builder.append( "=" );
-	//		builder.append( value );
-	//	}
-	//
-	//	private void addDouble( WeatherDataEvent event, StringBuilder builder, WeatherDatumIdentifier identifier, String key ) {
-	//		Double value = event.getValue( identifier );
-	//		if( value == null ) return;
-	//
-	//		builder.append( "&" );
-	//		builder.append( key );
-	//		builder.append( "=" );
-	//		builder.append( Double.doubleToLongBits( value ) );
-	//	}
 
 }
