@@ -15,7 +15,11 @@ public class WeatherRestController {
 
 	private Map<String, WeatherStation> stations;
 
-	public WeatherRestController() {}
+	private PerformPublisher publisher;
+
+	public WeatherRestController() {
+		publisher = new PerformPublisher();
+	}
 
 	public String getVersion() {
 		return version;
@@ -37,6 +41,7 @@ public class WeatherRestController {
 		if( target == null ) return;
 		target.copyFrom( station );
 		target.setServerVersion( version );
+		publisher.publish( target );
 	}
 
 	private Map<String, WeatherStation> getStations() {
