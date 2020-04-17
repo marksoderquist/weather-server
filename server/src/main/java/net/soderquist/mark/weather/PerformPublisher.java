@@ -59,6 +59,10 @@ public class PerformPublisher extends HttpPublisher {
 		builder.append( add( MEM, 120, station.getWindSpeedTrend() ) );
 		//builder.append( add( MEM, 121, station.getWindDirectionTrend() ) );
 
+		// Flight condition summary should be in the range (1-GROUNDED to 5-GREAT)
+		int count = FlightCondition.Summary.values().length;
+		builder.append( add( MEM, 200, count - station.getFlightCondition().getSummary().ordinal() ) );
+
 		return builder.toString();
 	}
 
