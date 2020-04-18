@@ -15,7 +15,6 @@ public class PerformPublisher extends HttpPublisher {
 	private static final String MEM = "mem";
 
 	public int publish( WeatherStation station ) throws IOException {
-		log.info( "send=" + generateData( station ) );
 		return rest( "GET", generateRequest( station ) ).getCode();
 	}
 
