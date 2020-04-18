@@ -1,14 +1,21 @@
 package net.soderquist.mark.weather;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 
 public class PerformPublisher extends HttpPublisher {
+
+	private final Logger log = LoggerFactory.getLogger( MethodHandles.lookup().lookupClass() );
 
 	private static final String VBIT = "vbit";
 
 	private static final String MEM = "mem";
 
 	public int publish( WeatherStation station ) throws IOException {
+		log.info( "send=" + generateData( station ) );
 		return rest( "GET", generateRequest( station ) ).getCode();
 	}
 
@@ -18,6 +25,12 @@ public class PerformPublisher extends HttpPublisher {
 		StringBuilder builder = new StringBuilder( "https://perform.southbranchcontrols.com" );
 		builder.append( "/api/stations/" ).append( stationId ).append( "/data/feed" );
 		builder.append( "?accesskey=" ).append( accessKey );
+		builder.append( generateData( station ) );
+		return builder.toString();
+	}
+
+	String generateData( WeatherStation station ) {
+		StringBuilder builder = new StringBuilder();
 
 		// Need to send online flag VBIT-0
 		builder.append( add( VBIT, 0, 1 ) );

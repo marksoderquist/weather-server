@@ -14,7 +14,7 @@ import java.util.Map;
 @SuppressWarnings( "unused" )
 public class WeatherRestController {
 
-	private Logger log = LoggerFactory.getLogger( MethodHandles.lookup().lookupClass() );
+	private final Logger log = LoggerFactory.getLogger( MethodHandles.lookup().lookupClass() );
 
 	@Value( "${spring.application.version:unknown}" )
 	private String version;
