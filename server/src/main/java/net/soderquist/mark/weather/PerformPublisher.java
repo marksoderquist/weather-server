@@ -14,7 +14,7 @@ public class PerformPublisher extends HttpPublisher {
 
 	String generateRequest( WeatherStation station ) {
 		String stationId = "39";
-		String accessKey = "b8f4c216-c54f-4c2f-bc33-5ab120accca3";
+		String accessKey = "88af534d-aa11-4d3f-ab96-481df649e273";
 		StringBuilder builder = new StringBuilder( "https://perform.southbranchcontrols.com" );
 		builder.append( "/api/stations/" ).append( stationId ).append( "/data/feed" );
 		builder.append( "?accesskey=" ).append( accessKey );
