@@ -10,8 +10,6 @@ public class PerformPublisher extends HttpPublisher {
 
 	private final Logger log = LoggerFactory.getLogger( MethodHandles.lookup().lookupClass() );
 
-	private static final String VBIT = "vbit";
-
 	private static final String MEM = "mem";
 
 	public int publish( WeatherStation station ) throws IOException {
@@ -30,9 +28,6 @@ public class PerformPublisher extends HttpPublisher {
 
 	String generateData( WeatherStation station ) {
 		StringBuilder builder = new StringBuilder();
-
-		// Need to send online flag VBIT-0
-		builder.append( add( VBIT, 0, 1 ) );
 
 		// Timestamp
 		builder.append( add( MEM, 0, station.getTimestamp() ) );
