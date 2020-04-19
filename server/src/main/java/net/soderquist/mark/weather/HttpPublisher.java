@@ -28,6 +28,7 @@ public abstract class HttpPublisher implements WeatherPublisher {
 		connection.setRequestMethod( method );
 		connection.setRequestProperty( "User-Agent", USER_AGENT );
 		connection.setAllowUserInteraction( false );
+		connection.setUseCaches( false );
 		if( headers != null ) {
 			for( String key : headers.keySet() ) {
 				connection.setRequestProperty( key, headers.get( key ) );
