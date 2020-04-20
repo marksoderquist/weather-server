@@ -11,8 +11,8 @@ import java.io.OutputStream;
 import java.lang.invoke.MethodHandles;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class HttpPublisher implements WeatherPublisher {
 
@@ -21,8 +21,8 @@ public abstract class HttpPublisher implements WeatherPublisher {
 	static {
 		HostnameVerifier defaultVerifier = javax.net.ssl.HttpsURLConnection.getDefaultHostnameVerifier();
 		javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier( ( hostname, sslSession ) -> {
+			if( Objects.equals( hostname, "perform.southbranchcontrols.com" ) ) return true;
 			log.info( "verifying: " + hostname );
-			Arrays.stream( sslSession.getLocalCertificates() ).forEach( c -> log.info( " -> " + c.toString() ) );
 			return defaultVerifier.verify( hostname, sslSession );
 		} );
 	}
