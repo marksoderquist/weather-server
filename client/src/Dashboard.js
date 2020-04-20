@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {weatherService} from "./Api";
 import Weather from './Weather'
+import WeatherStation from './WeatherStation'
 import Clock from './Clock';
 import FlightConditions from './FlightConditions';
 import './dashboard.css';
@@ -34,7 +35,7 @@ export default class Dashboard extends Component {
 			<div className="dashboard">
 				<div className="content-left col-4">
 					<div className="buffer"/>
-					<Weather weather={this.state.weather}/>
+					<WeatherStation weather={this.state.weather}/>
 				</div>
 				<div className="content-center col-4">
 					<Clock/>
