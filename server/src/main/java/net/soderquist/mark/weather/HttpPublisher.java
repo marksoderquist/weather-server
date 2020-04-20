@@ -1,14 +1,29 @@
 package net.soderquist.mark.weather;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.net.ssl.HostnameVerifier;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.invoke.MethodHandles;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
 public abstract class HttpPublisher implements WeatherPublisher {
+
+	private static final Logger log = LoggerFactory.getLogger( MethodHandles.lookup().lookupClass() );
+
+	static {
+		HostnameVerifier defaultVerifier = javax.net.ssl.HttpsURLConnection.getDefaultHostnameVerifier();
+		javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier( ( hostname, sslSession ) -> {
+			log.info( "verifying: " + hostname );
+			return defaultVerifier.verify( hostname, sslSession );
+		} );
+	}
 
 	protected Response rest( String method, String url ) throws IOException {
 		return rest( method, url, null );
@@ -28,7 +43,6 @@ public abstract class HttpPublisher implements WeatherPublisher {
 		connection.setRequestMethod( method );
 		connection.setRequestProperty( "User-Agent", USER_AGENT );
 		connection.setAllowUserInteraction( false );
-		connection.setUseCaches( false );
 		if( headers != null ) {
 			for( String key : headers.keySet() ) {
 				connection.setRequestProperty( key, headers.get( key ) );
@@ -64,11 +78,11 @@ public abstract class HttpPublisher implements WeatherPublisher {
 		}
 	}
 
-	protected class Response {
+	protected static class Response {
 
-		private int code;
+		private final int code;
 
-		private String content;
+		private final String content;
 
 		public Response( int code, String content ) {
 			this.code = code;
