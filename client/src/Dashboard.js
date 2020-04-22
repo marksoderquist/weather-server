@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {weatherService} from "./Api";
-import Weather from './Weather'
 import WeatherStation from './WeatherStation'
 import Clock from './Clock';
 import FlightConditions from './FlightConditions';
