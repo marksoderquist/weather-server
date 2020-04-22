@@ -397,12 +397,12 @@ public class WeatherStation {
 		} // otherwise GREAT
 
 		double sun = getSunAltitude();
-		if( sun <= -6 ) {
-			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.DARK );
+		if( sun <= -5 ) {
+			updateFlightCondition( FlightCondition.Summary.GROUNDED, FlightCondition.Reason.DARK );
 		} else if( sun <= 0 ) {
-			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.TWILIGHT );
+			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.TWILIGHT );
 		} else if( sun <= 5 ) {
-			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.TWILIGHT );
+			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.TWILIGHT );
 		} // otherwise GREAT
 
 		if( getRainRate() > 0 ) {
