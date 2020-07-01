@@ -60,6 +60,9 @@ public class PerformPublisher extends HttpPublisher {
 		builder.append( add( MEM, 50, station.getRainRate() ) );
 		builder.append( add( MEM, 51, station.getRainTotalDaily() ) );
 
+		builder.append( add( MEM, 60, station.getSunAltitude() ) );
+		builder.append( add( MEM, 61, station.getSunIllumination() ) );
+
 		builder.append( add( MEM, 110, station.getTemperatureTrend() ) );
 		builder.append( add( MEM, 111, station.getPressureTrend() ) );
 		builder.append( add( MEM, 112, station.getHumidityTrend() ) );

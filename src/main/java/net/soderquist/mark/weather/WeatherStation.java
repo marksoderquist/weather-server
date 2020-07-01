@@ -76,6 +76,8 @@ public class WeatherStation {
 
 	private double sunAltitude;
 
+	private double sunIllumination;
+
 	// Unit values.
 	private String temperatureUnit = DEGREE + "F";
 
@@ -100,6 +102,8 @@ public class WeatherStation {
 	private String windSpeedTrendUnit = windSpeedUnit + "/hr";
 
 	private String sunAltitudeUnit = DEGREE;
+
+	private String sunIlluminationUnit = "%";
 
 	private FlightCondition flightCondition;
 
@@ -173,6 +177,8 @@ public class WeatherStation {
 
 	public double getSunAltitude() { return sunAltitude; }
 
+	public double getSunIllumination() { return sunIllumination; }
+
 	public String getTemperatureUnit() { return temperatureUnit; }
 
 	public String getHumidityUnit() { return humidityUnit; }
@@ -196,6 +202,8 @@ public class WeatherStation {
 	public String getWindSpeedTrendUnit() { return windSpeedTrendUnit; }
 
 	public String getSunAltitudeUnit() { return sunAltitudeUnit; }
+
+	public String getSunIlluminationUnit() { return sunIlluminationUnit; }
 
 	// Weather station
 	public void setId( String id ) {this.id = id; }
@@ -261,6 +269,8 @@ public class WeatherStation {
 
 	public void setSunAltitude( double sunAltitude ) { this.sunAltitude = sunAltitude; }
 
+	public void setSunIllumination( double sunIllumination ) { this.sunIllumination = sunIllumination; }
+
 	public void setTemperatureUnit( String temperatureUnit ) { this.temperatureUnit = temperatureUnit; }
 
 	public void setHumidityUnit( String humidityUnit ) { this.humidityUnit = humidityUnit; }
@@ -284,6 +294,8 @@ public class WeatherStation {
 	public void setWindSpeedTrendUnit( String windSpeedTrendUnit ) { this.windSpeedTrendUnit = windSpeedTrendUnit; }
 
 	public void setSunAltitudeUnit( String sunAltitudeUnit ) { this.sunAltitudeUnit = sunAltitudeUnit; }
+
+	public void setSunIlluminationUnit( String sunIlluminationUnit ) { this.sunIlluminationUnit = sunIlluminationUnit; }
 
 	public FlightCondition getFlightCondition() {
 		return flightCondition;
@@ -344,7 +356,9 @@ public class WeatherStation {
 		// Using the sun altitude, calculate an illumination value
 		// Civil twilight is -6 degrees (https://en.wikipedia.org/wiki/Twilight)
 		SunPosition position = SunPosition.compute().on( new Date() ).at( latitude, longitude ).execute();
-		this.setSunAltitude( position.getTrueAltitude() );
+		double sunAltitude = position.getTrueAltitude();
+		this.setSunAltitude( sunAltitude );
+		this.setSunIllumination( sunAltitude <= 0 ? 0 : Math.sin( Math.toRadians( sunAltitude ) ) * 100 );
 
 		updateFlyingConditions();
 	}
