@@ -367,21 +367,21 @@ public class WeatherStation {
 		getFlightCondition().reset();
 
 		double temperature = getTemperature();
-		if( temperature >= 110 ) {
+		if( temperature >= 100 ) {
 			updateFlightCondition( FlightCondition.Summary.GROUNDED, FlightCondition.Reason.HOT );
-		} else if( temperature < 110 && temperature >= 100 ) {
-			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.HOT );
 		} else if( temperature < 100 && temperature >= 90 ) {
-			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.HOT );
+			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.HOT );
 		} else if( temperature < 90 && temperature >= 80 ) {
-			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.WARM );
+			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.HOT );
 		} else if( temperature < 80 && temperature >= 70 ) {
-			updateFlightCondition( FlightCondition.Summary.GREAT );
+			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.WARM );
 		} else if( temperature < 70 && temperature >= 60 ) {
-			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.COOL );
+			updateFlightCondition( FlightCondition.Summary.GREAT );
 		} else if( temperature < 60 && temperature >= 50 ) {
-			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.COOL );
-		} else if( temperature < 50 && temperature >= 30 ) {
+			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.COOL );
+		} else if( temperature < 50 && temperature >= 40 ) {
+			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.COLD );
+		} else if( temperature < 40 && temperature >= 30 ) {
 			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.COLD );
 		} else if( temperature < 30 ) {
 			updateFlightCondition( FlightCondition.Summary.GROUNDED, FlightCondition.Reason.COLD );
