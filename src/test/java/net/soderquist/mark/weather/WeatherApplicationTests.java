@@ -1,10 +1,10 @@
 package net.soderquist.mark.weather;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
-import static org.junit.Assert.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class WeatherApplicationTests {
 
@@ -12,7 +12,7 @@ public class WeatherApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		assertNotNull( contextRunner );
+		assertThat( contextRunner ).isNotNull();
 	}
 
 }
