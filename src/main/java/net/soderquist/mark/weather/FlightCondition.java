@@ -10,7 +10,7 @@ public class FlightCondition {
 		GOOD,
 		FAIR,
 		POOR,
-		GROUNDED
+		HOLD
 	}
 
 	enum Reason {
@@ -23,7 +23,8 @@ public class FlightCondition {
 		BUMPY,
 		GUSTY,
 		RAINY,
-		TWILIGHT,
+		DAWN,
+		DUSK,
 		DARK
 	}
 

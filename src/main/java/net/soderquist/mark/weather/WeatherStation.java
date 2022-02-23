@@ -2,8 +2,10 @@ package net.soderquist.mark.weather;
 
 import org.shredzone.commons.suncalc.SunPosition;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+import java.util.TimeZone;
 
 @SuppressWarnings( "WeakerAccess" )
 public class WeatherStation {
@@ -138,7 +140,7 @@ public class WeatherStation {
 
 	public double getWindDirection() {return this.windDirection;}
 
-	public Cardinal getWindCardinal() { return this.windCardinal;}
+	public Cardinal getWindCardinal() {return this.windCardinal;}
 
 	public double getWindSpeed() {return this.windSpeed;}
 
@@ -147,13 +149,13 @@ public class WeatherStation {
 	public double getRainRate() {return this.rainRate;}
 
 	// Avg, min, max and trends
-	public double getTemperatureTrend() { return temperatureTrend; }
+	public double getTemperatureTrend() {return temperatureTrend;}
 
-	public double getHumidityTrend() { return humidityTrend; }
+	public double getHumidityTrend() {return humidityTrend;}
 
-	public double getPressureTrend() { return pressureTrend; }
+	public double getPressureTrend() {return pressureTrend;}
 
-	public double getWindSpeedTrend() { return windSpeedTrend; }
+	public double getWindSpeedTrend() {return windSpeedTrend;}
 
 	public double getWindTenMinMax() {return this.windTenMinMax;}
 
@@ -167,95 +169,95 @@ public class WeatherStation {
 
 	public double getWindTwoMinMin() {return this.windTwoMinMin;}
 
-	public double getWindDirectionTenMinAvg() { return windDirectionTenMinAvg; }
+	public double getWindDirectionTenMinAvg() {return windDirectionTenMinAvg;}
 
-	public Cardinal getWindCardinalTenMinAvg() { return windCardinalTenMinAvg; }
+	public Cardinal getWindCardinalTenMinAvg() {return windCardinalTenMinAvg;}
 
-	public double getWindDirectionTwoMinAvg() { return windDirectionTwoMinAvg; }
+	public double getWindDirectionTwoMinAvg() {return windDirectionTwoMinAvg;}
 
-	public Cardinal getWindCardinalTwoMinAvg() { return windCardinalTwoMinAvg; }
+	public Cardinal getWindCardinalTwoMinAvg() {return windCardinalTwoMinAvg;}
 
-	public double getSunAltitude() { return sunAltitude; }
+	public double getSunAltitude() {return sunAltitude;}
 
-	public double getSunIllumination() { return sunIllumination; }
+	public double getSunIllumination() {return sunIllumination;}
 
-	public String getTemperatureUnit() { return temperatureUnit; }
+	public String getTemperatureUnit() {return temperatureUnit;}
 
-	public String getHumidityUnit() { return humidityUnit; }
+	public String getHumidityUnit() {return humidityUnit;}
 
-	public String getPressureUnit() { return pressureUnit; }
+	public String getPressureUnit() {return pressureUnit;}
 
-	public String getWindSpeedUnit() { return windSpeedUnit; }
+	public String getWindSpeedUnit() {return windSpeedUnit;}
 
-	public String getWindDirectionUnit() { return windDirectionUnit; }
+	public String getWindDirectionUnit() {return windDirectionUnit;}
 
-	public String getRainUnit() { return rainUnit; }
+	public String getRainUnit() {return rainUnit;}
 
-	public String getRainRateUnit() { return rainRateUnit; }
+	public String getRainRateUnit() {return rainRateUnit;}
 
-	public String getTemperatureTrendUnit() { return temperatureTrendUnit; }
+	public String getTemperatureTrendUnit() {return temperatureTrendUnit;}
 
-	public String getHumidityTrendUnit() { return humidityTrendUnit; }
+	public String getHumidityTrendUnit() {return humidityTrendUnit;}
 
-	public String getPressureTrendUnit() { return pressureTrendUnit; }
+	public String getPressureTrendUnit() {return pressureTrendUnit;}
 
-	public String getWindSpeedTrendUnit() { return windSpeedTrendUnit; }
+	public String getWindSpeedTrendUnit() {return windSpeedTrendUnit;}
 
-	public String getSunAltitudeUnit() { return sunAltitudeUnit; }
+	public String getSunAltitudeUnit() {return sunAltitudeUnit;}
 
-	public String getSunIlluminationUnit() { return sunIlluminationUnit; }
+	public String getSunIlluminationUnit() {return sunIlluminationUnit;}
 
 	// Weather station
-	public void setId( String id ) {this.id = id; }
+	public void setId( String id ) {this.id = id;}
 
-	public void setName( String name ) {this.name = name; }
+	public void setName( String name ) {this.name = name;}
 
-	public void setTimestamp( long timestamp ) {this.timestamp = timestamp; }
+	public void setTimestamp( long timestamp ) {this.timestamp = timestamp;}
 
 	// Weather basics
-	public void setTemperature( double temperature ) {this.temperature = temperature; }
+	public void setTemperature( double temperature ) {this.temperature = temperature;}
 
-	public void setPressure( double pressure ) {this.pressure = pressure; }
+	public void setPressure( double pressure ) {this.pressure = pressure;}
 
-	public void setHumidity( double humidity ) {this.humidity = humidity; }
+	public void setHumidity( double humidity ) {this.humidity = humidity;}
 
-	public void setDewPoint( double dewPoint ) {this.dewPoint = dewPoint; }
+	public void setDewPoint( double dewPoint ) {this.dewPoint = dewPoint;}
 
-	public void setWindChill( double windChill ) {this.windChill = windChill; }
+	public void setWindChill( double windChill ) {this.windChill = windChill;}
 
-	public void setHeatIndex( double heatIndex ) {this.heatIndex = heatIndex; }
+	public void setHeatIndex( double heatIndex ) {this.heatIndex = heatIndex;}
 
-	public void setWindSpeed( double windSpeed ) {this.windSpeed = windSpeed; }
+	public void setWindSpeed( double windSpeed ) {this.windSpeed = windSpeed;}
 
 	public void setWindDirection( double windDirection ) {
 		this.windDirection = windDirection;
 		this.windCardinal = Cardinal.toCardinal( windDirection );
 	}
 
-	public void setRainTotalDaily( double rainTotalDaily ) {this.rainTotalDaily = rainTotalDaily; }
+	public void setRainTotalDaily( double rainTotalDaily ) {this.rainTotalDaily = rainTotalDaily;}
 
-	public void setRainRate( double rainRate ) {this.rainRate = rainRate; }
+	public void setRainRate( double rainRate ) {this.rainRate = rainRate;}
 
 	// Avg, min, max and trend
-	public void setTemperatureTrend( double temperatureTrend ) { this.temperatureTrend = temperatureTrend; }
+	public void setTemperatureTrend( double temperatureTrend ) {this.temperatureTrend = temperatureTrend;}
 
-	public void setHumidityTrend( double humidityTrend ) { this.humidityTrend = humidityTrend; }
+	public void setHumidityTrend( double humidityTrend ) {this.humidityTrend = humidityTrend;}
 
-	public void setPressureTrend( double pressureTrend ) { this.pressureTrend = pressureTrend; }
+	public void setPressureTrend( double pressureTrend ) {this.pressureTrend = pressureTrend;}
 
-	public void setWindSpeedTrend( double windSpeedTrend ) { this.windSpeedTrend = windSpeedTrend; }
+	public void setWindSpeedTrend( double windSpeedTrend ) {this.windSpeedTrend = windSpeedTrend;}
 
-	public void setWindTenMinMax( double windTenMinMax ) {this.windTenMinMax = windTenMinMax; }
+	public void setWindTenMinMax( double windTenMinMax ) {this.windTenMinMax = windTenMinMax;}
 
-	public void setWindTenMinAvg( double windTenMinAvg ) {this.windTenMinAvg = windTenMinAvg; }
+	public void setWindTenMinAvg( double windTenMinAvg ) {this.windTenMinAvg = windTenMinAvg;}
 
-	public void setWindTenMinMin( double windTenMinMin ) {this.windTenMinMin = windTenMinMin; }
+	public void setWindTenMinMin( double windTenMinMin ) {this.windTenMinMin = windTenMinMin;}
 
-	public void setWindTwoMinMax( double windTwoMinMax ) {this.windTwoMinMax = windTwoMinMax; }
+	public void setWindTwoMinMax( double windTwoMinMax ) {this.windTwoMinMax = windTwoMinMax;}
 
-	public void setWindTwoMinAvg( double windTwoMinAvg ) {this.windTwoMinAvg = windTwoMinAvg; }
+	public void setWindTwoMinAvg( double windTwoMinAvg ) {this.windTwoMinAvg = windTwoMinAvg;}
 
-	public void setWindTwoMinMin( double windTwoMinMin ) {this.windTwoMinMin = windTwoMinMin; }
+	public void setWindTwoMinMin( double windTwoMinMin ) {this.windTwoMinMin = windTwoMinMin;}
 
 	public void setWindDirectionTenMinAvg( double windDirectionTenMinAvg ) {
 		this.windDirectionTenMinAvg = windDirectionTenMinAvg;
@@ -267,35 +269,35 @@ public class WeatherStation {
 		this.windCardinalTwoMinAvg = Cardinal.toCardinal( windDirectionTwoMinAvg );
 	}
 
-	public void setSunAltitude( double sunAltitude ) { this.sunAltitude = sunAltitude; }
+	public void setSunAltitude( double sunAltitude ) {this.sunAltitude = sunAltitude;}
 
-	public void setSunIllumination( double sunIllumination ) { this.sunIllumination = sunIllumination; }
+	public void setSunIllumination( double sunIllumination ) {this.sunIllumination = sunIllumination;}
 
-	public void setTemperatureUnit( String temperatureUnit ) { this.temperatureUnit = temperatureUnit; }
+	public void setTemperatureUnit( String temperatureUnit ) {this.temperatureUnit = temperatureUnit;}
 
-	public void setHumidityUnit( String humidityUnit ) { this.humidityUnit = humidityUnit; }
+	public void setHumidityUnit( String humidityUnit ) {this.humidityUnit = humidityUnit;}
 
-	public void setPressureUnit( String pressureUnit ) { this.pressureUnit = pressureUnit; }
+	public void setPressureUnit( String pressureUnit ) {this.pressureUnit = pressureUnit;}
 
-	public void setWindSpeedUnit( String windSpeedUnit ) { this.windSpeedUnit = windSpeedUnit; }
+	public void setWindSpeedUnit( String windSpeedUnit ) {this.windSpeedUnit = windSpeedUnit;}
 
-	public void setWindDirectionUnit( String windDirectionUnit ) { this.windDirectionUnit = windDirectionUnit; }
+	public void setWindDirectionUnit( String windDirectionUnit ) {this.windDirectionUnit = windDirectionUnit;}
 
-	public void setRainUnit( String rainUnit ) { this.rainUnit = rainUnit; }
+	public void setRainUnit( String rainUnit ) {this.rainUnit = rainUnit;}
 
-	public void setRainRateUnit( String rainRateUnit ) { this.rainRateUnit = rainRateUnit; }
+	public void setRainRateUnit( String rainRateUnit ) {this.rainRateUnit = rainRateUnit;}
 
-	public void setTemperatureTrendUnit( String temperatureTrendUnit ) { this.temperatureTrendUnit = temperatureTrendUnit; }
+	public void setTemperatureTrendUnit( String temperatureTrendUnit ) {this.temperatureTrendUnit = temperatureTrendUnit;}
 
-	public void setHumidityTrendUnit( String humidityTrendUnit ) {this.humidityTrendUnit = humidityTrendUnit; }
+	public void setHumidityTrendUnit( String humidityTrendUnit ) {this.humidityTrendUnit = humidityTrendUnit;}
 
-	public void setPressureTrendUnit( String pressureTrendUnit ) { this.pressureTrendUnit = pressureTrendUnit; }
+	public void setPressureTrendUnit( String pressureTrendUnit ) {this.pressureTrendUnit = pressureTrendUnit;}
 
-	public void setWindSpeedTrendUnit( String windSpeedTrendUnit ) { this.windSpeedTrendUnit = windSpeedTrendUnit; }
+	public void setWindSpeedTrendUnit( String windSpeedTrendUnit ) {this.windSpeedTrendUnit = windSpeedTrendUnit;}
 
-	public void setSunAltitudeUnit( String sunAltitudeUnit ) { this.sunAltitudeUnit = sunAltitudeUnit; }
+	public void setSunAltitudeUnit( String sunAltitudeUnit ) {this.sunAltitudeUnit = sunAltitudeUnit;}
 
-	public void setSunIlluminationUnit( String sunIlluminationUnit ) { this.sunIlluminationUnit = sunIlluminationUnit; }
+	public void setSunIlluminationUnit( String sunIlluminationUnit ) {this.sunIlluminationUnit = sunIlluminationUnit;}
 
 	public FlightCondition getFlightCondition() {
 		return flightCondition;
@@ -366,9 +368,12 @@ public class WeatherStation {
 	private void updateFlyingConditions() {
 		getFlightCondition().reset();
 
+		Calendar calendar = Calendar.getInstance( TimeZone.getTimeZone( "America/Denver" ) );
+		boolean isPm = calendar.get( Calendar.AM_PM ) == Calendar.PM;
+
 		double temperature = getTemperature();
 		if( temperature >= 100 ) {
-			updateFlightCondition( FlightCondition.Summary.GROUNDED, FlightCondition.Reason.HOT );
+			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.HOT );
 		} else if( temperature < 100 && temperature >= 90 ) {
 			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.HOT );
 		} else if( temperature < 90 && temperature >= 80 ) {
@@ -384,14 +389,14 @@ public class WeatherStation {
 		} else if( temperature < 40 && temperature >= 30 ) {
 			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.COLD );
 		} else if( temperature < 30 ) {
-			updateFlightCondition( FlightCondition.Summary.GROUNDED, FlightCondition.Reason.COLD );
+			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.COLD );
 		}
 
 		double wind = getWindTenMinAvg();
 		double gust = getWindTwoMinMax();
 
 		if( wind >= 20 ) {
-			updateFlightCondition( FlightCondition.Summary.GROUNDED, FlightCondition.Reason.WINDY );
+			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.WINDY );
 		} else if( wind >= 15 ) {
 			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.WINDY );
 		} else if( wind >= 10 ) {
@@ -401,7 +406,7 @@ public class WeatherStation {
 		} // otherwise GREAT
 
 		if( gust >= 30 ) {
-			updateFlightCondition( FlightCondition.Summary.GROUNDED, FlightCondition.Reason.GUSTY );
+			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.GUSTY );
 		} else if( gust >= 20 ) {
 			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.GUSTY );
 		} else if( gust >= 15 ) {
@@ -411,12 +416,13 @@ public class WeatherStation {
 		} // otherwise GREAT
 
 		double sun = getSunAltitude();
+		FlightCondition.Reason twilight = isPm ? FlightCondition.Reason.DUSK : FlightCondition.Reason.DAWN;
 		if( sun <= -5 ) {
-			updateFlightCondition( FlightCondition.Summary.GROUNDED, FlightCondition.Reason.DARK );
+			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.DARK );
 		} else if( sun <= 0 ) {
-			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.TWILIGHT );
+			updateFlightCondition( FlightCondition.Summary.POOR, twilight );
 		} else if( sun <= 5 ) {
-			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.TWILIGHT );
+			updateFlightCondition( FlightCondition.Summary.FAIR, twilight );
 		} // otherwise GREAT
 
 		if( getRainRate() > 0 ) {
@@ -457,8 +463,7 @@ public class WeatherStation {
 	protected boolean canEqual( Object other ) {return other instanceof WeatherStation;}
 
 	public String toString() {
-		return "WeatherStation(id=" + this.getId() + ", name=" + this.getName() + ", timestamp=" + this.getTimestamp() + ", temperature=" + this.getTemperature() + ", pressure=" + this
-			.getPressure() + ", humidity=" + this.getHumidity() + ", dewPoint=" + this.getDewPoint() + ", windChill=" + this.getWindChill() + ", heatIndex=" + this.getHeatIndex() + ", wind=" + this
-			.getWindSpeed() + ", windDirection=" + this.getWindDirection() + ", rainTotalDaily=" + this.getRainTotalDaily() + ", rainRate=" + this.getRainRate() + ")";
+		return "WeatherStation(id=" + this.getId() + ", name=" + this.getName() + ", timestamp=" + this.getTimestamp() + ", temperature=" + this.getTemperature() + ", pressure=" + this.getPressure() + ", humidity=" + this.getHumidity() + ", dewPoint=" + this.getDewPoint() + ", windChill=" + this.getWindChill() + ", heatIndex=" + this.getHeatIndex() + ", wind=" + this.getWindSpeed() + ", windDirection=" + this.getWindDirection() + ", rainTotalDaily=" + this.getRainTotalDaily() + ", rainRate=" + this.getRainRate() + ")";
 	}
+
 }
