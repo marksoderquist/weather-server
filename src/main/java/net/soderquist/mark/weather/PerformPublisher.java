@@ -2,6 +2,7 @@ package net.soderquist.mark.weather;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
@@ -12,16 +13,18 @@ public class PerformPublisher extends HttpPublisher {
 
 	private static final String MEM = "mem";
 
+	@Value( value = "perform.access.key" )
+	private String performAccessKey;
+
 	public int publish( WeatherStation station ) throws IOException {
 		return rest( "GET", generateRequest( station ) ).getCode();
 	}
 
 	String generateRequest( WeatherStation station ) {
 		String stationId = "39";
-		String accessKey = "88af534d-aa11-4d3f-ab96-481df649e273";
 		StringBuilder builder = new StringBuilder( "https://perform.southbranchcontrols.com" );
 		builder.append( "/api/stations/" ).append( stationId ).append( "/data/feed" );
-		builder.append( "?accesskey=" ).append( accessKey );
+		builder.append( "?accesskey=" ).append( performAccessKey );
 		builder.append( generateData( station ) );
 		return builder.toString();
 	}
