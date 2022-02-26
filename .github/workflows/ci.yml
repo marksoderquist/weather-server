@@ -54,7 +54,7 @@ jobs:
 
       - name: Build Server
         run: |
-           mvn -B -U clean deploy
+           mvn -B -U clean package
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
