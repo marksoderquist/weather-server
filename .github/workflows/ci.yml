@@ -6,6 +6,7 @@ env:
   JAVA_VERSION: "17"
   MVS_GPG_PASSWORD: ${{ secrets.MVS_GPG_PASSWORD }}
   MVS_REPO_USERNAME: ${{ secrets.MVS_REPO_USERNAME }}
+  MAVEN_PARMS: "-B -U -V --settings .github/settings.xml --file pom.xml"
   WEBSITE_DEPLOY_PATH: '/opt/sod/dalton/server'
 
 jobs:
