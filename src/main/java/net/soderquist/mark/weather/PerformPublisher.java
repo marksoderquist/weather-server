@@ -3,17 +3,19 @@ package net.soderquist.mark.weather;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 
+@Component
 public class PerformPublisher extends HttpPublisher {
 
 	private final Logger log = LoggerFactory.getLogger( MethodHandles.lookup().lookupClass() );
 
 	private static final String MEM = "mem";
 
-	@Value( value = "perform.access.key" )
+	@Value( value = "${perform.access.key}" )
 	private String performAccessKey;
 
 	public int publish( WeatherStation station ) throws IOException {

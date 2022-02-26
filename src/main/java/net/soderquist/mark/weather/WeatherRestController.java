@@ -16,15 +16,15 @@ public class WeatherRestController {
 
 	private final Logger log = LoggerFactory.getLogger( MethodHandles.lookup().lookupClass() );
 
+	private final PerformPublisher publisher;
+
 	@Value( "${spring.application.version:unknown}" )
 	private String version;
 
 	private Map<String, WeatherStation> stations;
 
-	private PerformPublisher publisher;
-
-	public WeatherRestController() {
-		publisher = new PerformPublisher();
+	public WeatherRestController(PerformPublisher performPublisher) {
+		this.publisher = performPublisher;
 	}
 
 	public String getVersion() {
