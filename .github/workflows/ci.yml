@@ -4,8 +4,8 @@ on: [ push ]
 
 env:
   JAVA_VERSION: "17"
-  DSR_GPG_PASSWORD: ${{ secrets.DSR_GPG_PASSWORD }}
-  DSR_REPO_USERNAME: ${{ secrets.DSR_REPO_USERNAME }}
+  MVS_GPG_PASSWORD: ${{ secrets.MVS_GPG_PASSWORD }}
+  MVS_REPO_USERNAME: ${{ secrets.MVS_REPO_USERNAME }}
   WEBSITE_DEPLOY_PATH: '/opt/sod/dalton/server'
 
 jobs:
