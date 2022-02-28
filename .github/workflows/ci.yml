@@ -52,9 +52,10 @@ jobs:
         with:
           languages: ${{ matrix.language }}
 
+# FIXME Why does deploy not have permission to the maven repo?
       - name: Build Server
         run: |
-           mvn -B -U clean package
+          mvn -B -U clean deploy
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
