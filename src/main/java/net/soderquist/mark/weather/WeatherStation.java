@@ -37,6 +37,8 @@ public class WeatherStation {
 
 	private double heatIndex;
 
+	private double feelsLike;
+
 	private double windSpeed;
 
 	private double windDirection;
@@ -138,6 +140,8 @@ public class WeatherStation {
 
 	public double getHeatIndex() {return this.heatIndex;}
 
+	public double getFeelsLike() {return this.feelsLike;}
+
 	public double getWindDirection() {return this.windDirection;}
 
 	public Cardinal getWindCardinal() {return this.windCardinal;}
@@ -226,6 +230,8 @@ public class WeatherStation {
 	public void setWindChill( double windChill ) {this.windChill = windChill;}
 
 	public void setHeatIndex( double heatIndex ) {this.heatIndex = heatIndex;}
+
+	public void setFeelsLike( double feelsLike ) {this.feelsLike = feelsLike;}
 
 	public void setWindSpeed( double windSpeed ) {this.windSpeed = windSpeed;}
 
@@ -324,6 +330,7 @@ public class WeatherStation {
 		this.setDewPoint( that.getDewPoint() );
 		this.setWindChill( that.getWindChill() );
 		this.setHeatIndex( that.getHeatIndex() );
+		this.setFeelsLike( calcFeelsLike( that.getTemperature(), that.getWindSpeed(), that.getHumidity() ) );
 		this.setWindSpeed( that.getWindSpeed() );
 		this.setWindDirection( that.getWindDirection() );
 		this.setRainTotalDaily( that.getRainTotalDaily() );
@@ -363,6 +370,37 @@ public class WeatherStation {
 		this.setSunIllumination( sunAltitude <= 0 ? 0 : Math.sin( Math.toRadians( sunAltitude ) ) * 100 );
 
 		updateFlyingConditions();
+	}
+
+	private double calcFeelsLike( double temperature, double wind, double humidity ) {
+		if( temperature < 50 ) return calculateWindChill( temperature, wind );
+		if( temperature > 80 ) return calculateHeatIndex( temperature, humidity );
+		return temperature;
+	}
+
+	public static double calculateWindChill( double t, double w ) {
+		if( w <= 3 || t >= 50 ) return t;
+
+		return 35.74f + 0.6215f * t - 35.75f * Math.pow( w, 0.16 ) + 0.4275f * t * Math.pow( w, 0.16 );
+	}
+
+	public static double calculateHeatIndex( double t, double h ) {
+		if( t < 80 || h < 40 ) return t;
+
+		double c1 = -42.379;
+		double c2 = 2.04901523;
+		double c3 = 10.14333127;
+		double c4 = -0.22475541;
+		double c5 = -6.83783e-3;
+		double c6 = -5.481717e-10;
+		double c7 = 1.22874e-3;
+		double c8 = 8.5282e-4;
+		double c9 = -1.99e-6;
+
+		double t2 = t * t;
+		double h2 = h * h;
+
+		return c1 + c2 * t + c3 * h + c4 * t * h + c5 * t2 + c6 * h2 + c7 * t2 * h + c8 * t * h2 + c9 * t2 * h2;
 	}
 
 	private void updateFlyingConditions() {
