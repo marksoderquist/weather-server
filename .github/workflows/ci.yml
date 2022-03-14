@@ -52,7 +52,11 @@ jobs:
         with:
           languages: ${{ matrix.language }}
 
-      - name: Build Server
+      - name: Compile
+        run: |
+          mvn ${{env.MAVEN_PARMS}} compile
+
+      - name: Unit Tests
         run: |
           mvn ${{env.MAVEN_PARMS}} test
 
