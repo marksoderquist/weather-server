@@ -52,13 +52,16 @@ jobs:
         with:
           languages: ${{ matrix.language }}
 
-# FIXME Why does deploy not have permission to the maven repo?
       - name: Build Server
         run: |
-          mvn -B -U clean deploy
+          mvn ${{env.MAVEN_PARMS}} test
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
+
+      - name: Deploy Arifacts
+        run: |
+          mvn ${{env.MAVEN_PARMS}} deploy -Dmaven.test.skip=true
 
       - name: Copy Server JAR
         run: scp -B target/*.jar travis@soderquist.net:/opt/sod/store/latest/dalton
