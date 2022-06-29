@@ -392,7 +392,7 @@ public class WeatherStation {
 		double c3 = 10.14333127;
 		double c4 = -0.22475541;
 		double c5 = -6.83783e-3;
-		double c6 = -5.481717e-10;
+		double c6 = -5.481717e-2;
 		double c7 = 1.22874e-3;
 		double c8 = 8.5282e-4;
 		double c9 = -1.99e-6;
