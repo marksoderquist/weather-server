@@ -392,7 +392,7 @@ public class WeatherStation {
 		double c3 = 10.14333127;
 		double c4 = -0.22475541;
 		double c5 = -6.83783e-3;
-		double c6 = -5.481717e-10;
+		double c6 = -5.481717e-2;
 		double c7 = 1.22874e-3;
 		double c8 = 8.5282e-4;
 		double c9 = -1.99e-6;
@@ -400,7 +400,8 @@ public class WeatherStation {
 		double t2 = t * t;
 		double h2 = h * h;
 
-		return c1 + c2 * t + c3 * h + c4 * t * h + c5 * t2 + c6 * h2 + c7 * t2 * h + c8 * t * h2 + c9 * t2 * h2;
+		double heatIndex = c1 + c2 * t + c3 * h + c4 * t * h + c5 * t2 + c6 * h2 + c7 * t2 * h + c8 * t * h2 + c9 * t2 * h2;
+		return Math.max( t, heatIndex );
 	}
 
 	private void updateFlyingConditions() {
