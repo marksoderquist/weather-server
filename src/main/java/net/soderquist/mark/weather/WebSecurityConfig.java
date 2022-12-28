@@ -1,6 +1,5 @@
 package net.soderquist.mark.weather;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +10,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import java.lang.invoke.MethodHandles;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -28,6 +24,7 @@ public class WebSecurityConfig {
 		http.csrf().ignoringRequestMatchers( "/station" );
 		http.authorizeHttpRequests().requestMatchers( HttpMethod.GET, "/station" ).permitAll();
 		http.authorizeHttpRequests().requestMatchers( HttpMethod.PUT, "/station" ).authenticated().and().httpBasic();
+		log.atInfo().log("CSRF ignoring /station");
 		return http.build();
 	}
 

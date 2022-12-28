@@ -1,6 +1,5 @@
 package net.soderquist.mark.weather;
 
-import jakarta.annotation.security.PermitAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
