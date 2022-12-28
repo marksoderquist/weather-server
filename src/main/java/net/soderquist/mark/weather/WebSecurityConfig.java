@@ -27,7 +27,7 @@ public class WebSecurityConfig {
 	protected SecurityFilterChain configure( HttpSecurity http ) throws Exception {
 		http.csrf().ignoringRequestMatchers( "/station" );
 		http.authorizeHttpRequests().requestMatchers( HttpMethod.GET, "/station" ).permitAll();
-		http.authorizeHttpRequests().requestMatchers( HttpMethod.PUT, "/station" ).authenticated();
+		http.authorizeHttpRequests().requestMatchers( HttpMethod.PUT, "/station" ).authenticated().and().httpBasic();
 		return http.build();
 	}
 
