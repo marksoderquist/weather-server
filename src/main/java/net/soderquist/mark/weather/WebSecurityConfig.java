@@ -25,8 +25,9 @@ public class WebSecurityConfig {
 
 	@Bean
 	protected SecurityFilterChain configure( HttpSecurity http ) throws Exception {
-		http.csrf().ignoringRequestMatchers( request -> request.getMethod().equals( "PUT" ) && request.getServletPath().equals( "/station" ) );
-		http.authorizeHttpRequests().requestMatchers( HttpMethod.GET, "/station" ).permitAll().requestMatchers( HttpMethod.PUT, "/station" ).authenticated().and().httpBasic( withDefaults() );
+		http.csrf().ignoringRequestMatchers( "/station" );
+		http.authorizeHttpRequests().requestMatchers( HttpMethod.GET, "/station" ).permitAll();
+		http.authorizeHttpRequests().requestMatchers( HttpMethod.PUT, "/station" ).authenticated();
 		return http.build();
 	}
 
