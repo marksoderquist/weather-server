@@ -1,5 +1,6 @@
 package net.soderquist.mark.weather;
 
+import jakarta.annotation.security.PermitAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +36,7 @@ public class WeatherRestController {
 		this.version = version;
 	}
 
-	@CrossOrigin
+	@CrossOrigin(origins = "*")
 	@RequestMapping( method = RequestMethod.GET, path = "/station" )
 	public @ResponseBody
 	WeatherStation getStation( @RequestParam( value = "id" ) String id ) {

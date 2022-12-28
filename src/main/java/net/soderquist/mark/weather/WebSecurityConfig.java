@@ -17,8 +17,7 @@ public class WebSecurityConfig {
 
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-            .authorizeHttpRequests()
+        http.authorizeHttpRequests()
             .requestMatchers(HttpMethod.GET, "/station").permitAll()
             .requestMatchers(HttpMethod.PUT, "/station").authenticated()
             .and().httpBasic(withDefaults());
