@@ -330,7 +330,7 @@ public class WeatherStation {
 		this.setDewPoint( that.getDewPoint() );
 		this.setWindChill( that.getWindChill() );
 		this.setHeatIndex( that.getHeatIndex() );
-		this.setFeelsLike( calcFeelsLike( that.getTemperature(), that.getWindSpeed(), that.getHumidity() ) );
+		this.setFeelsLike( calcFeelsLike( that.getTemperature(), that.getWindTenMinAvg(), that.getHumidity() ) );
 		this.setWindSpeed( that.getWindSpeed() );
 		this.setWindDirection( that.getWindDirection() );
 		this.setRainTotalDaily( that.getRainTotalDaily() );
