@@ -35,7 +35,7 @@ public class WeatherRestController {
 		this.version = version;
 	}
 
-	@CrossOrigin
+	@CrossOrigin(origins = "*")
 	@RequestMapping( method = RequestMethod.GET, path = "/station" )
 	public @ResponseBody
 	WeatherStation getStation( @RequestParam( value = "id" ) String id ) {
