@@ -105,7 +105,7 @@ public class WeatherStation {
 	// Unit values.
 	private String temperatureUnit = DEGREE + "F";
 
-	private String temperatureUnitC = DEGREE + "C";
+	private String temperatureUnitMetric = DEGREE + "C";
 
 	private String humidityUnit = "%";
 
@@ -225,7 +225,7 @@ public class WeatherStation {
 
 	public String getTemperatureUnit() {return temperatureUnit;}
 
-	public String getTemperatureUnitC() {return temperatureUnitC;}
+	public String getTemperatureUnitMetric() {return temperatureUnitMetric;}
 
 	public String getHumidityUnit() {return humidityUnit;}
 
@@ -335,7 +335,7 @@ public class WeatherStation {
 
 	public void setTemperatureUnit( String temperatureUnit ) {this.temperatureUnit = temperatureUnit;}
 
-	public void setTemperatureUnitC( String temperatureUnitC ) {this.temperatureUnitC = temperatureUnitC;}
+	public void setTemperatureUnitMetric( String temperatureUnitMetric ) {this.temperatureUnitMetric = temperatureUnitMetric;}
 
 	public void setHumidityUnit( String humidityUnit ) {this.humidityUnit = humidityUnit;}
 
@@ -417,7 +417,7 @@ public class WeatherStation {
 		this.setWindDirectionTwoMinAvg( that.getWindDirectionTwoMinAvg() );
 
 		this.setTemperatureUnit( that.getTemperatureUnit() );
-		this.setTemperatureUnitC( that.getTemperatureUnitC() );
+		this.setTemperatureUnitMetric( that.getTemperatureUnitMetric() );
 		this.setHumidityUnit( that.getHumidityUnit() );
 		this.setPressureUnit( that.getPressureUnit() );
 		this.setWindSpeedUnit( that.getWindSpeedUnit() );
