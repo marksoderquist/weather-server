@@ -10,6 +10,14 @@ import java.util.TimeZone;
 @SuppressWarnings( "WeakerAccess" )
 public class WeatherStation {
 
+	public static final double DEGREES_C_PER_DEGREES_F = 5.0 / 9.0;
+
+	public static final double DEGREES_F_PER_DEGREES_C = 9.0 / 5.0;
+
+	public static final double KPH_PER_MPH = 1.609344;
+
+	public static final double MPH_PER_KPH = 1.0 / 1.609344;
+
 	private static final String DEGREE = "\u00B0";
 
 	private String id;
@@ -27,19 +35,31 @@ public class WeatherStation {
 	// Basic weather measures
 	private double temperature;
 
+	private double temperatureMetric;
+
 	private double pressure;
 
 	private double humidity;
 
 	private double dewPoint;
 
+	private double dewPointMetric;
+
 	private double windChill;
+
+	private double windChillMetric;
 
 	private double heatIndex;
 
+	private double heatIndexMetric;
+
 	private double feelsLike;
 
+	private double feelsLikeMetric;
+
 	private double windSpeed;
+
+	private double windSpeedMetric;
 
 	private double windDirection;
 
@@ -85,15 +105,21 @@ public class WeatherStation {
 	// Unit values.
 	private String temperatureUnit = DEGREE + "F";
 
+	private String temperatureUnitC = DEGREE + "C";
+
 	private String humidityUnit = "%";
 
 	private String pressureUnit = "in";
 
 	private String windSpeedUnit = "mph";
 
+	private String windSpeedUnitMetric = "kph";
+
 	private String windDirectionUnit = DEGREE;
 
 	private String rainUnit = "in";
+
+	private String rainUnitMetric = "mm";
 
 	private String rainRateUnit = rainUnit + "/hr";
 
@@ -130,23 +156,35 @@ public class WeatherStation {
 	// Weather basics
 	public double getTemperature() {return this.temperature;}
 
+	public double getTemperatureMetric() {return this.temperatureMetric;}
+
 	public double getPressure() {return this.pressure;}
 
 	public double getHumidity() {return this.humidity;}
 
 	public double getDewPoint() {return this.dewPoint;}
 
+	public double getDewPointMetric() {return this.dewPointMetric;}
+
 	public double getWindChill() {return this.windChill;}
+
+	public double getWindChillMetric() {return this.windChillMetric;}
 
 	public double getHeatIndex() {return this.heatIndex;}
 
+	public double getHeatIndexMetric() {return this.heatIndexMetric;}
+
 	public double getFeelsLike() {return this.feelsLike;}
+
+	public double getFeelsLikeMetric() {return this.feelsLikeMetric;}
 
 	public double getWindDirection() {return this.windDirection;}
 
 	public Cardinal getWindCardinal() {return this.windCardinal;}
 
 	public double getWindSpeed() {return this.windSpeed;}
+
+	public double getWindSpeedMetric() {return this.windSpeedMetric;}
 
 	public double getRainTotalDaily() {return this.rainTotalDaily;}
 
@@ -187,11 +225,15 @@ public class WeatherStation {
 
 	public String getTemperatureUnit() {return temperatureUnit;}
 
+	public String getTemperatureUnitC() {return temperatureUnitC;}
+
 	public String getHumidityUnit() {return humidityUnit;}
 
 	public String getPressureUnit() {return pressureUnit;}
 
 	public String getWindSpeedUnit() {return windSpeedUnit;}
+
+	public String getWindSpeedUnitMetric() {return windSpeedUnitMetric;}
 
 	public String getWindDirectionUnit() {return windDirectionUnit;}
 
@@ -221,19 +263,31 @@ public class WeatherStation {
 	// Weather basics
 	public void setTemperature( double temperature ) {this.temperature = temperature;}
 
+	public void setTemperatureMetric( double temperatureMetric ) {this.temperatureMetric = temperatureMetric;}
+
 	public void setPressure( double pressure ) {this.pressure = pressure;}
 
 	public void setHumidity( double humidity ) {this.humidity = humidity;}
 
 	public void setDewPoint( double dewPoint ) {this.dewPoint = dewPoint;}
 
+	public void setDewPointMetric( double dewPointMetric ) {this.dewPointMetric = dewPointMetric;}
+
 	public void setWindChill( double windChill ) {this.windChill = windChill;}
+
+	public void setWindChillMetric( double windChillMetric ) {this.windChillMetric = windChillMetric;}
 
 	public void setHeatIndex( double heatIndex ) {this.heatIndex = heatIndex;}
 
+	public void setHeatIndexMetric( double heatIndexMetric ) {this.heatIndexMetric = heatIndexMetric;}
+
 	public void setFeelsLike( double feelsLike ) {this.feelsLike = feelsLike;}
 
+	public void setFeelsLikeMetric( double feelsLikeMetric ) {this.feelsLikeMetric = feelsLikeMetric;}
+
 	public void setWindSpeed( double windSpeed ) {this.windSpeed = windSpeed;}
+
+	public void setWindSpeedMetric( double windSpeedMetric ) {this.windSpeedMetric = windSpeedMetric;}
 
 	public void setWindDirection( double windDirection ) {
 		this.windDirection = windDirection;
@@ -281,11 +335,15 @@ public class WeatherStation {
 
 	public void setTemperatureUnit( String temperatureUnit ) {this.temperatureUnit = temperatureUnit;}
 
+	public void setTemperatureUnitC( String temperatureUnitC ) {this.temperatureUnitC = temperatureUnitC;}
+
 	public void setHumidityUnit( String humidityUnit ) {this.humidityUnit = humidityUnit;}
 
 	public void setPressureUnit( String pressureUnit ) {this.pressureUnit = pressureUnit;}
 
 	public void setWindSpeedUnit( String windSpeedUnit ) {this.windSpeedUnit = windSpeedUnit;}
+
+	public void setWindSpeedUnitMetric( String windSpeedUnitMetric ) {this.windSpeedUnitMetric = windSpeedUnitMetric;}
 
 	public void setWindDirectionUnit( String windDirectionUnit ) {this.windDirectionUnit = windDirectionUnit;}
 
@@ -324,14 +382,22 @@ public class WeatherStation {
 	public void copyFrom( WeatherStation that ) {
 		this.setTimestamp( that.getTimestamp() );
 
+		double calcFeelsLike = calcFeelsLike( that.getTemperature(), that.getWindTenMinAvg(), that.getHumidity() );
+
 		this.setTemperature( that.getTemperature() );
+		this.setTemperatureMetric( toDegreesC( that.getTemperature() ) );
 		this.setPressure( that.getPressure() );
 		this.setHumidity( that.getHumidity() );
 		this.setDewPoint( that.getDewPoint() );
+		this.setDewPointMetric( toDegreesC( that.getDewPoint() ) );
 		this.setWindChill( that.getWindChill() );
+		this.setWindChillMetric( toDegreesC( that.getWindChill() ) );
 		this.setHeatIndex( that.getHeatIndex() );
-		this.setFeelsLike( calcFeelsLike( that.getTemperature(), that.getWindTenMinAvg(), that.getHumidity() ) );
+		this.setHeatIndexMetric( toDegreesC( that.getHeatIndex() ) );
+		this.setFeelsLike( calcFeelsLike );
+		this.setFeelsLikeMetric( toDegreesC( calcFeelsLike ) );
 		this.setWindSpeed( that.getWindSpeed() );
+		this.setWindSpeedMetric( toKph( that.getWindSpeed() ) );
 		this.setWindDirection( that.getWindDirection() );
 		this.setRainTotalDaily( that.getRainTotalDaily() );
 		this.setRainRate( that.getRainRate() );
@@ -351,9 +417,11 @@ public class WeatherStation {
 		this.setWindDirectionTwoMinAvg( that.getWindDirectionTwoMinAvg() );
 
 		this.setTemperatureUnit( that.getTemperatureUnit() );
+		this.setTemperatureUnitC( that.getTemperatureUnitC() );
 		this.setHumidityUnit( that.getHumidityUnit() );
 		this.setPressureUnit( that.getPressureUnit() );
 		this.setWindSpeedUnit( that.getWindSpeedUnit() );
+		this.setWindSpeedUnitMetric( that.getWindSpeedUnitMetric() );
 		this.setWindDirectionUnit( that.getWindDirectionUnit() );
 		this.setRainUnit( that.getRainUnit() );
 		this.setRainRateUnit( that.getRainRateUnit() );
@@ -376,6 +444,22 @@ public class WeatherStation {
 		if( temperature < 50 ) return calculateWindChill( temperature, wind );
 		if( temperature > 80 ) return calculateHeatIndex( temperature, humidity );
 		return temperature;
+	}
+
+	public static double toDegreesC( double degreesF ) {
+		return (degreesF - 32) * DEGREES_C_PER_DEGREES_F;
+	}
+
+	public static double toDegreesF( double degreesC ) {
+		return degreesC * DEGREES_F_PER_DEGREES_C + 32;
+	}
+
+	public static double toKph( double mph ) {
+		return mph * KPH_PER_MPH;
+	}
+
+	public static double toMph( double kph ) {
+		return kph * MPH_PER_KPH;
 	}
 
 	public static double calculateWindChill( double t, double w ) {
