@@ -26,7 +26,11 @@ public class WebSecurityConfig {
 	protected SecurityFilterChain configure( HttpSecurity http ) throws Exception {
 		return http
 			.csrf( requests -> requests.ignoringRequestMatchers( new AntPathRequestMatcher( STATION_PATH ) ) )
-			.authorizeHttpRequests( requests -> requests.requestMatchers( HttpMethod.GET, STATION_PATH ).permitAll().requestMatchers( HttpMethod.PUT, STATION_PATH ).authenticated() )
+			.authorizeHttpRequests( requests -> requests
+				.requestMatchers( AntPathRequestMatcher.antMatcher( HttpMethod.GET, STATION_PATH ) )
+				.permitAll()
+				.requestMatchers( AntPathRequestMatcher.antMatcher( HttpMethod.PUT, STATION_PATH ) )
+				.authenticated() )
 			.httpBasic( requests -> {} )
 			.build();
 	}
