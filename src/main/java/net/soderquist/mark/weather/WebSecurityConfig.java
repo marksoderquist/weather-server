@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.lang.invoke.MethodHandles;
 
@@ -17,15 +18,17 @@ import java.lang.invoke.MethodHandles;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
+	public static final String STATION_PATH = "/station";
+
 	private final Logger log = LoggerFactory.getLogger( MethodHandles.lookup().lookupClass() );
 
 	@Bean
 	protected SecurityFilterChain configure( HttpSecurity http ) throws Exception {
-		http.csrf().ignoringRequestMatchers( "/station" );
-		http.authorizeHttpRequests().requestMatchers( HttpMethod.GET, "/station" ).permitAll();
-		http.authorizeHttpRequests().requestMatchers( HttpMethod.PUT, "/station" ).authenticated().and().httpBasic();
-		log.atInfo().log("CSRF ignoring /station");
-		return http.build();
+		return http
+			.csrf( requests -> requests.ignoringRequestMatchers( new AntPathRequestMatcher( STATION_PATH ) ) )
+			.authorizeHttpRequests( requests -> requests.requestMatchers( HttpMethod.GET, STATION_PATH ).permitAll().requestMatchers( HttpMethod.PUT, STATION_PATH ).authenticated() )
+			.httpBasic( requests -> {} )
+			.build();
 	}
 
 	@Autowired
