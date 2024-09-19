@@ -32,9 +32,12 @@ public class WeatherStation {
 
 	private long timestamp;
 
+	private UnitSystem unitSystem;
+
 	// Basic weather measures
 	private double temperature;
 
+	@Deprecated
 	private double temperatureMetric;
 
 	private double pressure;
@@ -43,22 +46,27 @@ public class WeatherStation {
 
 	private double dewPoint;
 
+	@Deprecated
 	private double dewPointMetric;
 
 	private double windChill;
 
+	@Deprecated
 	private double windChillMetric;
 
 	private double heatIndex;
 
+	@Deprecated
 	private double heatIndexMetric;
 
 	private double feelsLike;
 
+	@Deprecated
 	private double feelsLikeMetric;
 
 	private double windSpeed;
 
+	@Deprecated
 	private double windSpeedMetric;
 
 	private double windDirection;
@@ -105,6 +113,7 @@ public class WeatherStation {
 	// Unit values.
 	private String temperatureUnit = DEGREE + "F";
 
+	@Deprecated
 	private String temperatureUnitMetric = DEGREE + "C";
 
 	private String humidityUnit = "%";
@@ -113,12 +122,14 @@ public class WeatherStation {
 
 	private String windSpeedUnit = "mph";
 
+	@Deprecated
 	private String windSpeedUnitMetric = "kph";
 
 	private String windDirectionUnit = DEGREE;
 
 	private String rainUnit = "in";
 
+	@Deprecated
 	private String rainUnitMetric = "mm";
 
 	private String rainRateUnit = rainUnit + "/hr";
@@ -137,13 +148,12 @@ public class WeatherStation {
 
 	private FlightCondition flightCondition;
 
-	public WeatherStation() {}
-
-	public WeatherStation( String id, String name, double latitude, double longitude ) {
+	public WeatherStation( String id, String name, double latitude, double longitude, UnitSystem unitSystem ) {
 		this.id = id;
 		this.name = name;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.unitSystem = unitSystem;
 		this.flightCondition = new FlightCondition();
 	}
 
