@@ -35,9 +35,9 @@ public class WebSecurityConfig {
 			.build();
 	}
 
-//	@Autowired
-//	public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
-//		auth.inMemoryAuthentication().withUser( "dalton" ).password( "{noop}Do5JpMo8z5hSxUi4" ).roles( "USER" );
-//	}
+	@Autowired
+	public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
+		auth.inMemoryAuthentication().withUser( "dalton" ).password( "{noop}Do5JpMo8z5hSxUi4" ).roles( "USER" );
+	}
 
 }
