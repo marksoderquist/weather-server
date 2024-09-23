@@ -11,6 +11,16 @@ public enum UnitSystem {
 
 	IMPERIAL( "Imperial", new FahrenheitUnit(), new InchMercuryUnit(), new MileUnit(), new MilePerHourUnit(), new DegreeUnit(), new InchUnit(), new PercentUnit() );
 
+	private static final String DEGREE = "°";
+
+	private static final double DEGREES_C_PER_DEGREES_F = 5.0 / 9.0;
+
+	private static final double DEGREES_F_PER_DEGREES_C = 9.0 / 5.0;
+
+	private static final double KPH_PER_MPH = 1.609344;
+
+	private static final double MPH_PER_KPH = 1.0 / 1.609344;
+
 	private final String name;
 
 	private final TemperatureUnit temperatureUnit;
@@ -98,7 +108,7 @@ public enum UnitSystem {
 
 		@Override
 		public String getSymbol() {
-			return "C";
+			return DEGREE + "C";
 		}
 
 		@Override
@@ -130,7 +140,7 @@ public enum UnitSystem {
 
 		@Override
 		public String getSymbol() {
-			return "F";
+			return DEGREE + "F";
 		}
 
 		@Override
@@ -306,7 +316,7 @@ public enum UnitSystem {
 
 		@Override
 		public String getSymbol() {
-			return "°";
+			return DEGREE;
 		}
 
 		@Override

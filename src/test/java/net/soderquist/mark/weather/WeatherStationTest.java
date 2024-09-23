@@ -34,6 +34,8 @@ public class WeatherStationTest {
 		//source.setDewPointTrend( 0.3 );
 		source.setWindSpeedTrend( 0.4 );
 
+		// wind
+
 		// when
 		WeatherStation target = new WeatherStation( "bluewing-m", "Bluewing", 40.503923, -112.013373, UnitSystem.METRIC );
 		target.copyFrom( source );
@@ -57,6 +59,9 @@ public class WeatherStationTest {
 		assertThat( target.getHumidityTrend() ).isEqualTo( 0.2, Offset.offset( 0.0 ) );
 		//assertThat( target.getDewPointTrend() ).isEqualTo( 0.3, Offset.offset( 0.1 ) );
 		assertThat( target.getWindSpeedTrend() ).isEqualTo( 0.6, Offset.offset( 0.1 ) );
+
+		// wind
+
 	}
 
 	@ParameterizedTest
