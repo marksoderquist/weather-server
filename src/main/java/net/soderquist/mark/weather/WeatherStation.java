@@ -435,10 +435,10 @@ public class WeatherStation {
 		this.setRainRate( convertRainfall( that, that.getRainRate() ) );
 
 		// trends
-		this.setTemperatureTrend( that.getTemperatureTrend() );
-		this.setHumidityTrend( that.getHumidityTrend() );
-		this.setPressureTrend( that.getPressureTrend() );
-		this.setWindSpeedTrend( that.getWindSpeedTrend() );
+		this.setTemperatureTrend( convertTemperatureRate( that, that.getTemperatureTrend() ) );
+		this.setHumidityTrend( convertHumidity( that, that.getHumidityTrend() ) );
+		this.setPressureTrend( convertPressure( that, that.getPressureTrend() ) );
+		this.setWindSpeedTrend( convertSpeed( that, that.getWindSpeedTrend() ) );
 
 		this.setWindTenMinMax( that.getWindTenMinMax() );
 		this.setWindTenMinAvg( that.getWindTenMinAvg() );
@@ -477,6 +477,10 @@ public class WeatherStation {
 		return that.getUnitSystem().getTemperatureUnit().convert( temperature, this.getUnitSystem().getTemperatureUnit() );
 	}
 
+	private double convertTemperatureRate( WeatherStation that, double temperature ) {
+		return that.getUnitSystem().getTemperatureUnit().convertRate( temperature, this.getUnitSystem().getTemperatureUnit() );
+	}
+
 	private double convertPressure( WeatherStation that, double pressure ) {
 		return that.getUnitSystem().getPressureUnit().convert( pressure, this.getUnitSystem().getPressureUnit() );
 	}
@@ -503,21 +507,21 @@ public class WeatherStation {
 		return temperature;
 	}
 
-//	public static double toDegreesC( double degreesF ) {
-//		return (degreesF - 32) * DEGREES_C_PER_DEGREES_F;
-//	}
-//
-//	public static double toDegreesF( double degreesC ) {
-//		return degreesC * DEGREES_F_PER_DEGREES_C + 32;
-//	}
-//
-//	public static double toKph( double mph ) {
-//		return mph * KPH_PER_MPH;
-//	}
-//
-//	public static double toMph( double kph ) {
-//		return kph * MPH_PER_KPH;
-//	}
+	//	public static double toDegreesC( double degreesF ) {
+	//		return (degreesF - 32) * DEGREES_C_PER_DEGREES_F;
+	//	}
+	//
+	//	public static double toDegreesF( double degreesC ) {
+	//		return degreesC * DEGREES_F_PER_DEGREES_C + 32;
+	//	}
+	//
+	//	public static double toKph( double mph ) {
+	//		return mph * KPH_PER_MPH;
+	//	}
+	//
+	//	public static double toMph( double kph ) {
+	//		return kph * MPH_PER_KPH;
+	//	}
 
 	public static double calculateWindChill( double t, double w ) {
 		if( w <= 3 || t >= 50 ) return t;

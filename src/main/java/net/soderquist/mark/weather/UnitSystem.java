@@ -65,7 +65,17 @@ public enum UnitSystem {
 
 	}
 
-	public interface TemperatureUnit extends Unit<TemperatureUnit> {}
+	public interface TemperatureUnit extends Unit<TemperatureUnit> {
+
+		double toRate( double value );
+
+		double fromRate( double value );
+
+		default double convertRate( double value, TemperatureUnit target ) {
+			return target.toRate( fromRate( value ) );
+		}
+
+	}
 
 	public interface PressureUnit extends Unit<PressureUnit> {}
 
@@ -101,6 +111,14 @@ public enum UnitSystem {
 			return value;
 		}
 
+		public double toRate( double value ) {
+			return value;
+		}
+
+		public double fromRate( double value ) {
+			return value;
+		}
+
 	}
 
 	public static class FahrenheitUnit implements TemperatureUnit {
@@ -123,6 +141,14 @@ public enum UnitSystem {
 		@Override
 		public double from( double value ) {
 			return (value - 32) * 5 / 9;
+		}
+
+		public double toRate( double value ) {
+			return 9.0 * value / 5.0;
+		}
+
+		public double fromRate( double value ) {
+			return 5.0 * value / 9.0;
 		}
 
 	}

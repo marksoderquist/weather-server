@@ -15,7 +15,7 @@ public class WeatherStationTest {
 	@Test
 	void testCopyFrom() {
 		// given
-		WeatherStation source = new WeatherStation("bluewing-i", "Bluewing", 40.503923, -112.013373, UnitSystem.IMPERIAL);
+		WeatherStation source = new WeatherStation( "bluewing-i", "Bluewing", 40.503923, -112.013373, UnitSystem.IMPERIAL );
 		source.setTemperature( 80 );
 		source.setPressure( 30.05 );
 		source.setHumidity( 50 );
@@ -28,8 +28,14 @@ public class WeatherStationTest {
 		source.setRainTotalDaily( 0.3 );
 		source.setRainRate( 0.7 );
 
+		source.setTemperatureTrend( -0.4 );
+		source.setPressureTrend( 0.1 );
+		source.setHumidityTrend( 0.2 );
+		//source.setDewPointTrend( 0.3 );
+		source.setWindSpeedTrend( 0.4 );
+
 		// when
-		WeatherStation target = new WeatherStation("bluewing-m", "Bluewing", 40.503923, -112.013373, UnitSystem.METRIC);
+		WeatherStation target = new WeatherStation( "bluewing-m", "Bluewing", 40.503923, -112.013373, UnitSystem.METRIC );
 		target.copyFrom( source );
 
 		// then
@@ -46,6 +52,11 @@ public class WeatherStationTest {
 		assertThat( target.getRainRate() ).isEqualTo( 17.8, Offset.offset( 0.1 ) );
 
 		// trends
+		assertThat( target.getTemperatureTrend() ).isEqualTo( -0.2, Offset.offset( 0.1 ) );
+		assertThat( target.getPressureTrend() ).isEqualTo( 3.39, Offset.offset( 0.01 ) );
+		assertThat( target.getHumidityTrend() ).isEqualTo( 0.2, Offset.offset( 0.0 ) );
+		//assertThat( target.getDewPointTrend() ).isEqualTo( 0.3, Offset.offset( 0.1 ) );
+		assertThat( target.getWindSpeedTrend() ).isEqualTo( 0.6, Offset.offset( 0.1 ) );
 	}
 
 	@ParameterizedTest
@@ -75,7 +86,7 @@ public class WeatherStationTest {
 			Arguments.of( 100, 50, 118 ),
 			Arguments.of( 100, 60, 129 ),
 			Arguments.of( 110, 40, 136 )
-			);
+		);
 	}
 
 }

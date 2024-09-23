@@ -25,4 +25,19 @@ public class TemperatureUnitTest {
 		assertThat( source.convert( value, target ) ).isEqualTo( expected );
 	}
 
+	public static Stream<Arguments> provideTemperaturesToConvertRate() {
+		return Stream.of(
+			Arguments.of( UnitSystem.METRIC.getTemperatureUnit(), UnitSystem.METRIC.getTemperatureUnit(), 1.0, 1.0 ),
+			Arguments.of( UnitSystem.METRIC.getTemperatureUnit(), UnitSystem.IMPERIAL.getTemperatureUnit(), 1.0, 1.8 ),
+			Arguments.of( UnitSystem.IMPERIAL.getTemperatureUnit(), UnitSystem.IMPERIAL.getTemperatureUnit(), 1.8, 1.8 ),
+			Arguments.of( UnitSystem.IMPERIAL.getTemperatureUnit(), UnitSystem.METRIC.getTemperatureUnit(), 1.8, 1 )
+		);
+	}
+
+	@ParameterizedTest
+	@MethodSource( "provideTemperaturesToConvertRate" )
+	public void testConvertRate( UnitSystem.TemperatureUnit source, UnitSystem.TemperatureUnit target, double value, double expected) {
+		assertThat( source.convertRate( value, target ) ).isEqualTo( expected );
+	}
+
 }
