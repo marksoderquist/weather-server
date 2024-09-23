@@ -266,17 +266,15 @@ public class WeatherStation {
 		this.setPressureTrend( convertPressure( that, that.getPressureTrend() ) );
 		this.setWindSpeedTrend( convertSpeed( that, that.getWindSpeedTrend() ) );
 
-		// NEXT Continue here
-
 		// wind
-		this.setWindTenMinMax( that.getWindTenMinMax() );
-		this.setWindTenMinAvg( that.getWindTenMinAvg() );
-		this.setWindTenMinMin( that.getWindTenMinMin() );
-		this.setWindTwoMinMax( that.getWindTwoMinMax() );
-		this.setWindTwoMinAvg( that.getWindTwoMinAvg() );
-		this.setWindTwoMinMin( that.getWindTwoMinMin() );
-		this.setWindDirectionTenMinAvg( that.getWindDirectionTenMinAvg() );
-		this.setWindDirectionTwoMinAvg( that.getWindDirectionTwoMinAvg() );
+		this.setWindTenMinMax( convertSpeed( that, that.getWindTenMinMax() ) );
+		this.setWindTenMinAvg( convertSpeed( that, that.getWindTenMinAvg() ) );
+		this.setWindTenMinMin( convertSpeed( that, that.getWindTenMinMin() ) );
+		this.setWindTwoMinMax( convertSpeed( that, that.getWindTwoMinMax() ) );
+		this.setWindTwoMinAvg( convertSpeed( that, that.getWindTwoMinAvg() ) );
+		this.setWindTwoMinMin( convertSpeed( that, that.getWindTwoMinMin() ) );
+		this.setWindDirectionTenMinAvg( convertDirection( that, that.getWindDirectionTenMinAvg() ) );
+		this.setWindDirectionTwoMinAvg( convertDirection( that, that.getWindDirectionTwoMinAvg() ) );
 
 		// units
 		this.setTemperatureUnit( this.getUnitSystem().getTemperatureUnit().getSymbol() );
@@ -290,6 +288,8 @@ public class WeatherStation {
 		this.setHumidityTrendUnit( getHumidityUnit() + trendUnit );
 		this.setPressureTrendUnit( that.getPressureUnit() + trendUnit );
 		this.setWindSpeedTrendUnit( that.getWindSpeedUnit() + trendUnit );
+
+		// NEXT Continue here
 
 		// Using the sun altitude, calculate an illumination value
 		// Civil twilight is -6 degrees (https://en.wikipedia.org/wiki/Twilight)

@@ -62,6 +62,13 @@ public class WeatherStationTest {
 
 		// wind
 
+		// units
+		assertThat( target.getTemperatureUnit() ).isEqualTo( "°C" );
+		assertThat( target.getPressureUnit() ).isEqualTo( "hPa" );
+		assertThat( target.getHumidityUnit() ).isEqualTo( "%" );
+		assertThat( target.getWindSpeedUnit() ).isEqualTo( "kph" );
+		assertThat( target.getWindDirectionUnit() ).isEqualTo( "°" );
+		assertThat( target.getRainUnit() ).isEqualTo( "mm" );
 	}
 
 	@ParameterizedTest
