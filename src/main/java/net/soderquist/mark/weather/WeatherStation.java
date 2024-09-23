@@ -1,5 +1,7 @@
 package net.soderquist.mark.weather;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.shredzone.commons.suncalc.SunPosition;
 
 import java.util.Calendar;
@@ -32,6 +34,8 @@ public class WeatherStation {
 
 	private long timestamp;
 
+	@Getter
+	@Setter
 	private UnitSystem unitSystem;
 
 	// Basic weather measures

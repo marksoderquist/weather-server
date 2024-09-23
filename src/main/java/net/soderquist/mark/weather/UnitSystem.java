@@ -5,9 +5,9 @@ import lombok.Getter;
 import java.util.concurrent.TimeUnit;
 
 @Getter
-public class UnitSystem {
+public enum UnitSystem {
 
-	public static final UnitSystem METRIC = new UnitSystem( "Metric",
+	METRIC( "Metric",
 		new CelsiusUnit(),
 		new HectoPascalUnit(),
 		new KilometerUnit(),
@@ -15,9 +15,9 @@ public class UnitSystem {
 		new DegreeUnit(),
 		new MillimeterUnit(),
 		new PercentUnit()
-	);
+	),
 
-	public static final UnitSystem IMPERIAL = new UnitSystem( "Imperial",
+	IMPERIAL( "Imperial",
 		new FahrenheitUnit(),
 		new InchMercuryUnit(),
 		new MileUnit(),
@@ -45,7 +45,7 @@ public class UnitSystem {
 
 	private final TimeUnit timeUnit = TimeUnit.SECONDS;
 
-	private UnitSystem(
+	UnitSystem(
 		String name,
 		TemperatureUnit temperatureUnit,
 		PressureUnit pressureUnit,

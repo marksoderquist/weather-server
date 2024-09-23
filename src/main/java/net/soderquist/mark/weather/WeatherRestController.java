@@ -40,6 +40,8 @@ public class WeatherRestController {
 
 	@RequestMapping( method = RequestMethod.PUT, path = "/station" )
 	public WeatherStation putStation( @RequestParam( value = "id" ) String id, @RequestBody WeatherStation station ) {
+		// TODO In the next version of Dalton, the unit system will be passed in the request
+
 		WeatherStation target = getStations().get( id );
 		if( target == null ) return null;
 		target.setServerVersion( version );
