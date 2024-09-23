@@ -45,7 +45,7 @@ public class WeatherRestControllerTest {
 	@Test
 	public void testPutWeatherInfo() throws Exception {
 		// given
-		String body = "{\"unitSystem\":\"IMPERIAL\",\"temperature\":72.0,\"humidity\":0.5,\"windSpeed\":5.0,\"windDirection\":181.2}";
+		String body = "{\"temperature\":72.0,\"humidity\":0.5,\"windSpeed\":5.0,\"windDirection\":181.2,\"unitSystem\":\"IMPERIAL\"}";
 
 		// when
 		MvcResult result = mvc.perform( put( "/station?id=bluewing" ).contentType( MediaType.APPLICATION_JSON ).content( body ) ).andExpect( status().isOk() ).andReturn();

@@ -7,25 +7,9 @@ import java.util.concurrent.TimeUnit;
 @Getter
 public enum UnitSystem {
 
-	METRIC( "Metric",
-		new CelsiusUnit(),
-		new HectoPascalUnit(),
-		new KilometerUnit(),
-		new KilometerPerHourUnit(),
-		new DegreeUnit(),
-		new MillimeterUnit(),
-		new PercentUnit()
-	),
+	METRIC( "Metric", new CelsiusUnit(), new HectoPascalUnit(), new KilometerUnit(), new KilometerPerHourUnit(), new DegreeUnit(), new MillimeterUnit(), new PercentUnit() ),
 
-	IMPERIAL( "Imperial",
-		new FahrenheitUnit(),
-		new InchMercuryUnit(),
-		new MileUnit(),
-		new MilePerHourUnit(),
-		new DegreeUnit(),
-		new InchUnit(),
-		new PercentUnit()
-	);
+	IMPERIAL( "Imperial", new FahrenheitUnit(), new InchMercuryUnit(), new MileUnit(), new MilePerHourUnit(), new DegreeUnit(), new InchUnit(), new PercentUnit() );
 
 	private final String name;
 
@@ -65,7 +49,7 @@ public enum UnitSystem {
 		this.humidityUnit = humidityUnit;
 	}
 
-	private interface Unit {
+	public interface Unit<T extends Unit<?>> {
 
 		String getName();
 
@@ -75,23 +59,27 @@ public enum UnitSystem {
 
 		double from( double value );
 
+		default double convert( double value, T target ) {
+			return target.to( from( value ) );
+		}
+
 	}
 
-	public interface TemperatureUnit extends Unit {}
+	public interface TemperatureUnit extends Unit<TemperatureUnit> {}
 
-	public interface PressureUnit extends Unit {}
+	public interface PressureUnit extends Unit<PressureUnit> {}
 
-	public interface DistanceUnit extends Unit {}
+	public interface DistanceUnit extends Unit<DistanceUnit> {}
 
-	public interface SpeedUnit extends Unit {}
+	public interface SpeedUnit extends Unit<SpeedUnit> {}
 
-	public interface DirectionUnit extends Unit {}
+	public interface DirectionUnit extends Unit<DirectionUnit> {}
 
-	public interface RainfallUnit extends Unit {}
+	public interface RainfallUnit extends Unit<RainfallUnit> {}
 
-	public interface HumidityUnit extends Unit {}
+	public interface HumidityUnit extends Unit<HumidityUnit> {}
 
-	private static class CelsiusUnit implements TemperatureUnit {
+	public static class CelsiusUnit implements TemperatureUnit {
 
 		@Override
 		public String getName() {
@@ -115,7 +103,7 @@ public enum UnitSystem {
 
 	}
 
-	private static class FahrenheitUnit implements TemperatureUnit {
+	public static class FahrenheitUnit implements TemperatureUnit {
 
 		@Override
 		public String getName() {
@@ -139,7 +127,7 @@ public enum UnitSystem {
 
 	}
 
-	private static class HectoPascalUnit implements PressureUnit {
+	public static class HectoPascalUnit implements PressureUnit {
 
 		@Override
 		public String getName() {
@@ -163,7 +151,7 @@ public enum UnitSystem {
 
 	}
 
-	private static class InchMercuryUnit implements PressureUnit {
+	public static class InchMercuryUnit implements PressureUnit {
 
 		@Override
 		public String getName() {
@@ -187,7 +175,7 @@ public enum UnitSystem {
 
 	}
 
-	private static class KilometerUnit implements DistanceUnit {
+	public static class KilometerUnit implements DistanceUnit {
 
 		@Override
 		public String getName() {
@@ -211,7 +199,7 @@ public enum UnitSystem {
 
 	}
 
-	private static class MileUnit implements DistanceUnit {
+	public static class MileUnit implements DistanceUnit {
 
 		@Override
 		public String getName() {
@@ -235,7 +223,7 @@ public enum UnitSystem {
 
 	}
 
-	private static class KilometerPerHourUnit implements SpeedUnit {
+	public static class KilometerPerHourUnit implements SpeedUnit {
 
 		@Override
 		public String getName() {
@@ -259,7 +247,7 @@ public enum UnitSystem {
 
 	}
 
-	private static class MilePerHourUnit implements SpeedUnit {
+	public static class MilePerHourUnit implements SpeedUnit {
 
 		@Override
 		public String getName() {
@@ -283,7 +271,7 @@ public enum UnitSystem {
 
 	}
 
-	private static class DegreeUnit implements DirectionUnit {
+	public static class DegreeUnit implements DirectionUnit {
 
 		@Override
 		public String getName() {
@@ -307,7 +295,7 @@ public enum UnitSystem {
 
 	}
 
-	private static class MillimeterUnit implements RainfallUnit {
+	public static class MillimeterUnit implements RainfallUnit {
 
 		@Override
 		public String getName() {
@@ -331,7 +319,7 @@ public enum UnitSystem {
 
 	}
 
-	private static class InchUnit implements RainfallUnit {
+	public static class InchUnit implements RainfallUnit {
 
 		@Override
 		public String getName() {
@@ -355,7 +343,7 @@ public enum UnitSystem {
 
 	}
 
-	private static class PercentUnit implements HumidityUnit {
+	public static class PercentUnit implements HumidityUnit {
 
 		@Override
 		public String getName() {

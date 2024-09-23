@@ -40,15 +40,30 @@ public class WeatherRestController {
 
 	@RequestMapping( method = RequestMethod.PUT, path = "/station" )
 	public WeatherStation putStation( @RequestParam( value = "id" ) String id, @RequestBody WeatherStation station ) {
-		// TODO In the next version of Dalton, the unit system will be passed in the request
+		// TODO We should update three versions of the station:
+		// 1. The station as passed in the request for backward compatibility
+		// 2. The station with metric units
+		// 3. The station with imperial units
 
 		WeatherStation target = getStations().get( id );
 		if( target == null ) return null;
 		target.setServerVersion( version );
 		target.copyFrom( station );
 
+		WeatherStation targetMetric = getStations().get( id + "-metric" );
+		if( targetMetric == null ) return null;
+		targetMetric.setServerVersion( version );
+		targetMetric.copyFrom( station );
+
+		WeatherStation targetImperial = getStations().get( id + "-imperial" );
+		if( targetImperial == null ) return null;
+		targetImperial.setServerVersion( version );
+		targetImperial.copyFrom( station );
+
 		try {
 			publisher.publish( target );
+			//publisher.publish( targetMetric );
+			//publisher.publish( targetImperial );
 		} catch( IOException exception ) {
 			log.error( "Error publishing to Perform", exception );
 		}
@@ -56,15 +71,12 @@ public class WeatherRestController {
 		return target;
 	}
 
-	// NEXT How to support metric and imperial units for weather stations?
-	// Options:
-	// 1. Add a field to the WeatherStation class to indicate the unit type
-	// 2. Add a separate station for each unit type to the station map
-
 	private Map<String, WeatherStation> getStations() {
 		if( stations == null ) {
 			stations = new HashMap<>();
 			stations.put( "bluewing", new WeatherStation( "bluewing", "Bluewing", 40.503923, -112.013373, UnitSystem.IMPERIAL ) );
+			stations.put( "bluewing-metric", new WeatherStation( "bluewing", "Bluewing", 40.503923, -112.013373, UnitSystem.METRIC ) );
+			stations.put( "bluewing-imperial", new WeatherStation( "bluewing", "Bluewing", 40.503923, -112.013373, UnitSystem.IMPERIAL ) );
 		}
 		return stations;
 	}

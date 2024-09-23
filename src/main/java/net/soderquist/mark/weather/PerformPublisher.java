@@ -15,6 +15,7 @@ public class PerformPublisher extends HttpPublisher {
 
 	private static final String MEM = "mem";
 
+	// FIXME This only works for one station
 	@Value( value = "${perform.access.key}" )
 	private String performAccessKey;
 
