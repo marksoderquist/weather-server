@@ -289,8 +289,6 @@ public class WeatherStation {
 		this.setPressureTrendUnit( that.getPressureUnit() + trendUnit );
 		this.setWindSpeedTrendUnit( that.getWindSpeedUnit() + trendUnit );
 
-		// NEXT Continue here
-
 		// Using the sun altitude, calculate an illumination value
 		// Civil twilight is -6 degrees (https://en.wikipedia.org/wiki/Twilight)
 		SunPosition position = SunPosition.compute().on( new Date() ).at( latitude, longitude ).execute();
