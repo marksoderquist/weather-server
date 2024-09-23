@@ -136,6 +136,8 @@ public class WeatherStation {
 	@Deprecated
 	private String rainUnitMetric = "mm";
 
+	private String trendUnit = "/hr";
+
 	private String rainRateUnit = rainUnit + "/hr";
 
 	private String temperatureTrendUnit = temperatureUnit + "/hr";
@@ -170,6 +172,7 @@ public class WeatherStation {
 	// Weather basics
 	public double getTemperature() {return this.temperature;}
 
+	@Deprecated
 	public double getTemperatureMetric() {return this.temperatureMetric;}
 
 	public double getPressure() {return this.pressure;}
@@ -178,18 +181,22 @@ public class WeatherStation {
 
 	public double getDewPoint() {return this.dewPoint;}
 
+	@Deprecated
 	public double getDewPointMetric() {return this.dewPointMetric;}
 
 	public double getWindChill() {return this.windChill;}
 
+	@Deprecated
 	public double getWindChillMetric() {return this.windChillMetric;}
 
 	public double getHeatIndex() {return this.heatIndex;}
 
+	@Deprecated
 	public double getHeatIndexMetric() {return this.heatIndexMetric;}
 
 	public double getFeelsLike() {return this.feelsLike;}
 
+	@Deprecated
 	public double getFeelsLikeMetric() {return this.feelsLikeMetric;}
 
 	public double getWindDirection() {return this.windDirection;}
@@ -198,6 +205,7 @@ public class WeatherStation {
 
 	public double getWindSpeed() {return this.windSpeed;}
 
+	@Deprecated
 	public double getWindSpeedMetric() {return this.windSpeedMetric;}
 
 	public double getRainTotalDaily() {return this.rainTotalDaily;}
@@ -239,6 +247,7 @@ public class WeatherStation {
 
 	public String getTemperatureUnit() {return temperatureUnit;}
 
+	@Deprecated
 	public String getTemperatureUnitMetric() {return temperatureUnitMetric;}
 
 	public String getHumidityUnit() {return humidityUnit;}
@@ -247,6 +256,7 @@ public class WeatherStation {
 
 	public String getWindSpeedUnit() {return windSpeedUnit;}
 
+	@Deprecated
 	public String getWindSpeedUnitMetric() {return windSpeedUnitMetric;}
 
 	public String getWindDirectionUnit() {return windDirectionUnit;}
@@ -277,6 +287,7 @@ public class WeatherStation {
 	// Weather basics
 	public void setTemperature( double temperature ) {this.temperature = temperature;}
 
+	@Deprecated
 	public void setTemperatureMetric( double temperatureMetric ) {this.temperatureMetric = temperatureMetric;}
 
 	public void setPressure( double pressure ) {this.pressure = pressure;}
@@ -285,22 +296,27 @@ public class WeatherStation {
 
 	public void setDewPoint( double dewPoint ) {this.dewPoint = dewPoint;}
 
+	@Deprecated
 	public void setDewPointMetric( double dewPointMetric ) {this.dewPointMetric = dewPointMetric;}
 
 	public void setWindChill( double windChill ) {this.windChill = windChill;}
 
+	@Deprecated
 	public void setWindChillMetric( double windChillMetric ) {this.windChillMetric = windChillMetric;}
 
 	public void setHeatIndex( double heatIndex ) {this.heatIndex = heatIndex;}
 
+	@Deprecated
 	public void setHeatIndexMetric( double heatIndexMetric ) {this.heatIndexMetric = heatIndexMetric;}
 
 	public void setFeelsLike( double feelsLike ) {this.feelsLike = feelsLike;}
 
+	@Deprecated
 	public void setFeelsLikeMetric( double feelsLikeMetric ) {this.feelsLikeMetric = feelsLikeMetric;}
 
 	public void setWindSpeed( double windSpeed ) {this.windSpeed = windSpeed;}
 
+	@Deprecated
 	public void setWindSpeedMetric( double windSpeedMetric ) {this.windSpeedMetric = windSpeedMetric;}
 
 	public void setWindDirection( double windDirection ) {
@@ -349,6 +365,7 @@ public class WeatherStation {
 
 	public void setTemperatureUnit( String temperatureUnit ) {this.temperatureUnit = temperatureUnit;}
 
+	@Deprecated
 	public void setTemperatureUnitMetric( String temperatureUnitMetric ) {this.temperatureUnitMetric = temperatureUnitMetric;}
 
 	public void setHumidityUnit( String humidityUnit ) {this.humidityUnit = humidityUnit;}
@@ -357,6 +374,7 @@ public class WeatherStation {
 
 	public void setWindSpeedUnit( String windSpeedUnit ) {this.windSpeedUnit = windSpeedUnit;}
 
+	@Deprecated
 	public void setWindSpeedUnitMetric( String windSpeedUnitMetric ) {this.windSpeedUnitMetric = windSpeedUnitMetric;}
 
 	public void setWindDirectionUnit( String windDirectionUnit ) {this.windDirectionUnit = windDirectionUnit;}
@@ -393,29 +411,30 @@ public class WeatherStation {
 		this.serverVersion = serverVersion;
 	}
 
+	/**
+	 * Copy values from another weather station.
+	 *
+	 * @param that The other weather station to copy from.
+	 */
 	public void copyFrom( WeatherStation that ) {
 		this.setTimestamp( that.getTimestamp() );
 
-		double calcFeelsLike = calcFeelsLike( that.getTemperature(), that.getWindTenMinAvg(), that.getHumidity() );
+		double feelsLike = calcFeelsLikeFahrenheit( that.getTemperature(), that.getWindTenMinAvg(), that.getHumidity() );
 
-		this.setTemperature( that.getTemperature() );
-		this.setTemperatureMetric( toDegreesC( that.getTemperature() ) );
-		this.setPressure( that.getPressure() );
-		this.setHumidity( that.getHumidity() );
-		this.setDewPoint( that.getDewPoint() );
-		this.setDewPointMetric( toDegreesC( that.getDewPoint() ) );
-		this.setWindChill( that.getWindChill() );
-		this.setWindChillMetric( toDegreesC( that.getWindChill() ) );
-		this.setHeatIndex( that.getHeatIndex() );
-		this.setHeatIndexMetric( toDegreesC( that.getHeatIndex() ) );
-		this.setFeelsLike( calcFeelsLike );
-		this.setFeelsLikeMetric( toDegreesC( calcFeelsLike ) );
-		this.setWindSpeed( that.getWindSpeed() );
-		this.setWindSpeedMetric( toKph( that.getWindSpeed() ) );
-		this.setWindDirection( that.getWindDirection() );
-		this.setRainTotalDaily( that.getRainTotalDaily() );
-		this.setRainRate( that.getRainRate() );
+		// basics
+		this.setTemperature( convertTemperature( that, that.getTemperature() ) );
+		this.setPressure( convertPressure( that, that.getPressure() ) );
+		this.setHumidity( convertHumidity( that, that.getHumidity() ) );
+		this.setDewPoint( convertTemperature( that, that.getDewPoint() ) );
+		this.setWindChill( convertTemperature( that, that.getWindChill() ) );
+		this.setHeatIndex( convertTemperature( that, that.getHeatIndex() ) );
+		this.setFeelsLike( convertTemperature( that, feelsLike ) );
+		this.setWindSpeed( convertSpeed( that, that.getWindSpeed() ) );
+		this.setWindDirection( convertDirection( that, that.getWindDirection() ) );
+		this.setRainTotalDaily( convertRainfall( that, that.getRainTotalDaily() ) );
+		this.setRainRate( convertRainfall( that, that.getRainRate() ) );
 
+		// trends
 		this.setTemperatureTrend( that.getTemperatureTrend() );
 		this.setHumidityTrend( that.getHumidityTrend() );
 		this.setPressureTrend( that.getPressureTrend() );
@@ -430,19 +449,19 @@ public class WeatherStation {
 		this.setWindDirectionTenMinAvg( that.getWindDirectionTenMinAvg() );
 		this.setWindDirectionTwoMinAvg( that.getWindDirectionTwoMinAvg() );
 
-		this.setTemperatureUnit( that.getTemperatureUnit() );
-		this.setTemperatureUnitMetric( that.getTemperatureUnitMetric() );
-		this.setHumidityUnit( that.getHumidityUnit() );
-		this.setPressureUnit( that.getPressureUnit() );
-		this.setWindSpeedUnit( that.getWindSpeedUnit() );
-		this.setWindSpeedUnitMetric( that.getWindSpeedUnitMetric() );
-		this.setWindDirectionUnit( that.getWindDirectionUnit() );
-		this.setRainUnit( that.getRainUnit() );
-		this.setRainRateUnit( that.getRainRateUnit() );
-		this.setTemperatureTrendUnit( that.getTemperatureTrendUnit() );
-		this.setHumidityTrendUnit( that.getHumidityTrendUnit() );
-		this.setPressureTrendUnit( that.getPressureTrendUnit() );
-		this.setWindSpeedTrendUnit( that.getWindSpeedTrendUnit() );
+		this.setTemperatureUnit( this.getUnitSystem().getTemperatureUnit().getSymbol() );
+		//this.setTemperatureUnitMetric( that.getTemperatureUnitMetric() );
+		this.setHumidityUnit( this.getUnitSystem().getHumidityUnit().getSymbol() );
+		this.setPressureUnit( this.getUnitSystem().getPressureUnit().getSymbol() );
+		this.setWindSpeedUnit( this.getUnitSystem().getSpeedUnit().getSymbol() );
+		//this.setWindSpeedUnitMetric( that.getWindSpeedUnitMetric() );
+		this.setWindDirectionUnit( this.getUnitSystem().getDirectionUnit().getSymbol() );
+		this.setRainUnit( this.getUnitSystem().getRainfallUnit().getSymbol() );
+		this.setRainRateUnit( getRainUnit() + trendUnit );
+		this.setTemperatureTrendUnit( getTemperatureUnit() + trendUnit );
+		this.setHumidityTrendUnit( getHumidityUnit() + trendUnit );
+		this.setPressureTrendUnit( that.getPressureUnit() + trendUnit );
+		this.setWindSpeedTrendUnit( that.getWindSpeedUnit() + trendUnit );
 
 		// Using the sun altitude, calculate an illumination value
 		// Civil twilight is -6 degrees (https://en.wikipedia.org/wiki/Twilight)
@@ -454,27 +473,51 @@ public class WeatherStation {
 		updateFlyingConditions();
 	}
 
-	private double calcFeelsLike( double temperature, double wind, double humidity ) {
+	private double convertTemperature( WeatherStation that, double temperature ) {
+		return that.getUnitSystem().getTemperatureUnit().convert( temperature, this.getUnitSystem().getTemperatureUnit() );
+	}
+
+	private double convertPressure( WeatherStation that, double pressure ) {
+		return that.getUnitSystem().getPressureUnit().convert( pressure, this.getUnitSystem().getPressureUnit() );
+	}
+
+	private double convertHumidity( WeatherStation that, double humidity ) {
+		return that.getUnitSystem().getHumidityUnit().convert( humidity, this.getUnitSystem().getHumidityUnit() );
+	}
+
+	private double convertSpeed( WeatherStation that, double speed ) {
+		return that.getUnitSystem().getSpeedUnit().convert( speed, this.getUnitSystem().getSpeedUnit() );
+	}
+
+	private double convertDirection( WeatherStation that, double direction ) {
+		return that.getUnitSystem().getDirectionUnit().convert( direction, this.getUnitSystem().getDirectionUnit() );
+	}
+
+	private double convertRainfall( WeatherStation that, double rain ) {
+		return that.getUnitSystem().getRainfallUnit().convert( rain, this.getUnitSystem().getRainfallUnit() );
+	}
+
+	static double calcFeelsLikeFahrenheit( double temperature, double wind, double humidity ) {
 		if( temperature < 50 ) return calculateWindChill( temperature, wind );
 		if( temperature > 80 ) return calculateHeatIndex( temperature, humidity );
 		return temperature;
 	}
 
-	public static double toDegreesC( double degreesF ) {
-		return (degreesF - 32) * DEGREES_C_PER_DEGREES_F;
-	}
-
-	public static double toDegreesF( double degreesC ) {
-		return degreesC * DEGREES_F_PER_DEGREES_C + 32;
-	}
-
-	public static double toKph( double mph ) {
-		return mph * KPH_PER_MPH;
-	}
-
-	public static double toMph( double kph ) {
-		return kph * MPH_PER_KPH;
-	}
+//	public static double toDegreesC( double degreesF ) {
+//		return (degreesF - 32) * DEGREES_C_PER_DEGREES_F;
+//	}
+//
+//	public static double toDegreesF( double degreesC ) {
+//		return degreesC * DEGREES_F_PER_DEGREES_C + 32;
+//	}
+//
+//	public static double toKph( double mph ) {
+//		return mph * KPH_PER_MPH;
+//	}
+//
+//	public static double toMph( double kph ) {
+//		return kph * MPH_PER_KPH;
+//	}
 
 	public static double calculateWindChill( double t, double w ) {
 		if( w <= 3 || t >= 50 ) return t;
@@ -503,6 +546,8 @@ public class WeatherStation {
 	}
 
 	private void updateFlyingConditions() {
+		// FIXME These will need to be based on the UnitSystem of the station
+
 		getFlightCondition().reset();
 
 		Calendar calendar = Calendar.getInstance( TimeZone.getTimeZone( "America/Denver" ) );

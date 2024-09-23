@@ -170,7 +170,7 @@ public enum UnitSystem {
 
 		@Override
 		public double from( double value ) {
-			return value * 3386.39;
+			return value * 33.8639;
 		}
 
 	}

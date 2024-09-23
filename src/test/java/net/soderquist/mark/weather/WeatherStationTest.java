@@ -12,6 +12,42 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WeatherStationTest {
 
+	@Test
+	void testCopyFrom() {
+		// given
+		WeatherStation source = new WeatherStation("bluewing-i", "Bluewing", 40.503923, -112.013373, UnitSystem.IMPERIAL);
+		source.setTemperature( 80 );
+		source.setPressure( 30.05 );
+		source.setHumidity( 50 );
+		source.setDewPoint( 60 );
+		source.setWindChill( WeatherStation.calculateWindChill( 80, 10 ) );
+		source.setHeatIndex( WeatherStation.calculateHeatIndex( 80, 50 ) );
+		source.setFeelsLike( WeatherStation.calcFeelsLikeFahrenheit( 80, 50, 10 ) );
+		source.setWindSpeed( 10 );
+		source.setWindDirection( 180 );
+		source.setRainTotalDaily( 0.3 );
+		source.setRainRate( 0.7 );
+
+		// when
+		WeatherStation target = new WeatherStation("bluewing-m", "Bluewing", 40.503923, -112.013373, UnitSystem.METRIC);
+		target.copyFrom( source );
+
+		// then
+		assertThat( target.getTemperature() ).isEqualTo( 26.7, Offset.offset( 0.1 ) );
+		assertThat( target.getPressure() ).isEqualTo( 1017.61, Offset.offset( 0.1 ) );
+		assertThat( target.getHumidity() ).isEqualTo( 50 );
+		assertThat( target.getDewPoint() ).isEqualTo( 15.6, Offset.offset( 0.1 ) );
+		assertThat( target.getWindChill() ).isEqualTo( 26.7, Offset.offset( 0.1 ) );
+		assertThat( target.getHeatIndex() ).isEqualTo( 27.1, Offset.offset( 0.1 ) );
+		assertThat( target.getFeelsLike() ).isEqualTo( 26.7, Offset.offset( 0.1 ) );
+		assertThat( target.getWindSpeed() ).isEqualTo( 16.1, Offset.offset( 0.1 ) );
+		assertThat( target.getWindDirection() ).isEqualTo( 180 );
+		assertThat( target.getRainTotalDaily() ).isEqualTo( 7.6, Offset.offset( 0.1 ) );
+		assertThat( target.getRainRate() ).isEqualTo( 17.8, Offset.offset( 0.1 ) );
+
+		// trends
+	}
+
 	@ParameterizedTest
 	@MethodSource( "heatIndexValues" )
 	void testCalcHeatIndex( double temperature, double humidity, double heatIndex ) {

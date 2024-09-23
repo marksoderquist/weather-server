@@ -10,16 +10,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TemperatureUnitTest {
 
-	public static Stream<Arguments> provideTemperatureUnitConversion() {
+	public static Stream<Arguments> provideTemperaturesToConvert() {
 		return Stream.of(
+			Arguments.of( UnitSystem.METRIC.getTemperatureUnit(), UnitSystem.METRIC.getTemperatureUnit(), 0.0, 0.0 ),
 			Arguments.of( UnitSystem.METRIC.getTemperatureUnit(), UnitSystem.IMPERIAL.getTemperatureUnit(), 0.0, 32.0 ),
+			Arguments.of( UnitSystem.IMPERIAL.getTemperatureUnit(), UnitSystem.IMPERIAL.getTemperatureUnit(), 32.0, 32.0 ),
 			Arguments.of( UnitSystem.IMPERIAL.getTemperatureUnit(), UnitSystem.METRIC.getTemperatureUnit(), 32.0, 0.0 )
 		);
 	}
 
 	@ParameterizedTest
-	@MethodSource("provideTemperatureUnitConversion")
-	public void testTemperature( UnitSystem.TemperatureUnit source, UnitSystem.TemperatureUnit target, double value, double expected) {
+	@MethodSource( "provideTemperaturesToConvert" )
+	public void testConvert( UnitSystem.TemperatureUnit source, UnitSystem.TemperatureUnit target, double value, double expected) {
 		assertThat( source.convert( value, target ) ).isEqualTo( expected );
 	}
 
