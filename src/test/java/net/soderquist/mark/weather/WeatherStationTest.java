@@ -1,6 +1,7 @@
 package net.soderquist.mark.weather;
 
 import org.assertj.core.data.Offset;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,29 +13,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WeatherStationTest {
 
+	private WeatherStation metricStation;
+
+	private WeatherStation imperialStation;
+
+	@BeforeEach
+	void setup() {
+		metricStation = metricWeatherStation();
+		imperialStation = imperialWeatherStation();
+	}
+
 	@Test
 	void testCopyFrom() {
 		// given
-		WeatherStation source = new WeatherStation( "bluewing-i", "Bluewing", 40.503923, -112.013373, UnitSystem.IMPERIAL );
-		source.setTemperature( 80 );
-		source.setPressure( 30.05 );
-		source.setHumidity( 50 );
-		source.setDewPoint( 60 );
-		source.setWindChill( WeatherStation.calculateWindChill( 80, 10 ) );
-		source.setHeatIndex( WeatherStation.calculateHeatIndex( 80, 50 ) );
-		source.setFeelsLike( WeatherStation.calcFeelsLikeFahrenheit( 80, 50, 10 ) );
-		source.setWindSpeed( 10 );
-		source.setWindDirection( 180 );
-		source.setRainTotalDaily( 0.3 );
-		source.setRainRate( 0.7 );
-
-		source.setTemperatureTrend( -0.4 );
-		source.setPressureTrend( 0.1 );
-		source.setHumidityTrend( 0.2 );
-		//source.setDewPointTrend( 0.3 );
-		source.setWindSpeedTrend( 0.4 );
-
-		// wind
+		WeatherStation source = imperialStation;
 
 		// when
 		WeatherStation target = new WeatherStation( "bluewing-m", "Bluewing", 40.503923, -112.013373, UnitSystem.METRIC );
@@ -71,6 +63,18 @@ public class WeatherStationTest {
 		assertThat( target.getRainUnit() ).isEqualTo( "mm" );
 	}
 
+	@Test
+	void testUpdateFlyingConditionsMetric() {
+		// given
+		WeatherStation source = metricStation;
+
+		// when
+		source.updateFlyingConditions();
+
+		// then
+		assertThat( source.getFlightCondition().getSummary() ).isEqualTo( FlightCondition.Summary.POOR );
+	}
+
 	@ParameterizedTest
 	@MethodSource( "heatIndexValues" )
 	void testCalcHeatIndex( double temperature, double humidity, double heatIndex ) {
@@ -101,4 +105,49 @@ public class WeatherStationTest {
 		);
 	}
 
+	private WeatherStation metricWeatherStation() {
+		WeatherStation station = new WeatherStation( "bluewing-m", "Bluewing", 40.503923, -112.013373, UnitSystem.METRIC );
+		station.setTemperature( 20 );
+		station.setPressure( 1014 );
+		station.setHumidity( 50 );
+		station.setDewPoint( 10 );
+		station.setWindChill( WeatherStation.calculateWindChill( 80, 10 ) );
+		station.setHeatIndex( WeatherStation.calculateHeatIndex( 80, 50 ) );
+		station.setFeelsLike( WeatherStation.calcFeelsLikeFahrenheit( 80, 50, 10 ) );
+		station.setWindSpeed( 10 );
+		station.setWindDirection( 180 );
+		station.setRainTotalDaily( 0.3 );
+		station.setRainRate( 0.7 );
+
+		station.setTemperatureTrend( -0.4 );
+		station.setPressureTrend( 0.1 );
+		station.setHumidityTrend( 0.2 );
+		//source.setDewPointTrend( 0.3 );
+		station.setWindSpeedTrend( 0.4 );
+
+		return station;
+	}
+
+	private WeatherStation imperialWeatherStation() {
+		WeatherStation station = new WeatherStation( "bluewing-i", "Bluewing", 40.503923, -112.013373, UnitSystem.IMPERIAL );
+		station.setTemperature( 80 );
+		station.setPressure( 30.05 );
+		station.setHumidity( 50 );
+		station.setDewPoint( 60 );
+		station.setWindChill( WeatherStation.calculateWindChill( 80, 10 ) );
+		station.setHeatIndex( WeatherStation.calculateHeatIndex( 80, 50 ) );
+		station.setFeelsLike( WeatherStation.calcFeelsLikeFahrenheit( 80, 50, 10 ) );
+		station.setWindSpeed( 10 );
+		station.setWindDirection( 180 );
+		station.setRainTotalDaily( 0.3 );
+		station.setRainRate( 0.7 );
+
+		station.setTemperatureTrend( -0.4 );
+		station.setPressureTrend( 0.1 );
+		station.setHumidityTrend( 0.2 );
+		//source.setDewPointTrend( 0.3 );
+		station.setWindSpeedTrend( 0.4 );
+
+		return station;
+	}
 }

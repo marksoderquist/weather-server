@@ -363,7 +363,7 @@ public class WeatherStation {
 		return Math.max( t, heatIndex );
 	}
 
-	private void updateFlyingConditions() {
+	void updateFlyingConditions() {
 		Calendar calendar = Calendar.getInstance( getTimeZone() );
 
 		getFlightCondition().reset();
