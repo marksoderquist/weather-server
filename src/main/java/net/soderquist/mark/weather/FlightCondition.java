@@ -20,7 +20,9 @@ public class FlightCondition {
 		COLD,
 		BREEZY,
 		WINDY,
+		@Deprecated
 		BUMPY,
+		@Deprecated
 		GUSTY,
 		RAINY,
 		DAWN,

@@ -424,15 +424,15 @@ public class WeatherStation {
 			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.BREEZY );
 		} // otherwise GREAT
 
-		if( gust >= 30 ) {
-			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.GUSTY );
-		} else if( gust >= 20 ) {
-			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.GUSTY );
-		} else if( gust >= 15 ) {
-			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.BUMPY );
-		} else if( gust >= 10 ) {
-			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.BUMPY );
-		} // otherwise GREAT
+//		if( gust >= 30 ) {
+//			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.GUSTY );
+//		} else if( gust >= 20 ) {
+//			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.GUSTY );
+//		} else if( gust >= 15 ) {
+//			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.BUMPY );
+//		} else if( gust >= 10 ) {
+//			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.BUMPY );
+//		} // otherwise GREAT
 	}
 
 	private void updateFlyingConditionsMetric() {
@@ -470,15 +470,15 @@ public class WeatherStation {
 			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.BREEZY );
 		} // otherwise GREAT
 
-		if( gust >= 50 ) {
-			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.GUSTY );
-		} else if( gust >= 35 ) {
-			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.GUSTY );
-		} else if( gust >= 25 ) {
-			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.BUMPY );
-		} else if( gust >= 15 ) {
-			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.BUMPY );
-		} // otherwise GREAT
+//		if( gust >= 50 ) {
+//			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.GUSTY );
+//		} else if( gust >= 35 ) {
+//			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.GUSTY );
+//		} else if( gust >= 25 ) {
+//			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.BUMPY );
+//		} else if( gust >= 15 ) {
+//			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.BUMPY );
+//		} // otherwise GREAT
 
 	}
 
