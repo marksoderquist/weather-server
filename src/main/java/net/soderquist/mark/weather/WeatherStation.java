@@ -389,52 +389,6 @@ public class WeatherStation {
 		} // otherwise GREAT
 	}
 
-	private void updateFlyingConditionsImperial() {
-		double temperature = getTemperature();
-		if( temperature >= 100 ) {
-			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.HOT );
-		} else if( temperature < 100 && temperature >= 90 ) {
-			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.HOT );
-		} else if( temperature < 90 && temperature >= 80 ) {
-			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.HOT );
-		} else if( temperature < 80 && temperature >= 70 ) {
-			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.WARM );
-		} else if( temperature < 70 && temperature >= 60 ) {
-			updateFlightCondition( FlightCondition.Summary.GREAT );
-		} else if( temperature < 60 && temperature >= 50 ) {
-			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.COOL );
-		} else if( temperature < 50 && temperature >= 40 ) {
-			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.COLD );
-		} else if( temperature < 40 && temperature >= 30 ) {
-			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.COLD );
-		} else if( temperature < 30 ) {
-			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.COLD );
-		}
-
-		double wind = getWindTenMinAvg();
-		double gust = getWindTenMinMax();
-
-		if( wind >= 20 ) {
-			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.WINDY );
-		} else if( wind >= 15 ) {
-			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.WINDY );
-		} else if( wind >= 10 ) {
-			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.BREEZY );
-		} else if( wind >= 5 ) {
-			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.BREEZY );
-		} // otherwise GREAT
-
-//		if( gust >= 30 ) {
-//			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.GUSTY );
-//		} else if( gust >= 20 ) {
-//			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.GUSTY );
-//		} else if( gust >= 15 ) {
-//			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.BUMPY );
-//		} else if( gust >= 10 ) {
-//			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.BUMPY );
-//		} // otherwise GREAT
-	}
-
 	private void updateFlyingConditionsMetric() {
 		double temperature = getTemperature();
 		if( temperature >= 35 ) {
@@ -460,26 +414,72 @@ public class WeatherStation {
 		double wind = getWindTwoMinAvg();
 		double gust = getWindTwoMinMax();
 
-		if( wind >= 35 ) {
+		if( wind >= 40 ) {
 			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.WINDY );
-		} else if( wind >= 25 ) {
+		} else if( wind >= 30 ) {
 			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.WINDY );
-		} else if( wind >= 15 ) {
+		} else if( wind >= 20 ) {
 			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.BREEZY );
-		} else if( wind >= 5 ) {
+		} else if( wind >= 10 ) {
 			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.BREEZY );
 		} // otherwise GREAT
 
-//		if( gust >= 50 ) {
+		//		if( gust >= 50 ) {
+		//			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.GUSTY );
+		//		} else if( gust >= 40 ) {
+		//			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.GUSTY );
+		//		} else if( gust >= 30 ) {
+		//			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.BUMPY );
+		//		} else if( gust >= 20 ) {
+		//			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.BUMPY );
+		//		} // otherwise GREAT
+
+	}
+
+	private void updateFlyingConditionsImperial() {
+		double temperature = getTemperature();
+		if( temperature >= 100 ) {
+			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.HOT );
+		} else if( temperature < 100 && temperature >= 90 ) {
+			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.HOT );
+		} else if( temperature < 90 && temperature >= 80 ) {
+			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.HOT );
+		} else if( temperature < 80 && temperature >= 70 ) {
+			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.WARM );
+		} else if( temperature < 70 && temperature >= 60 ) {
+			updateFlightCondition( FlightCondition.Summary.GREAT );
+		} else if( temperature < 60 && temperature >= 50 ) {
+			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.COOL );
+		} else if( temperature < 50 && temperature >= 40 ) {
+			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.COLD );
+		} else if( temperature < 40 && temperature >= 30 ) {
+			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.COLD );
+		} else if( temperature < 30 ) {
+			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.COLD );
+		}
+
+		double wind = getWindTenMinAvg();
+		double gust = getWindTenMinMax();
+
+		if( wind >= 25 ) {
+			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.WINDY );
+		} else if( wind >= 19 ) {
+			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.WINDY );
+		} else if( wind >= 13 ) {
+			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.BREEZY );
+		} else if( wind >= 6 ) {
+			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.BREEZY );
+		} // otherwise GREAT
+
+//		if( gust >= 31 ) {
 //			updateFlightCondition( FlightCondition.Summary.HOLD, FlightCondition.Reason.GUSTY );
-//		} else if( gust >= 35 ) {
-//			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.GUSTY );
 //		} else if( gust >= 25 ) {
+//			updateFlightCondition( FlightCondition.Summary.POOR, FlightCondition.Reason.GUSTY );
+//		} else if( gust >= 19 ) {
 //			updateFlightCondition( FlightCondition.Summary.FAIR, FlightCondition.Reason.BUMPY );
-//		} else if( gust >= 15 ) {
+//		} else if( gust >= 13 ) {
 //			updateFlightCondition( FlightCondition.Summary.GOOD, FlightCondition.Reason.BUMPY );
 //		} // otherwise GREAT
-
 	}
 
 	private void updateFlightCondition( FlightCondition.Summary summary ) {
